@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:520px;">
+  <h2>Create your workspace</h2>
+  <p>Set up your first scan profile in under two minutes.</p>
+  {% if error %}
+    <div class="flash" style="border-color: rgba(255, 107, 107, 0.4); color: var(--danger);">
+      {{ error }}
+    </div>
+  {% endif %}
+  <form method="post">
+    <label>Workspace name</label>
+    <input class="input" type="text" name="org_name" placeholder="Studio, Team, or Your Name" required />
+    <div style="height:12px"></div>
+    <label>Email</label>
+    <input class="input" type="email" name="email" required />
+    <div style="height:12px"></div>
+    <label>Password</label>
+    <input class="input" type="password" name="password" required />
+    <div style="height:18px"></div>
+    <button class="button" type="submit">Create workspace</button>
+  </form>
+</div>
+{% endblock %}

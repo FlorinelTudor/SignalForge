@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="tag">Onboarding</div>
+    <h1>Set your first scan profile</h1>
+    <p>Tell us where to look and how deep to scan. You can change this anytime.</p>
+  </div>
+  <div class="hero-card">
+    <h3>Recommended starter profile</h3>
+    <p>Founder communities + app discovery subreddits. Daily scans turn into weekly insight packs.</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <span class="badge">Reddit</span>
+      <span class="badge">X optional</span>
+      <span class="badge">Daily</span>
+    </div>
+  </div>
+</section>
+
+<div class="card">
+  <form method="post">
+    <label>Subreddits (comma separated)</label>
+    <textarea class="textarea" name="subreddits" rows="3">{{ config.subreddits }}</textarea>
+    <div style="height:12px"></div>
+    <div class="form-row">
+      <div>
+        <label>Lookback window (days)</label>
+        <input class="input" type="number" name="since_days" value="{{ config.since_days }}" min="1" />
+      </div>
+      <div>
+        <label>Posts per subreddit</label>
+        <input class="input" type="number" name="post_limit" value="{{ config.post_limit }}" min="10" />
+      </div>
+      <div>
+        <label>Include comments</label>
+        <div>
+          <input type="checkbox" name="include_comments" {% if config.include_comments %}checked{% endif %} />
+        </div>
+      </div>
+      <div>
+        <label>Require explicit app/tool request</label>
+        <div>
+          <input type="checkbox" name="require_app_request" {% if config.require_app_request %}checked{% endif %} />
+        </div>
+      </div>
+    </div>
+    <div style="height:18px"></div>
+    <h3>X connector (optional)</h3>
+    <p>Enable X when you add a bearer token in your `.env` file.</p>
+    <div class="form-row">
+      <div>
+        <label>Enable X scans</label>
+        <div>
+          <input type="checkbox" name="x_enabled" {% if config.x_enabled %}checked{% endif %} />
+        </div>
+      </div>
+      <div>
+        <label>Language</label>
+        <input class="input" type="text" name="x_language" value="{{ config.x_language }}" />
+      </div>
+      <div>
+        <label>Include retweets</label>
+        <div>
+          <input type="checkbox" name="x_include_retweets" {% if config.x_include_retweets %}checked{% endif %} />
+        </div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <label>X search queries (comma separated)</label>
+    <textarea class="textarea" name="x_queries" rows="2">{{ config.x_queries }}</textarea>
+    <div style="height:12px"></div>
+    <div class="form-row">
+      <div>
+        <label>X lookback (days, max 7)</label>
+        <input class="input" type="number" name="x_since_days" value="{{ config.x_since_days }}" min="1" max="7" />
+      </div>
+      <div>
+        <label>Results per query</label>
+        <input class="input" type="number" name="x_post_limit" value="{{ config.x_post_limit }}" min="10" max="500" />
+      </div>
+    </div>
+    <div style="height:18px"></div>
+    <h3>Bluesky connector (optional)</h3>
+    <p>Uses the public Bluesky AppView API.</p>
+    <div class="form-row">
+      <div>
+        <label>Enable Bluesky scans</label>
+        <div>
+          <input type="checkbox" name="bsky_enabled" {% if config.bsky_enabled %}checked{% endif %} />
+        </div>
+      </div>
+      <div>
+        <label>API base URL</label>
+        <input class="input" type="text" name="bsky_base_url" value="{{ config.bsky_base_url }}" />
+      </div>
+      <div>
+        <label>Results per query</label>
+        <input class="input" type="number" name="bsky_post_limit" value="{{ config.bsky_post_limit }}" min="10" max="100" />
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <label>Bluesky search queries (comma separated)</label>
+    <textarea class="textarea" name="bsky_queries" rows="2">{{ config.bsky_queries }}</textarea>
+    <div style="height:18px"></div>
+    <h3>Mastodon connector (optional)</h3>
+    <p>Use a public instance or your own for search.</p>
+    <div class="form-row">
+      <div>
+        <label>Enable Mastodon scans</label>
+        <div>
+          <input type="checkbox" name="mastodon_enabled" {% if config.mastodon_enabled %}checked{% endif %} />
+        </div>
+      </div>
+      <div>
+        <label>Instance URL</label>
+        <input class="input" type="text" name="mastodon_instance" value="{{ config.mastodon_instance }}" />
+      </div>
+      <div>
+        <label>Results per query</label>
+        <input class="input" type="number" name="mastodon_post_limit" value="{{ config.mastodon_post_limit }}" min="5" max="40" />
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <label>Mastodon search queries (comma separated)</label>
+    <textarea class="textarea" name="mastodon_queries" rows="2">{{ config.mastodon_queries }}</textarea>
+    <div style="height:12px"></div>
+    <div class="form-row">
+      <div>
+        <label>Mastodon lookback (days)</label>
+        <input class="input" type="number" name="mastodon_since_days" value="{{ config.mastodon_since_days }}" min="1" max="30" />
+      </div>
+    </div>
+    <div style="height:18px"></div>
+    <label>Scan schedule</label>
+    <select class="select" name="schedule">
+      <option value="off" {% if schedule.interval_hours == 0 %}selected{% endif %}>Off</option>
+      <option value="daily" {% if schedule.interval_hours == 24 %}selected{% endif %}>Daily</option>
+      <option value="weekly" {% if schedule.interval_hours == 168 %}selected{% endif %}>Weekly</option>
+    </select>
+    <div style="height:18px"></div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="button" type="submit">Save & continue</button>
+      <a class="button secondary" href="/app">Skip for now</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

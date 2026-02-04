@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h2>Scan results</h2>
+  <p>Scan date: {{ scan.created_utc }}</p>
+  {% if flash %}
+    <div class="flash">{{ flash }}</div>
+  {% endif %}
+  {% if warnings %}
+    <div class="flash warning">
+      {% for warning in warnings %}
+        <div>{{ warning }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="card" style="margin-bottom:20px;">
+    <form method="get" action="/app/scan/{{ scan.id }}" class="form-row">
+      <div>
+        <label>Sort by</label>
+        <select class="select" name="sort_by">
+          <option value="mentions" {% if sort_by == "mentions" %}selected{% endif %}>Mentions</option>
+          <option value="pay_ratio" {% if sort_by == "pay_ratio" %}selected{% endif %}>Pay ratio</option>
+          <option value="pay_mentions" {% if sort_by == "pay_mentions" %}selected{% endif %}>Pay mentions</option>
+          <option value="momentum" {% if sort_by == "momentum" %}selected{% endif %}>Momentum</option>
+          <option value="signal" {% if sort_by == "signal" %}selected{% endif %}>Signal strength</option>
+        </select>
+      </div>
+      <div>
+        <label>Source</label>
+        <select class="select" name="source">
+          <option value="all" {% if source == "all" %}selected{% endif %}>All</option>
+          <option value="Reddit" {% if source == "Reddit" %}selected{% endif %}>Reddit</option>
+          <option value="X" {% if source == "X" %}selected{% endif %}>X</option>
+          <option value="Bluesky" {% if source == "Bluesky" %}selected{% endif %}>Bluesky</option>
+          <option value="Mastodon" {% if source == "Mastodon" %}selected{% endif %}>Mastodon</option>
+        </select>
+      </div>
+      <div>
+        <label>Idea contains</label>
+        <input class="input" type="text" name="idea" value="{{ idea }}" placeholder="ex: invoice" />
+      </div>
+      <div>
+        <label>Min score</label>
+        <input class="input" type="number" name="min_score" value="{{ min_score }}" min="0" />
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button class="button secondary" type="submit">Apply</button>
+      </div>
+    </form>
+  </div>
+  <div class="grid">
+    {% for row in summary %}
+      <div class="card">
+        <h3>{{ row.idea_key }}</h3>
+        <p>Mentions: {{ row.mentions }} | Pay signals: {{ row.pay_mentions }} ({{ row.pay_ratio }}%)</p>
+        <p>Sources: {{ row.sources }}</p>
+        <p>Channels: {{ row.subreddits }}</p>
+        <p>Persona: {{ row.persona }} | Mentions/day: {{ row.mentions_per_day }}</p>
+        <p>Signal strength: <strong>{{ row.signal }}</strong> | Momentum: {{ row.momentum }}</p>
+        {% if row.delta_mentions is not none %}
+          <p>Delta mentions: {{ row.delta_mentions }} | Delta pay: {{ row.delta_pay }}</p>
+        {% endif %}
+        <p>{{ row.brief }}</p>
+        <p>Example: <a href="{{ row.sample_url }}" target="_blank">{{ row.sample_title }}</a></p>
+        <div class="panel">
+          <h4>Idea Brief</h4>
+          <p><strong>Problem:</strong> {{ row.problem_statement }}</p>
+          <p><strong>MVP angle:</strong> {{ row.mvp_angle }}</p>
+          <p><strong>Pricing hypothesis:</strong> {{ row.pricing_hypothesis }}</p>
+        </div>
+        {% if row.evidence_samples %}
+          <p>Evidence:</p>
+          <ul style="padding-left:18px; margin:0; color:var(--muted);">
+            {% for item in row.evidence_samples %}
+              <li><a href="{{ item.permalink }}" target="_blank">{{ item.snippet }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section style="margin-top:40px;">
+  <h2>Evidence</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Idea</th>
+        <th>Source</th>
+        <th>Channel</th>
+        <th>Type</th>
+        <th>Score</th>
+        <th>Groups</th>
+        <th>Snippet</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in results %}
+        <tr>
+          <td>{{ row.idea_key }}</td>
+          <td>{{ row.source }}</td>
+          <td>{{ row.subreddit }}</td>
+          <td>{{ row.item_type }}</td>
+          <td>{{ row.score }}</td>
+          <td>{{ row.match_groups }}</td>
+          <td>{{ row.snippet }}</td>
+          <td><a href="{{ row.permalink }}" target="_blank">Open</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

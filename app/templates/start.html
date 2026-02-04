@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="tag">Launchpad</div>
+    <h1>Run scans and track usage</h1>
+    <p>Kick off a scan, review usage limits, and make sure your sources are configured.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <form method="post" action="/app/scan/run">
+        <button class="button" type="submit">Run scan now</button>
+      </form>
+      <form method="get" action="/app/test/bluesky">
+        <button class="button secondary" type="submit">Test Bluesky</button>
+      </form>
+      <a class="button secondary" href="/app/settings">Edit sources</a>
+      <a class="button secondary" href="/app">View dashboard</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>Source readiness</h3>
+    <p>Reddit: {{ "Connected" if reddit_connected else "Missing credentials" }}</p>
+    <p>X: {{ "Connected" if x_connected else "Missing bearer token" }}</p>
+    <p>Bluesky: {{ "Connected" if bsky_connected else "Missing base URL" }}</p>
+    <p>Mastodon: {{ "Connected" if mastodon_connected else "Missing instance" }}</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <span class="badge">Schedule {{ schedule_label }}</span>
+      <span class="badge">{{ config.since_days }} day lookback</span>
+      <span class="badge">Posts {{ config.post_limit }}</span>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:24px;">
+  <h2>Recent scan snapshot</h2>
+  {% if warnings %}
+    <div class="flash warning">
+      {% for warning in warnings %}
+        <div>{{ warning }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if latest_scan %}
+    <div class="stat-grid">
+      <div class="stat">
+        <h3>Last scan</h3>
+        <p>{{ latest_scan.created_utc }}</p>
+      </div>
+      <div class="stat">
+        <h3>Matches</h3>
+        <p>{{ match_count }}</p>
+      </div>
+      <div class="stat">
+        <h3>Ideas</h3>
+        <p>{{ idea_count }}</p>
+      </div>
+    </div>
+  {% else %}
+    <p>No scans yet. Run your first scan to see usage and ideas.</p>
+  {% endif %}
+</section>
+
+<section style="margin-top:32px;">
+  <h2>Fetched vs matched</h2>
+  <div class="stat-grid">
+    <div class="stat">
+      <h3>Reddit</h3>
+      <p>Fetched: {{ reddit_fetched }}</p>
+      <p>Matched: {{ reddit_matched }}</p>
+    </div>
+    <div class="stat">
+      <h3>X</h3>
+      <p>Fetched: {{ x_fetched }}</p>
+      <p>Matched: {{ x_matched }}</p>
+    </div>
+    <div class="stat">
+      <h3>Bluesky</h3>
+      <p>Fetched: {{ bsky_fetched }}</p>
+      <p>Matched: {{ bsky_matched }}</p>
+    </div>
+    <div class="stat">
+      <h3>Mastodon</h3>
+      <p>Fetched: {{ mastodon_fetched }}</p>
+      <p>Matched: {{ mastodon_matched }}</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:32px;">
+  <h2>Rate limits</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Reddit API</h3>
+      {% if reddit_limits %}
+        <p>Remaining: {{ reddit_limits.get('remaining') }}</p>
+        <p>Used: {{ reddit_limits.get('used') }}</p>
+        <p>Reset: {{ reddit_reset }}</p>
+      {% else %}
+        <p>Run a scan to capture live rate limit data.</p>
+      {% endif %}
+    </div>
+    <div class="card">
+      <h3>X API</h3>
+      {% if x_limits %}
+        <p>Limit: {{ x_limits.get('limit') }}</p>
+        <p>Remaining: {{ x_limits.get('remaining') }}</p>
+        <p>Reset: {{ x_reset }}</p>
+      {% else %}
+        <p>Run a scan to capture live rate limit data.</p>
+      {% endif %}
+    </div>
+    <div class="card">
+      <h3>Bluesky API</h3>
+      {% if bsky_limits %}
+        <p>Limit: {{ bsky_limits.get('limit') }}</p>
+        <p>Remaining: {{ bsky_limits.get('remaining') }}</p>
+        <p>Reset: {{ bsky_reset }}</p>
+      {% else %}
+        <p>Run a scan to capture live rate limit data.</p>
+      {% endif %}
+    </div>
+    <div class="card">
+      <h3>Mastodon API</h3>
+      {% if mastodon_limits %}
+        <p>Limit: {{ mastodon_limits.get('limit') }}</p>
+        <p>Remaining: {{ mastodon_limits.get('remaining') }}</p>
+        <p>Reset: {{ mastodon_reset }}</p>
+      {% else %}
+        <p>Run a scan to capture live rate limit data.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:32px;">
+  <h2>Quick checklist</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Credentials</h3>
+      <p>Set Reddit client ID/secret and user agent.</p>
+    </div>
+    <div class="card">
+      <h3>Sources</h3>
+      <p>Confirm subreddits and X queries match your target niche.</p>
+    </div>
+    <div class="card">
+      <h3>Schedule</h3>
+      <p>Choose daily or weekly scans to build momentum signals.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:480px;">
+  <h2>Log in</h2>
+  <p>Access your workspace and scan results.</p>
+  {% if error %}
+    <div class="flash" style="border-color: rgba(255, 107, 107, 0.4); color: var(--danger);">
+      {{ error }}
+    </div>
+  {% endif %}
+  <form method="post">
+    <label>Email</label>
+    <input class="input" type="email" name="email" required />
+    <div style="height:12px"></div>
+    <label>Password</label>
+    <input class="input" type="password" name="password" required />
+    <div style="height:18px"></div>
+    <button class="button" type="submit">Log in</button>
+  </form>
+</div>
+{% endblock %}

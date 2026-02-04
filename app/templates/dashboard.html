@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="tag">Workspace</div>
+    <h1>{{ org.name }}</h1>
+    <p>Scan Reddit for pain points and app requests. Your latest intelligence appears below.</p>
+    {% if flash %}
+      <div class="flash">{{ flash }}</div>
+    {% endif %}
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <form method="post" action="/app/scan/run">
+        <button class="button" type="submit">Run scan now</button>
+      </form>
+      <a class="button secondary" href="/app/settings">Edit sources</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>Scan profile</h3>
+    <p>Reddit: {{ config.subreddits }}</p>
+    {% if config.x_enabled %}
+      <p>X queries: {{ config.x_queries }}</p>
+    {% endif %}
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <span class="badge">{{ config.since_days }} days</span>
+      <span class="badge">{{ config.post_limit }} posts</span>
+      <span class="badge">Comments {{ "on" if config.include_comments else "off" }}</span>
+      {% if config.x_enabled %}
+        <span class="badge">X on</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Latest idea clusters</h2>
+  {% if latest_scan %}
+    <p>Scan date: {{ latest_scan.created_utc }}</p>
+    <div class="card" style="margin-bottom:20px;">
+      <form method="get" action="/app" class="form-row">
+        <div>
+          <label>Sort by</label>
+          <select class="select" name="sort_by">
+            <option value="mentions" {% if sort_by == "mentions" %}selected{% endif %}>Mentions</option>
+            <option value="pay_ratio" {% if sort_by == "pay_ratio" %}selected{% endif %}>Pay ratio</option>
+            <option value="pay_mentions" {% if sort_by == "pay_mentions" %}selected{% endif %}>Pay mentions</option>
+            <option value="momentum" {% if sort_by == "momentum" %}selected{% endif %}>Momentum</option>
+            <option value="signal" {% if sort_by == "signal" %}selected{% endif %}>Signal strength</option>
+          </select>
+        </div>
+        <div>
+          <label>Min mentions</label>
+          <input class="input" type="number" name="min_mentions" value="{{ min_mentions }}" min="0" />
+        </div>
+        <div>
+          <label>Source</label>
+          <select class="select" name="source">
+            <option value="all" {% if source == "all" %}selected{% endif %}>All</option>
+            <option value="Reddit" {% if source == "Reddit" %}selected{% endif %}>Reddit</option>
+            <option value="X" {% if source == "X" %}selected{% endif %}>X</option>
+            <option value="Bluesky" {% if source == "Bluesky" %}selected{% endif %}>Bluesky</option>
+            <option value="Mastodon" {% if source == "Mastodon" %}selected{% endif %}>Mastodon</option>
+          </select>
+        </div>
+        <div style="display:flex; align-items:flex-end;">
+          <button class="button secondary" type="submit">Apply</button>
+        </div>
+      </form>
+    </div>
+    {% if summary %}
+      <div class="grid">
+        {% for row in summary %}
+          <div class="card">
+            <h3>{{ row.idea_key }}</h3>
+            <p>Mentions: {{ row.mentions }} | Pay signals: {{ row.pay_mentions }} ({{ row.pay_ratio }}%)</p>
+            <p>Sources: {{ row.sources }} | Persona: {{ row.persona }}</p>
+            <p>Signal strength: <strong>{{ row.signal }}</strong> | Momentum: {{ row.momentum }}</p>
+            <p>Mentions/day: {{ row.mentions_per_day }}</p>
+            <p>{{ row.brief }}</p>
+            <p>Example: {{ row.sample_title }}</p>
+            <div class="panel">
+              <h4>Idea Brief</h4>
+              <p><strong>Problem:</strong> {{ row.problem_statement }}</p>
+              <p><strong>MVP angle:</strong> {{ row.mvp_angle }}</p>
+              <p><strong>Pricing hypothesis:</strong> {{ row.pricing_hypothesis }}</p>
+            </div>
+            <a class="button secondary" href="/app/scan/{{ latest_scan.id }}">View evidence</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No matches yet. Try adjusting the subreddit list or time window.</p>
+    {% endif %}
+  {% else %}
+    <p>No scans yet. Run your first scan to see idea clusters.</p>
+  {% endif %}
+</section>
+{% endblock %}

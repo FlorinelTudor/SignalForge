@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="tag">Pain point intelligence</div>
+    <h1>Turn Reddit frustrations into SaaS ideas worth paying for.</h1>
+    <p>SignalForge watches Reddit and X for app requests, complaints, and "I'd pay for this" moments. Get clear, detailed briefs with proof, volume, and source context.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="button" href="/register">Start scanning</a>
+      <a class="button secondary" href="/login">I already have access</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>What you get</h3>
+    <p>Weekly and daily insight packs with evidence from the source.</p>
+    <div class="grid">
+      <div class="card">
+        <h4>Idea clusters</h4>
+        <p>Grouped by real user language so you can pitch confidently.</p>
+      </div>
+      <div class="card">
+        <h4>Proof points</h4>
+        <p>Direct links to the original thread and supporting comments.</p>
+      </div>
+      <div class="card">
+        <h4>MVP angle</h4>
+        <p>Each idea includes a suggested MVP focus and target persona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:40px;">
+  <h2>Pricing</h2>
+  <div class="grid">
+    {% for plan in plans %}
+      <div class="card">
+        <div class="badge">{{ plan.note }}</div>
+        <h3>{{ plan.name }}</h3>
+        <p style="font-size:28px; color:var(--text);">{{ plan.price }}</p>
+        <ul style="padding-left:18px; margin:0; color:var(--muted);">
+          {% for feature in plan.features %}
+            <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
