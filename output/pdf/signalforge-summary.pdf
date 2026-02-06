@@ -1,0 +1,115 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 2292 >>
+stream
+BT
+/F2 18 Tf
+1 0 0 1 54 750 Tm
+(SignalForge \(Reddit Pain Point Scanner\)) Tj
+/F2 12 Tf
+1 0 0 1 54 722 Tm
+(What it is) Tj
+/F1 10.5 Tf
+1 0 0 1 54 706 Tm
+(SignalForge is a lightweight web app that scans Reddit and X for pain points and explicit) Tj
+/F1 10.5 Tf
+1 0 0 1 54 693 Tm
+(app or tool requests.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 680 Tm
+(It turns matches into SaaS idea briefs with mention counts and source evidence.) Tj
+/F2 12 Tf
+1 0 0 1 54 661 Tm
+(Who it's for) Tj
+/F1 10.5 Tf
+1 0 0 1 54 645 Tm
+(Founders and product builders who want SaaS idea briefs sourced from social discussions.) Tj
+/F2 12 Tf
+1 0 0 1 54 626 Tm
+(What it does) Tj
+/F1 10.5 Tf
+1 0 0 1 54 610 Tm
+(- Workspace-based authentication for solo or team use.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 597 Tm
+(- Reddit scanning with configurable subreddits and optional comments.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 584 Tm
+(- X connector with keyword queries \(recent search\).) Tj
+/F1 10.5 Tf
+1 0 0 1 54 571 Tm
+(- Optional Bluesky and Mastodon connectors.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 558 Tm
+(- Idea clustering with mention counts and willingness-to-pay signals.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 545 Tm
+(- Evidence table with source links, plus filters, sorting, and scheduled scans.) Tj
+/F2 12 Tf
+1 0 0 1 54 526 Tm
+(How it works) Tj
+/F1 10.5 Tf
+1 0 0 1 54 510 Tm
+(- FastAPI app \(app/main.py\) serves Jinja2 templates, static assets, and session auth.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 497 Tm
+(- Scan modules call external APIs \(Reddit, X, Bluesky, Mastodon\) to collect posts.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 484 Tm
+(- Background scheduler runs scans and writes results to SQLite \(data/app.db\) via) Tj
+/F1 10.5 Tf
+1 0 0 1 54 471 Tm
+(  app/db.py.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 458 Tm
+(- Results saved to scans, scan_results, and idea_summaries tables and rendered in the UI;) Tj
+/F1 10.5 Tf
+1 0 0 1 54 445 Tm
+(  CLI reddit_scan.py can output CSVs.) Tj
+/F2 12 Tf
+1 0 0 1 54 426 Tm
+(How to run) Tj
+/F1 10.5 Tf
+1 0 0 1 54 410 Tm
+(- Create API credentials for Reddit and X; optional Mastodon token.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 397 Tm
+(- Copy .env.example to .env and fill in keys.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 384 Tm
+(- Install deps: pip install -r requirements.txt.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 371 Tm
+(- Start: uvicorn app.main:app --reload then open http://127.0.0.1:8000.) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2740
+%%EOF

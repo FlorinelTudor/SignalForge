@@ -1,0 +1,24 @@
+{
+  "name": "codex",
+  "version": "1.0.0",
+  "description": "A lightweight web app that scans Reddit and X for pain points and explicit app/tool requests, then turns them into clear, detailed SaaS idea briefs with mention counts and source evidence.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlorinelTudor/SignalForge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FlorinelTudor/SignalForge/issues"
+  },
+  "homepage": "https://github.com/FlorinelTudor/SignalForge#readme",
+  "dependencies": {
+    "playwright": "^1.58.1"
+  }
+}

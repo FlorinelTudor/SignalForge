@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Star Courier</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game-shell">
+      <header class="mast">
+        <div class="title-block">
+          <p class="eyebrow">Star Courier</p>
+          <h1>Recover the 8 lost cores.</h1>
+        </div>
+        <div class="status-chip" id="status-chip">Offline</div>
+      </header>
+
+      <div id="canvas-wrap">
+        <canvas id="game-canvas" width="900" height="600" aria-label="Star Courier"></canvas>
+        <div id="overlay" class="overlay">
+          <div class="panel">
+            <h2 id="overlay-title">Star Courier</h2>
+            <p id="overlay-subtitle">
+              Scoop 8 cores, then reach the jump gate before the drones pin you down.
+            </p>
+            <div class="controls">
+              <div><span>Move</span> WASD / Arrow Keys</div>
+              <div><span>Aim</span> Mouse</div>
+              <div><span>Shoot</span> Space (overheat)</div>
+              <div><span>Dash</span> Shift (or B)</div>
+              <div><span>Shield</span> E / Right Click</div>
+              <div><span>Shop</span> Enter</div>
+              <div><span>Pause</span> P</div>
+              <div><span>Fullscreen</span> F (Esc to exit)</div>
+              <div><span>Restart</span> R</div>
+            </div>
+            <button id="start-btn" type="button">Start Run</button>
+            <p id="overlay-hint">Press Enter to launch</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span>Score & health appear on the HUD once the run starts.</span>
+      </footer>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
