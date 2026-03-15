@@ -1,0 +1,44 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'>
+<rect width='100%' height='100%' fill='#FFFFFF'/>
+<text x='60' y='20' font-family='Avenir, Arial, sans-serif' font-size='14' fill='#1C1A17'>Sleep Duration vs Next-Day Pace</text>
+<line x1='60' y1='310' x2='620' y2='310' stroke='#E5DED6'/>
+<line x1='60' y1='30' x2='60' y2='310' stroke='#E5DED6'/>
+<line x1='60.0' y1='310' x2='60.0' y2='315' stroke='#E5DED6'/>
+<text x='60.0' y='330' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>3.6h</text>
+<line x1='55' y1='310.0' x2='60' y2='310.0' stroke='#E5DED6'/>
+<text x='52' y='313.0' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='end'>5.35</text>
+<line x1='200.0' y1='310' x2='200.0' y2='315' stroke='#E5DED6'/>
+<text x='200.0' y='330' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>5.5h</text>
+<line x1='55' y1='239.99999999999994' x2='60' y2='239.99999999999994' stroke='#E5DED6'/>
+<text x='52' y='242.99999999999994' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='end'>5.82</text>
+<line x1='340.00000000000006' y1='310' x2='340.00000000000006' y2='315' stroke='#E5DED6'/>
+<text x='340.00000000000006' y='330' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>7.3h</text>
+<line x1='55' y1='170.0' x2='60' y2='170.0' stroke='#E5DED6'/>
+<text x='52' y='173.0' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='end'>6.29</text>
+<line x1='480.00000000000006' y1='310' x2='480.00000000000006' y2='315' stroke='#E5DED6'/>
+<text x='480.00000000000006' y='330' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>9.2h</text>
+<line x1='55' y1='100.00000000000006' x2='60' y2='100.00000000000006' stroke='#E5DED6'/>
+<text x='52' y='103.00000000000006' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='end'>6.76</text>
+<line x1='620.0' y1='310' x2='620.0' y2='315' stroke='#E5DED6'/>
+<text x='620.0' y='330' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>11.0h</text>
+<line x1='55' y1='30.0' x2='60' y2='30.0' stroke='#E5DED6'/>
+<text x='52' y='33.0' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='end'>7.24</text>
+<line x1='60.0' y1='77.18284901850812' x2='620.0' y2='244.13530114735067' stroke='#B89B6A' stroke-width='2'/>
+<circle cx='379.25825418362734' cy='297.27272727272725' r='3' fill='#1C1A17'/>
+<circle cx='209.56128448665763' cy='136.6372462488968' r='3' fill='#1C1A17'/>
+<circle cx='334.9344188150159' cy='134.16593115622248' r='3' fill='#1C1A17'/>
+<circle cx='266.54907281772955' cy='89.68225948808484' r='3' fill='#1C1A17'/>
+<circle cx='266.54907281772955' cy='186.0635481023831' r='3' fill='#1C1A17'/>
+<circle cx='251.3523292627771' cy='168.76434245366292' r='3' fill='#1C1A17'/>
+<circle cx='594.5454545454546' cy='230.54721977052074' r='3' fill='#1C1A17'/>
+<circle cx='269.0818634102217' cy='151.46513680494263' r='3' fill='#1C1A17'/>
+<circle cx='85.45454545454545' cy='92.15357458075914' r='3' fill='#1C1A17'/>
+<circle cx='214.62686567164184' cy='94.62488967343344' r='3' fill='#1C1A17'/>
+<circle cx='261.4834916327454' cy='151.46513680494263' r='3' fill='#1C1A17'/>
+<circle cx='228.55721393034827' cy='42.72727272727275' r='3' fill='#1C1A17'/>
+<circle cx='383.0574400723655' cy='136.6372462488968' r='3' fill='#1C1A17'/>
+<circle cx='413.45092718227056' cy='195.94880847308042' r='3' fill='#1C1A17'/>
+<circle cx='528.6928991406605' cy='178.64960282436016' r='3' fill='#1C1A17'/>
+<text x='60' y='350' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A'>Sleep hours</text>
+<text x='530' y='350' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A'>Pace (min/km)</text>
+</svg>

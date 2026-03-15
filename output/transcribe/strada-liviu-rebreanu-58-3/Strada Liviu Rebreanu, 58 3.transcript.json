@@ -1,0 +1,161 @@
+{
+  "duration": null,
+  "segments": [
+    {
+      "id": "seg_0",
+      "end": 1.8499999999999999,
+      "speaker": "A",
+      "start": 0.3500000000000001,
+      "text": " Convoy 3881,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_1",
+      "end": 2.999999999999999,
+      "speaker": "A",
+      "start": 1.9999999999999998,
+      "text": " Transco to Green Bay,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_2",
+      "end": 4.1499999999999995,
+      "speaker": "A",
+      "start": 3.1499999999999995,
+      "text": " O'Hare 8 departure,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_3",
+      "end": 6.449999999999999,
+      "speaker": "A",
+      "start": 5.199999999999999,
+      "text": " spread of vectors to Papa,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_4",
+      "end": 6.999999999999999,
+      "speaker": "A",
+      "start": 6.6,
+      "text": " Mike,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_5",
+      "end": 7.599999999999999,
+      "speaker": "A",
+      "start": 7.3999999999999995,
+      "text": " Papa,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_6",
+      "end": 8.149999999999999,
+      "speaker": "A",
+      "start": 7.699999999999998,
+      "text": " Kilo,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_7",
+      "end": 8.649999999999999,
+      "speaker": "A",
+      "start": 8.299999999999999,
+      "text": " November,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_8",
+      "end": 10.849999999999998,
+      "speaker": "A",
+      "start": 8.849999999999998,
+      "text": " then November,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_9",
+      "end": 11.349999999999998,
+      "speaker": "A",
+      "start": 10.899999999999999,
+      "text": " Echo,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_10",
+      "end": 12.049999999999997,
+      "speaker": "A",
+      "start": 11.549999999999997,
+      "text": " Alpha,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_11",
+      "end": 12.849999999999996,
+      "speaker": "A",
+      "start": 12.249999999999996,
+      "text": " Tango,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_12",
+      "end": 13.449999999999996,
+      "speaker": "A",
+      "start": 12.949999999999996,
+      "text": " Oscar,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_13",
+      "end": 15.849999999999994,
+      "speaker": "A",
+      "start": 13.649999999999995,
+      "text": " then to Delta,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_14",
+      "end": 16.299999999999994,
+      "speaker": "A",
+      "start": 15.899999999999995,
+      "text": " Lima,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_15",
+      "end": 16.799999999999994,
+      "speaker": "A",
+      "start": 16.399999999999995,
+      "text": " Lima,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_16",
+      "end": 17.449999999999992,
+      "speaker": "A",
+      "start": 16.949999999999992,
+      "text": " Alpha,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_17",
+      "end": 17.999999999999993,
+      "speaker": "A",
+      "start": 17.499999999999993,
+      "text": " November.",
+      "type": "transcript.text.segment"
+    }
+  ],
+  "task": null,
+  "text": "Convoy 3881, Transco to Green Bay, O'Hare 8 departure, spread of vectors to Papa, Mike, Papa, Kilo, November, then November, Echo, Alpha, Tango, Oscar, then to Delta, Lima, Lima, Alpha, November.",
+  "usage": {
+    "input_tokens": 193,
+    "output_tokens": 635,
+    "total_tokens": 828,
+    "type": "tokens",
+    "input_token_details": {
+      "audio_tokens": 193,
+      "text_tokens": 0
+    }
+  }
+}

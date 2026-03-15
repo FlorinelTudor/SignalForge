@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://agentxplorer.com/static-sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://api.agentxplorer.com/api/sitemaps/agents.xml</loc>
+  </sitemap>
+</sitemapindex>

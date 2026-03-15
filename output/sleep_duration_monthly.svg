@@ -1,0 +1,67 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='960' height='280' viewBox='0 0 960 280'>
+<rect width='100%' height='100%' fill='#FFFFFF'/>
+<text x='60' y='24' font-family='Avenir, Arial, sans-serif' font-size='16' fill='#1C1A17'>Monthly Avg Sleep Duration</text>
+<line x1='60' y1='240.0' x2='940' y2='240.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='244.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>6</text>
+<line x1='60' y1='190.0' x2='940' y2='190.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='194.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>6</text>
+<line x1='60' y1='140.00000000000006' x2='940' y2='140.00000000000006' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='144.00000000000006' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>7</text>
+<line x1='60' y1='90.00000000000003' x2='940' y2='90.00000000000003' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='94.00000000000003' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>8</text>
+<line x1='60' y1='40.0' x2='940' y2='40.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='44.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>9</text>
+<line x1='60' y1='240' x2='940' y2='240' stroke='#E5DED6' stroke-width='1'/>
+<path d='M60.00,130.98L84.44,147.35L108.89,136.41L133.33,163.68L157.78,214.37L182.22,172.67L206.67,169.08L231.11,130.84L255.56,97.31L280.00,89.69L304.44,49.09L328.89,80.02L353.33,69.86L377.78,101.19L402.22,141.97L426.67,168.46L451.11,164.76L475.56,151.26L500.00,125.98L524.44,178.51L548.89,108.16L573.33,120.94L597.78,192.14L622.22,146.08L646.67,146.17L671.11,146.10L695.56,149.55L720.00,156.85L744.44,131.76L768.89,151.65L793.33,175.58L817.78,130.30L842.22,113.03L866.67,134.90L891.11,230.91L915.56,183.52L940.00,199.85' fill='none' stroke='#1C1A17' stroke-width='2' stroke-linecap='round'/>
+<circle cx='60.00' cy='130.98' r='3.0' fill='#1C1A17'/>
+<circle cx='84.44' cy='147.35' r='3.0' fill='#1C1A17'/>
+<circle cx='108.89' cy='136.41' r='3.0' fill='#1C1A17'/>
+<circle cx='133.33' cy='163.68' r='3.0' fill='#1C1A17'/>
+<circle cx='157.78' cy='214.37' r='3.0' fill='#1C1A17'/>
+<circle cx='182.22' cy='172.67' r='3.0' fill='#1C1A17'/>
+<circle cx='206.67' cy='169.08' r='3.0' fill='#1C1A17'/>
+<circle cx='231.11' cy='130.84' r='3.0' fill='#1C1A17'/>
+<circle cx='255.56' cy='97.31' r='3.0' fill='#1C1A17'/>
+<circle cx='280.00' cy='89.69' r='3.0' fill='#1C1A17'/>
+<circle cx='304.44' cy='49.09' r='3.0' fill='#1C1A17'/>
+<circle cx='328.89' cy='80.02' r='3.0' fill='#1C1A17'/>
+<circle cx='353.33' cy='69.86' r='3.0' fill='#1C1A17'/>
+<circle cx='377.78' cy='101.19' r='3.0' fill='#1C1A17'/>
+<circle cx='402.22' cy='141.97' r='3.0' fill='#1C1A17'/>
+<circle cx='426.67' cy='168.46' r='3.0' fill='#1C1A17'/>
+<circle cx='451.11' cy='164.76' r='3.0' fill='#1C1A17'/>
+<circle cx='475.56' cy='151.26' r='3.0' fill='#1C1A17'/>
+<circle cx='500.00' cy='125.98' r='3.0' fill='#1C1A17'/>
+<circle cx='524.44' cy='178.51' r='3.0' fill='#1C1A17'/>
+<circle cx='548.89' cy='108.16' r='3.0' fill='#1C1A17'/>
+<circle cx='573.33' cy='120.94' r='3.0' fill='#1C1A17'/>
+<circle cx='597.78' cy='192.14' r='3.0' fill='#1C1A17'/>
+<circle cx='622.22' cy='146.08' r='3.0' fill='#1C1A17'/>
+<circle cx='646.67' cy='146.17' r='3.0' fill='#1C1A17'/>
+<circle cx='671.11' cy='146.10' r='3.0' fill='#1C1A17'/>
+<circle cx='695.56' cy='149.55' r='3.0' fill='#1C1A17'/>
+<circle cx='720.00' cy='156.85' r='3.0' fill='#1C1A17'/>
+<circle cx='744.44' cy='131.76' r='3.0' fill='#1C1A17'/>
+<circle cx='768.89' cy='151.65' r='3.0' fill='#1C1A17'/>
+<circle cx='793.33' cy='175.58' r='3.0' fill='#1C1A17'/>
+<circle cx='817.78' cy='130.30' r='3.0' fill='#1C1A17'/>
+<circle cx='842.22' cy='113.03' r='3.0' fill='#1C1A17'/>
+<circle cx='866.67' cy='134.90' r='3.0' fill='#1C1A17'/>
+<circle cx='891.11' cy='230.91' r='3.0' fill='#1C1A17'/>
+<circle cx='915.56' cy='183.52' r='3.0' fill='#1C1A17'/>
+<circle cx='940.00' cy='199.85' r='3.0' fill='#1C1A17'/>
+<text x='60' y='270' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#7A726A'>Hours</text>
+<text x='60.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-02</text>
+<text x='133.33333333333331' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-05</text>
+<text x='206.66666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-08</text>
+<text x='280.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-11</text>
+<text x='353.3333333333333' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-02</text>
+<text x='426.6666666666667' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-05</text>
+<text x='500.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-08</text>
+<text x='573.3333333333334' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-11</text>
+<text x='646.6666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-02</text>
+<text x='720.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-05</text>
+<text x='793.3333333333334' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-08</text>
+<text x='866.6666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-11</text>
+<text x='940.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2026-02</text>
+</svg>

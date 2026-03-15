@@ -1,0 +1,68 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='960' height='280' viewBox='0 0 960 280'>
+<rect width='100%' height='100%' fill='#FFFFFF'/>
+<text x='60' y='24' font-family='Avenir, Arial, sans-serif' font-size='16' fill='#1C1A17'>Weekly Sleep Duration</text>
+<line x1='60' y1='240.0' x2='940' y2='240.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='244.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>4</text>
+<line x1='60' y1='190.0' x2='940' y2='190.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='194.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>6</text>
+<line x1='60' y1='140.0' x2='940' y2='140.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='144.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>7</text>
+<line x1='60' y1='90.0' x2='940' y2='90.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='94.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>8</text>
+<line x1='60' y1='40.0' x2='940' y2='40.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='44.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>9</text>
+<line x1='60' y1='240' x2='940' y2='240' stroke='#E5DED6' stroke-width='1'/>
+<path d='M60.00,74.74L77.25,146.41L94.51,95.87L111.76,130.57L129.02,148.68L146.27,77.00L163.53,131.32L180.78,49.09L198.04,160.75L215.29,136.61L232.55,146.41L249.80,111.71L267.06,134.34L284.31,123.78L301.57,135.85L318.82,126.80L336.08,117.74L353.33,166.03L370.59,73.99L387.84,120.76L405.10,117.74L422.35,141.13L439.61,126.04L456.86,134.34L474.12,132.83L491.37,161.50L508.63,144.90L525.88,146.41L543.14,116.24L560.39,141.89L577.65,69.46L594.90,110.95L612.16,110.20L629.41,110.20L646.67,132.08L663.92,78.51L681.18,102.66L698.43,103.41L732.94,110.95L750.20,80.78L767.45,169.80L784.71,221.10L801.96,230.91L819.22,136.61L836.47,101.90L853.73,184.13L870.98,109.45L888.24,156.22L905.49,135.85L922.75,116.24L940.00,156.22' fill='none' stroke='#1C1A17' stroke-width='2' stroke-linecap='round'/>
+<circle cx='60.00' cy='74.74' r='3.2' fill='#1C1A17'/>
+<circle cx='77.25' cy='146.41' r='3.2' fill='#1C1A17'/>
+<circle cx='94.51' cy='95.87' r='3.2' fill='#1C1A17'/>
+<circle cx='111.76' cy='130.57' r='3.2' fill='#1C1A17'/>
+<circle cx='129.02' cy='148.68' r='3.2' fill='#1C1A17'/>
+<circle cx='146.27' cy='77.00' r='3.2' fill='#1C1A17'/>
+<circle cx='163.53' cy='131.32' r='3.2' fill='#1C1A17'/>
+<circle cx='180.78' cy='49.09' r='3.2' fill='#1C1A17'/>
+<circle cx='198.04' cy='160.75' r='3.2' fill='#1C1A17'/>
+<circle cx='215.29' cy='136.61' r='3.2' fill='#1C1A17'/>
+<circle cx='232.55' cy='146.41' r='3.2' fill='#1C1A17'/>
+<circle cx='249.80' cy='111.71' r='3.2' fill='#1C1A17'/>
+<circle cx='267.06' cy='134.34' r='3.2' fill='#1C1A17'/>
+<circle cx='284.31' cy='123.78' r='3.2' fill='#1C1A17'/>
+<circle cx='301.57' cy='135.85' r='3.2' fill='#1C1A17'/>
+<circle cx='318.82' cy='126.80' r='3.2' fill='#1C1A17'/>
+<circle cx='336.08' cy='117.74' r='3.2' fill='#1C1A17'/>
+<circle cx='353.33' cy='166.03' r='3.2' fill='#1C1A17'/>
+<circle cx='370.59' cy='73.99' r='3.2' fill='#1C1A17'/>
+<circle cx='387.84' cy='120.76' r='3.2' fill='#1C1A17'/>
+<circle cx='405.10' cy='117.74' r='3.2' fill='#1C1A17'/>
+<circle cx='422.35' cy='141.13' r='3.2' fill='#1C1A17'/>
+<circle cx='439.61' cy='126.04' r='3.2' fill='#1C1A17'/>
+<circle cx='456.86' cy='134.34' r='3.2' fill='#1C1A17'/>
+<circle cx='474.12' cy='132.83' r='3.2' fill='#1C1A17'/>
+<circle cx='491.37' cy='161.50' r='3.2' fill='#1C1A17'/>
+<circle cx='508.63' cy='144.90' r='3.2' fill='#1C1A17'/>
+<circle cx='525.88' cy='146.41' r='3.2' fill='#1C1A17'/>
+<circle cx='543.14' cy='116.24' r='3.2' fill='#1C1A17'/>
+<circle cx='560.39' cy='141.89' r='3.2' fill='#1C1A17'/>
+<circle cx='577.65' cy='69.46' r='3.2' fill='#1C1A17'/>
+<circle cx='594.90' cy='110.95' r='3.2' fill='#1C1A17'/>
+<circle cx='612.16' cy='110.20' r='3.2' fill='#1C1A17'/>
+<circle cx='629.41' cy='110.20' r='3.2' fill='#1C1A17'/>
+<circle cx='646.67' cy='132.08' r='3.2' fill='#1C1A17'/>
+<circle cx='663.92' cy='78.51' r='3.2' fill='#1C1A17'/>
+<circle cx='681.18' cy='102.66' r='3.2' fill='#1C1A17'/>
+<circle cx='698.43' cy='103.41' r='3.2' fill='#1C1A17'/>
+<circle cx='732.94' cy='110.95' r='3.2' fill='#1C1A17'/>
+<circle cx='750.20' cy='80.78' r='3.2' fill='#1C1A17'/>
+<circle cx='767.45' cy='169.80' r='3.2' fill='#1C1A17'/>
+<circle cx='784.71' cy='221.10' r='3.2' fill='#1C1A17'/>
+<circle cx='801.96' cy='230.91' r='3.2' fill='#1C1A17'/>
+<circle cx='819.22' cy='136.61' r='3.2' fill='#1C1A17'/>
+<circle cx='836.47' cy='101.90' r='3.2' fill='#1C1A17'/>
+<circle cx='853.73' cy='184.13' r='3.2' fill='#1C1A17'/>
+<circle cx='870.98' cy='109.45' r='3.2' fill='#1C1A17'/>
+<circle cx='888.24' cy='156.22' r='3.2' fill='#1C1A17'/>
+<circle cx='905.49' cy='135.85' r='3.2' fill='#1C1A17'/>
+<circle cx='922.75' cy='116.24' r='3.2' fill='#1C1A17'/>
+<circle cx='940.00' cy='156.22' r='3.2' fill='#1C1A17'/>
+<text x='60' y='270' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#7A726A'>Hours</text>
+</svg>

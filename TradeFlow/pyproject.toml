@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tradeflow-bot"
+version = "0.1.0"
+description = "Self-learning trading bot with strategy blend, ML, backtesting, and live/paper execution"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas==2.2.3",
+  "numpy==2.2.2",
+  "scikit-learn==1.6.1",
+  "yfinance==0.2.54",
+  "requests==2.32.3",
+  "python-dotenv==1.0.1",
+  "joblib==1.4.2",
+]
+
+[project.scripts]
+tradeflow = "tradeflow_bot.main:main"
+hackathon-kit = "tradeflow_bot.hackathon:main"
+
+[tool.setuptools]
+packages = ["tradeflow_bot", "tradeflow_bot.brokers"]

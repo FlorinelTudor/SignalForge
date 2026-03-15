@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Photoshoot Generator</title>
+  <link rel="stylesheet" href="/static/photoshoot.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pro Photoshoot Generator</h1>
+      <p>Upload a selfie and generate a professional studio-style portrait.</p>
+    </header>
+
+    {% if error %}
+      <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    <form class="card" method="post" action="/generate" enctype="multipart/form-data">
+      <label>
+        Selfie image
+        <input type="file" name="selfie" accept="image/*" required />
+      </label>
+
+      <label>
+        Style
+        <select name="style">
+          {% for key, item in styles.items() %}
+            <option value="{{ key }}">{{ item.title }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>
+        Output size
+        <select name="size">
+          <option value="1024x1024">1024x1024</option>
+          <option value="1024x1536">1024x1536</option>
+          <option value="1536x1024">1536x1024</option>
+        </select>
+      </label>
+
+      <label>
+        Extra notes (optional)
+        <textarea name="extra_notes" rows="3" placeholder="e.g., suit, dramatic shadow, plain grey backdrop"></textarea>
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" name="consent" />
+        I confirm I have consent to upload this photo and use it to generate an edited image.
+      </label>
+
+      <button type="submit">Generate photo</button>
+    </form>
+
+    <section class="card">
+      <h2>Notes</h2>
+      <ul>
+        <li>Best results: front-facing, well-lit selfie with minimal background clutter.</li>
+        <li>Use the same person you have consent to process.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

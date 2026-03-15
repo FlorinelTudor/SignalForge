@@ -91,9 +91,28 @@
     <div class="card">
       <h3>Reddit API</h3>
       {% if reddit_limits %}
-        <p>Remaining: {{ reddit_limits.get('remaining') }}</p>
-        <p>Used: {{ reddit_limits.get('used') }}</p>
-        <p>Reset: {{ reddit_reset }}</p>
+        {% set reddit_used = reddit_limits.get('used') | int %}
+        {% set reddit_remaining = reddit_limits.get('remaining') | int %}
+        {% set reddit_total = reddit_used + reddit_remaining %}
+        {% if reddit_total > 0 %}
+          {% set reddit_pct = ((reddit_used * 100) / reddit_total) | round(0, 'floor') | int %}
+        {% else %}
+          {% set reddit_pct = 0 %}
+        {% endif %}
+        {% set reddit_class = "danger" if reddit_pct >= 90 else "warn" if reddit_pct >= 70 else "ok" %}
+        <div class="rate-layout">
+          <div class="usage-gauge {{ reddit_class }}" style="--usage: {{ reddit_pct }}%;">
+            <div class="usage-center">
+              <div class="usage-value">{{ reddit_pct }}%</div>
+              <div class="usage-label">used</div>
+            </div>
+          </div>
+          <div class="rate-lines">
+            <p>Remaining: {{ reddit_limits.get('remaining') }}</p>
+            <p>Used: {{ reddit_limits.get('used') }}</p>
+            <p>Reset: {{ reddit_reset }}</p>
+          </div>
+        </div>
       {% else %}
         <p>Run a scan to capture live rate limit data.</p>
       {% endif %}
@@ -101,9 +120,31 @@
     <div class="card">
       <h3>X API</h3>
       {% if x_limits %}
-        <p>Limit: {{ x_limits.get('limit') }}</p>
-        <p>Remaining: {{ x_limits.get('remaining') }}</p>
-        <p>Reset: {{ x_reset }}</p>
+        {% set x_limit = x_limits.get('limit') | int %}
+        {% set x_remaining = x_limits.get('remaining') | int %}
+        {% set x_used = x_limit - x_remaining %}
+        {% if x_used < 0 %}
+          {% set x_used = 0 %}
+        {% endif %}
+        {% if x_limit > 0 %}
+          {% set x_pct = ((x_used * 100) / x_limit) | round(0, 'floor') | int %}
+        {% else %}
+          {% set x_pct = 0 %}
+        {% endif %}
+        {% set x_class = "danger" if x_pct >= 90 else "warn" if x_pct >= 70 else "ok" %}
+        <div class="rate-layout">
+          <div class="usage-gauge {{ x_class }}" style="--usage: {{ x_pct }}%;">
+            <div class="usage-center">
+              <div class="usage-value">{{ x_pct }}%</div>
+              <div class="usage-label">used</div>
+            </div>
+          </div>
+          <div class="rate-lines">
+            <p>Limit: {{ x_limits.get('limit') }}</p>
+            <p>Remaining: {{ x_limits.get('remaining') }}</p>
+            <p>Reset: {{ x_reset }}</p>
+          </div>
+        </div>
       {% else %}
         <p>Run a scan to capture live rate limit data.</p>
       {% endif %}
@@ -111,9 +152,31 @@
     <div class="card">
       <h3>Bluesky API</h3>
       {% if bsky_limits %}
-        <p>Limit: {{ bsky_limits.get('limit') }}</p>
-        <p>Remaining: {{ bsky_limits.get('remaining') }}</p>
-        <p>Reset: {{ bsky_reset }}</p>
+        {% set bsky_limit = bsky_limits.get('limit') | int %}
+        {% set bsky_remaining = bsky_limits.get('remaining') | int %}
+        {% set bsky_used = bsky_limit - bsky_remaining %}
+        {% if bsky_used < 0 %}
+          {% set bsky_used = 0 %}
+        {% endif %}
+        {% if bsky_limit > 0 %}
+          {% set bsky_pct = ((bsky_used * 100) / bsky_limit) | round(0, 'floor') | int %}
+        {% else %}
+          {% set bsky_pct = 0 %}
+        {% endif %}
+        {% set bsky_class = "danger" if bsky_pct >= 90 else "warn" if bsky_pct >= 70 else "ok" %}
+        <div class="rate-layout">
+          <div class="usage-gauge {{ bsky_class }}" style="--usage: {{ bsky_pct }}%;">
+            <div class="usage-center">
+              <div class="usage-value">{{ bsky_pct }}%</div>
+              <div class="usage-label">used</div>
+            </div>
+          </div>
+          <div class="rate-lines">
+            <p>Limit: {{ bsky_limits.get('limit') }}</p>
+            <p>Remaining: {{ bsky_limits.get('remaining') }}</p>
+            <p>Reset: {{ bsky_reset }}</p>
+          </div>
+        </div>
       {% else %}
         <p>Run a scan to capture live rate limit data.</p>
       {% endif %}
@@ -121,9 +184,31 @@
     <div class="card">
       <h3>Mastodon API</h3>
       {% if mastodon_limits %}
-        <p>Limit: {{ mastodon_limits.get('limit') }}</p>
-        <p>Remaining: {{ mastodon_limits.get('remaining') }}</p>
-        <p>Reset: {{ mastodon_reset }}</p>
+        {% set mastodon_limit = mastodon_limits.get('limit') | int %}
+        {% set mastodon_remaining = mastodon_limits.get('remaining') | int %}
+        {% set mastodon_used = mastodon_limit - mastodon_remaining %}
+        {% if mastodon_used < 0 %}
+          {% set mastodon_used = 0 %}
+        {% endif %}
+        {% if mastodon_limit > 0 %}
+          {% set mastodon_pct = ((mastodon_used * 100) / mastodon_limit) | round(0, 'floor') | int %}
+        {% else %}
+          {% set mastodon_pct = 0 %}
+        {% endif %}
+        {% set mastodon_class = "danger" if mastodon_pct >= 90 else "warn" if mastodon_pct >= 70 else "ok" %}
+        <div class="rate-layout">
+          <div class="usage-gauge {{ mastodon_class }}" style="--usage: {{ mastodon_pct }}%;">
+            <div class="usage-center">
+              <div class="usage-value">{{ mastodon_pct }}%</div>
+              <div class="usage-label">used</div>
+            </div>
+          </div>
+          <div class="rate-lines">
+            <p>Limit: {{ mastodon_limits.get('limit') }}</p>
+            <p>Remaining: {{ mastodon_limits.get('remaining') }}</p>
+            <p>Reset: {{ mastodon_reset }}</p>
+          </div>
+        </div>
       {% else %}
         <p>Run a scan to capture live rate limit data.</p>
       {% endif %}

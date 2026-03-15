@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Photoshoot</title>
+  <link rel="stylesheet" href="/static/photoshoot.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Your Photoshoot Result</h1>
+      <p>Download or share your generated portrait.</p>
+    </header>
+
+    <div class="card">
+      <img src="{{ image_url }}" alt="Generated portrait" />
+      <div class="actions">
+        <a class="button" href="{{ image_url }}" download>Download</a>
+        <a class="button secondary" href="/">Generate another</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

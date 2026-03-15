@@ -1,0 +1,67 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='960' height='280' viewBox='0 0 960 280'>
+<rect width='100%' height='100%' fill='#FFFFFF'/>
+<text x='60' y='24' font-family='Avenir, Arial, sans-serif' font-size='16' fill='#1C1A17'>Monthly Avg Sleep Score</text>
+<line x1='60' y1='240.0' x2='940' y2='240.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='244.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>47</text>
+<line x1='60' y1='189.99999999999997' x2='940' y2='189.99999999999997' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='193.99999999999997' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>55</text>
+<line x1='60' y1='140.0' x2='940' y2='140.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='144.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>63</text>
+<line x1='60' y1='90.00000000000003' x2='940' y2='90.00000000000003' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='94.00000000000003' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>71</text>
+<line x1='60' y1='40.0' x2='940' y2='40.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='44.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>79</text>
+<line x1='60' y1='240' x2='940' y2='240' stroke='#E5DED6' stroke-width='1'/>
+<path d='M60.00,85.48L84.44,76.38L108.89,49.09L133.33,78.13L157.78,174.46L182.22,131.29L206.67,104.01L231.11,79.95L255.56,92.62L280.00,82.42L304.44,126.03L328.89,117.91L353.33,99.21L377.78,85.02L402.22,107.00L426.67,145.58L451.11,85.43L475.56,111.21L500.00,73.03L524.44,121.97L548.89,83.81L573.33,100.77L597.78,118.67L622.22,100.85L646.67,81.29L671.11,120.39L695.56,82.18L720.00,50.09L744.44,102.27L768.89,102.27L793.33,65.63L817.78,60.40L842.22,88.76L866.67,92.28L891.11,230.91L915.56,109.53L940.00,102.76' fill='none' stroke='#1C1A17' stroke-width='2' stroke-linecap='round'/>
+<circle cx='60.00' cy='85.48' r='3.0' fill='#1C1A17'/>
+<circle cx='84.44' cy='76.38' r='3.0' fill='#1C1A17'/>
+<circle cx='108.89' cy='49.09' r='3.0' fill='#1C1A17'/>
+<circle cx='133.33' cy='78.13' r='3.0' fill='#1C1A17'/>
+<circle cx='157.78' cy='174.46' r='3.0' fill='#1C1A17'/>
+<circle cx='182.22' cy='131.29' r='3.0' fill='#1C1A17'/>
+<circle cx='206.67' cy='104.01' r='3.0' fill='#1C1A17'/>
+<circle cx='231.11' cy='79.95' r='3.0' fill='#1C1A17'/>
+<circle cx='255.56' cy='92.62' r='3.0' fill='#1C1A17'/>
+<circle cx='280.00' cy='82.42' r='3.0' fill='#1C1A17'/>
+<circle cx='304.44' cy='126.03' r='3.0' fill='#1C1A17'/>
+<circle cx='328.89' cy='117.91' r='3.0' fill='#1C1A17'/>
+<circle cx='353.33' cy='99.21' r='3.0' fill='#1C1A17'/>
+<circle cx='377.78' cy='85.02' r='3.0' fill='#1C1A17'/>
+<circle cx='402.22' cy='107.00' r='3.0' fill='#1C1A17'/>
+<circle cx='426.67' cy='145.58' r='3.0' fill='#1C1A17'/>
+<circle cx='451.11' cy='85.43' r='3.0' fill='#1C1A17'/>
+<circle cx='475.56' cy='111.21' r='3.0' fill='#1C1A17'/>
+<circle cx='500.00' cy='73.03' r='3.0' fill='#1C1A17'/>
+<circle cx='524.44' cy='121.97' r='3.0' fill='#1C1A17'/>
+<circle cx='548.89' cy='83.81' r='3.0' fill='#1C1A17'/>
+<circle cx='573.33' cy='100.77' r='3.0' fill='#1C1A17'/>
+<circle cx='597.78' cy='118.67' r='3.0' fill='#1C1A17'/>
+<circle cx='622.22' cy='100.85' r='3.0' fill='#1C1A17'/>
+<circle cx='646.67' cy='81.29' r='3.0' fill='#1C1A17'/>
+<circle cx='671.11' cy='120.39' r='3.0' fill='#1C1A17'/>
+<circle cx='695.56' cy='82.18' r='3.0' fill='#1C1A17'/>
+<circle cx='720.00' cy='50.09' r='3.0' fill='#1C1A17'/>
+<circle cx='744.44' cy='102.27' r='3.0' fill='#1C1A17'/>
+<circle cx='768.89' cy='102.27' r='3.0' fill='#1C1A17'/>
+<circle cx='793.33' cy='65.63' r='3.0' fill='#1C1A17'/>
+<circle cx='817.78' cy='60.40' r='3.0' fill='#1C1A17'/>
+<circle cx='842.22' cy='88.76' r='3.0' fill='#1C1A17'/>
+<circle cx='866.67' cy='92.28' r='3.0' fill='#1C1A17'/>
+<circle cx='891.11' cy='230.91' r='3.0' fill='#1C1A17'/>
+<circle cx='915.56' cy='109.53' r='3.0' fill='#1C1A17'/>
+<circle cx='940.00' cy='102.76' r='3.0' fill='#1C1A17'/>
+<text x='60' y='270' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#7A726A'>Score</text>
+<text x='60.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-02</text>
+<text x='133.33333333333331' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-05</text>
+<text x='206.66666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-08</text>
+<text x='280.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2023-11</text>
+<text x='353.3333333333333' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-02</text>
+<text x='426.6666666666667' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-05</text>
+<text x='500.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-08</text>
+<text x='573.3333333333334' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2024-11</text>
+<text x='646.6666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-02</text>
+<text x='720.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-05</text>
+<text x='793.3333333333334' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-08</text>
+<text x='866.6666666666666' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2025-11</text>
+<text x='940.0' y='262' font-family='Avenir, Arial, sans-serif' font-size='10' fill='#7A726A' text-anchor='middle'>2026-02</text>
+</svg>

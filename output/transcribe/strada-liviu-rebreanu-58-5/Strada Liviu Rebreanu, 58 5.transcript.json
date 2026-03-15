@@ -1,0 +1,49 @@
+{
+  "duration": null,
+  "segments": [
+    {
+      "id": "seg_0",
+      "end": 3.8,
+      "speaker": "A",
+      "start": 0.9000000000000001,
+      "text": " Southwest 4254, cautionary turbulence heavy,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_1",
+      "end": 7.6499999999999995,
+      "speaker": "A",
+      "start": 3.95,
+      "text": " Airbus 335 miles upwind, wind 1205,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_2",
+      "end": 9.250000000000002,
+      "speaker": "A",
+      "start": 7.7,
+      "text": " runway 27 clear for takeoff.",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_3",
+      "end": 12.3,
+      "speaker": "B",
+      "start": 9.700000000000001,
+      "text": " Two seven clear takeoff southwest 40, 54.",
+      "type": "transcript.text.segment"
+    }
+  ],
+  "task": null,
+  "text": "Southwest 4254, cautionary turbulence heavy, Airbus 335 miles upwind, wind 1205, runway 27 clear for takeoff. Two seven clear takeoff southwest 40, 54.",
+  "usage": {
+    "input_tokens": 133,
+    "output_tokens": 393,
+    "total_tokens": 526,
+    "type": "tokens",
+    "input_token_details": {
+      "audio_tokens": 133,
+      "text_tokens": 0
+    }
+  }
+}

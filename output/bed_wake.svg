@@ -1,0 +1,124 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='960' height='280' viewBox='0 0 960 280'>
+<rect width='100%' height='100%' fill='#FFFFFF'/>
+<text x='60' y='24' font-family='Avenir, Arial, sans-serif' font-size='16' fill='#1C1A17'>Bedtime vs Wake Time (Weekly Avg)</text>
+<line x1='60' y1='220.80808080808083' x2='940' y2='220.80808080808083' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='224.80808080808083' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>22:00</text>
+<line x1='60' y1='180.4040404040404' x2='940' y2='180.4040404040404' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='184.4040404040404' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>00:00</text>
+<line x1='60' y1='140.0' x2='940' y2='140.0' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='144.0' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>02:00</text>
+<line x1='60' y1='99.59595959595958' x2='940' y2='99.59595959595958' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='103.59595959595958' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>04:00</text>
+<line x1='60' y1='59.19191919191918' x2='940' y2='59.19191919191918' stroke='#E5DED6' stroke-width='1'/>
+<text x='52' y='63.19191919191918' font-family='Avenir, Arial, sans-serif' font-size='11' fill='#7A726A' text-anchor='end'>06:00</text>
+<line x1='60' y1='240' x2='940' y2='240' stroke='#E5DED6' stroke-width='1'/>
+<path d='M60.00,178.38L77.25,150.44L94.51,182.09L111.76,177.71L129.02,182.09L146.27,204.65L163.53,161.55L180.78,228.55L198.04,181.08L215.29,162.22L232.55,133.60L249.80,186.46L267.06,174.01L284.31,189.16L301.57,174.68L318.82,166.94L336.08,168.96L353.33,158.86L370.59,205.66L387.84,179.39L405.10,143.70L422.35,130.57L439.61,151.11L456.86,170.98L474.12,151.78L491.37,154.14L508.63,154.14L525.88,180.07L543.14,173.67L560.39,171.31L577.65,208.69L594.90,179.39L612.16,191.85L629.41,163.91L646.67,175.02L663.92,205.99L681.18,180.40L698.43,175.02L732.94,153.47L750.20,164.24L767.45,135.29L784.71,173.00L801.96,124.51L819.22,167.61L836.47,174.68L853.73,87.47L870.98,176.03L888.24,158.52L905.49,147.74L922.75,155.49L940.00,129.90' fill='none' stroke='#1C1A17' stroke-width='2' stroke-linecap='round'/>
+<circle cx='60.00' cy='178.38' r='3.2' fill='#1C1A17'/>
+<circle cx='77.25' cy='150.44' r='3.2' fill='#1C1A17'/>
+<circle cx='94.51' cy='182.09' r='3.2' fill='#1C1A17'/>
+<circle cx='111.76' cy='177.71' r='3.2' fill='#1C1A17'/>
+<circle cx='129.02' cy='182.09' r='3.2' fill='#1C1A17'/>
+<circle cx='146.27' cy='204.65' r='3.2' fill='#1C1A17'/>
+<circle cx='163.53' cy='161.55' r='3.2' fill='#1C1A17'/>
+<circle cx='180.78' cy='228.55' r='3.2' fill='#1C1A17'/>
+<circle cx='198.04' cy='181.08' r='3.2' fill='#1C1A17'/>
+<circle cx='215.29' cy='162.22' r='3.2' fill='#1C1A17'/>
+<circle cx='232.55' cy='133.60' r='3.2' fill='#1C1A17'/>
+<circle cx='249.80' cy='186.46' r='3.2' fill='#1C1A17'/>
+<circle cx='267.06' cy='174.01' r='3.2' fill='#1C1A17'/>
+<circle cx='284.31' cy='189.16' r='3.2' fill='#1C1A17'/>
+<circle cx='301.57' cy='174.68' r='3.2' fill='#1C1A17'/>
+<circle cx='318.82' cy='166.94' r='3.2' fill='#1C1A17'/>
+<circle cx='336.08' cy='168.96' r='3.2' fill='#1C1A17'/>
+<circle cx='353.33' cy='158.86' r='3.2' fill='#1C1A17'/>
+<circle cx='370.59' cy='205.66' r='3.2' fill='#1C1A17'/>
+<circle cx='387.84' cy='179.39' r='3.2' fill='#1C1A17'/>
+<circle cx='405.10' cy='143.70' r='3.2' fill='#1C1A17'/>
+<circle cx='422.35' cy='130.57' r='3.2' fill='#1C1A17'/>
+<circle cx='439.61' cy='151.11' r='3.2' fill='#1C1A17'/>
+<circle cx='456.86' cy='170.98' r='3.2' fill='#1C1A17'/>
+<circle cx='474.12' cy='151.78' r='3.2' fill='#1C1A17'/>
+<circle cx='491.37' cy='154.14' r='3.2' fill='#1C1A17'/>
+<circle cx='508.63' cy='154.14' r='3.2' fill='#1C1A17'/>
+<circle cx='525.88' cy='180.07' r='3.2' fill='#1C1A17'/>
+<circle cx='543.14' cy='173.67' r='3.2' fill='#1C1A17'/>
+<circle cx='560.39' cy='171.31' r='3.2' fill='#1C1A17'/>
+<circle cx='577.65' cy='208.69' r='3.2' fill='#1C1A17'/>
+<circle cx='594.90' cy='179.39' r='3.2' fill='#1C1A17'/>
+<circle cx='612.16' cy='191.85' r='3.2' fill='#1C1A17'/>
+<circle cx='629.41' cy='163.91' r='3.2' fill='#1C1A17'/>
+<circle cx='646.67' cy='175.02' r='3.2' fill='#1C1A17'/>
+<circle cx='663.92' cy='205.99' r='3.2' fill='#1C1A17'/>
+<circle cx='681.18' cy='180.40' r='3.2' fill='#1C1A17'/>
+<circle cx='698.43' cy='175.02' r='3.2' fill='#1C1A17'/>
+<circle cx='732.94' cy='153.47' r='3.2' fill='#1C1A17'/>
+<circle cx='750.20' cy='164.24' r='3.2' fill='#1C1A17'/>
+<circle cx='767.45' cy='135.29' r='3.2' fill='#1C1A17'/>
+<circle cx='784.71' cy='173.00' r='3.2' fill='#1C1A17'/>
+<circle cx='801.96' cy='124.51' r='3.2' fill='#1C1A17'/>
+<circle cx='819.22' cy='167.61' r='3.2' fill='#1C1A17'/>
+<circle cx='836.47' cy='174.68' r='3.2' fill='#1C1A17'/>
+<circle cx='853.73' cy='87.47' r='3.2' fill='#1C1A17'/>
+<circle cx='870.98' cy='176.03' r='3.2' fill='#1C1A17'/>
+<circle cx='888.24' cy='158.52' r='3.2' fill='#1C1A17'/>
+<circle cx='905.49' cy='147.74' r='3.2' fill='#1C1A17'/>
+<circle cx='922.75' cy='155.49' r='3.2' fill='#1C1A17'/>
+<circle cx='940.00' cy='129.90' r='3.2' fill='#1C1A17'/>
+<path d='M60.00,485.79L77.25,498.59L94.51,493.87L111.76,509.36L129.02,520.13L146.27,516.09L163.53,497.58L180.78,500.61L198.04,527.21L215.29,507.68L232.55,467.61L249.80,513.06L267.06,516.77L284.31,513.06L301.57,514.75L318.82,508.35L336.08,505.32L353.33,512.05L370.59,498.59L387.84,484.44L405.10,461.89L422.35,468.62L439.61,480.07L456.86,517.10L474.12,494.88L491.37,511.72L508.63,496.90L525.88,527.21L543.14,502.29L560.39,517.44L577.65,496.57L594.90,505.99L612.16,516.43L629.41,488.48L646.67,505.66L663.92,495.56L681.18,507.00L698.43,500.94L732.94,476.03L750.20,480.40L767.45,496.23L784.71,540.34L801.96,507.34L819.22,503.97L836.47,486.46L853.73,453.13L870.98,487.14L888.24,507.34L905.49,485.79L922.75,482.42L940.00,462.56' fill='none' stroke='#B89B6A' stroke-width='2' stroke-linecap='round'/>
+<circle cx='60.00' cy='485.79' r='3.2' fill='#B89B6A'/>
+<circle cx='77.25' cy='498.59' r='3.2' fill='#B89B6A'/>
+<circle cx='94.51' cy='493.87' r='3.2' fill='#B89B6A'/>
+<circle cx='111.76' cy='509.36' r='3.2' fill='#B89B6A'/>
+<circle cx='129.02' cy='520.13' r='3.2' fill='#B89B6A'/>
+<circle cx='146.27' cy='516.09' r='3.2' fill='#B89B6A'/>
+<circle cx='163.53' cy='497.58' r='3.2' fill='#B89B6A'/>
+<circle cx='180.78' cy='500.61' r='3.2' fill='#B89B6A'/>
+<circle cx='198.04' cy='527.21' r='3.2' fill='#B89B6A'/>
+<circle cx='215.29' cy='507.68' r='3.2' fill='#B89B6A'/>
+<circle cx='232.55' cy='467.61' r='3.2' fill='#B89B6A'/>
+<circle cx='249.80' cy='513.06' r='3.2' fill='#B89B6A'/>
+<circle cx='267.06' cy='516.77' r='3.2' fill='#B89B6A'/>
+<circle cx='284.31' cy='513.06' r='3.2' fill='#B89B6A'/>
+<circle cx='301.57' cy='514.75' r='3.2' fill='#B89B6A'/>
+<circle cx='318.82' cy='508.35' r='3.2' fill='#B89B6A'/>
+<circle cx='336.08' cy='505.32' r='3.2' fill='#B89B6A'/>
+<circle cx='353.33' cy='512.05' r='3.2' fill='#B89B6A'/>
+<circle cx='370.59' cy='498.59' r='3.2' fill='#B89B6A'/>
+<circle cx='387.84' cy='484.44' r='3.2' fill='#B89B6A'/>
+<circle cx='405.10' cy='461.89' r='3.2' fill='#B89B6A'/>
+<circle cx='422.35' cy='468.62' r='3.2' fill='#B89B6A'/>
+<circle cx='439.61' cy='480.07' r='3.2' fill='#B89B6A'/>
+<circle cx='456.86' cy='517.10' r='3.2' fill='#B89B6A'/>
+<circle cx='474.12' cy='494.88' r='3.2' fill='#B89B6A'/>
+<circle cx='491.37' cy='511.72' r='3.2' fill='#B89B6A'/>
+<circle cx='508.63' cy='496.90' r='3.2' fill='#B89B6A'/>
+<circle cx='525.88' cy='527.21' r='3.2' fill='#B89B6A'/>
+<circle cx='543.14' cy='502.29' r='3.2' fill='#B89B6A'/>
+<circle cx='560.39' cy='517.44' r='3.2' fill='#B89B6A'/>
+<circle cx='577.65' cy='496.57' r='3.2' fill='#B89B6A'/>
+<circle cx='594.90' cy='505.99' r='3.2' fill='#B89B6A'/>
+<circle cx='612.16' cy='516.43' r='3.2' fill='#B89B6A'/>
+<circle cx='629.41' cy='488.48' r='3.2' fill='#B89B6A'/>
+<circle cx='646.67' cy='505.66' r='3.2' fill='#B89B6A'/>
+<circle cx='663.92' cy='495.56' r='3.2' fill='#B89B6A'/>
+<circle cx='681.18' cy='507.00' r='3.2' fill='#B89B6A'/>
+<circle cx='698.43' cy='500.94' r='3.2' fill='#B89B6A'/>
+<circle cx='732.94' cy='476.03' r='3.2' fill='#B89B6A'/>
+<circle cx='750.20' cy='480.40' r='3.2' fill='#B89B6A'/>
+<circle cx='767.45' cy='496.23' r='3.2' fill='#B89B6A'/>
+<circle cx='784.71' cy='540.34' r='3.2' fill='#B89B6A'/>
+<circle cx='801.96' cy='507.34' r='3.2' fill='#B89B6A'/>
+<circle cx='819.22' cy='503.97' r='3.2' fill='#B89B6A'/>
+<circle cx='836.47' cy='486.46' r='3.2' fill='#B89B6A'/>
+<circle cx='853.73' cy='453.13' r='3.2' fill='#B89B6A'/>
+<circle cx='870.98' cy='487.14' r='3.2' fill='#B89B6A'/>
+<circle cx='888.24' cy='507.34' r='3.2' fill='#B89B6A'/>
+<circle cx='905.49' cy='485.79' r='3.2' fill='#B89B6A'/>
+<circle cx='922.75' cy='482.42' r='3.2' fill='#B89B6A'/>
+<circle cx='940.00' cy='462.56' r='3.2' fill='#B89B6A'/>
+<circle cx='740' cy='26' r='4' fill='#1C1A17'/>
+<text x='750' y='30' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#1C1A17'>Bedtime</text>
+<circle cx='840' cy='26' r='4' fill='#B89B6A'/>
+<text x='850' y='30' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#1C1A17'>Wake time</text>
+<text x='60' y='270' font-family='Avenir, Arial, sans-serif' font-size='12' fill='#7A726A'>Time (hours)</text>
+</svg>

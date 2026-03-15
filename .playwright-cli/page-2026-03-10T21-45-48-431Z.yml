@@ -1,0 +1,973 @@
+- generic [ref=e2]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Guide" [active] [ref=e9] [cursor=pointer]:
+          - generic [ref=e12]:
+            - img
+        - generic [ref=e13]:
+          - link "YouTube Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e19]:
+              - img
+          - generic [ref=e20]: RO
+        - button "Skip navigation" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: Skip navigation
+      - search [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - combobox "Search" [expanded] [ref=e34]: best vibe code app ideas
+            - button "Clear search query" [ref=e226] [cursor=pointer]:
+              - generic [ref=e229]:
+                - img
+          - button "Search" [ref=e35] [cursor=pointer]:
+            - generic [ref=e38]:
+              - img
+      - generic [ref=e40]:
+        - button "Settings" [ref=e45] [cursor=pointer]:
+          - generic [ref=e48]:
+            - img
+        - link "Sign in" [ref=e51] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den-GB%26next%3D%252Fresults%253Fsearch_query%253Dbest%252Bvibe%252Bcode%252Bapp%252Bideas&hl=en-GB&ec=65620
+          - generic [ref=e233]:
+            - img
+          - generic [ref=e56]: Sign in
+  - navigation [ref=e60]:
+    - generic [ref=e61]:
+      - link "Home" [ref=e63] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e234]:
+          - img
+        - generic [ref=e67]: Home
+      - link "Shorts" [ref=e69] [cursor=pointer]:
+        - /url: /shorts/
+        - generic [ref=e72]:
+          - img
+        - generic [ref=e73]: Shorts
+      - link "Subscriptions" [ref=e75] [cursor=pointer]:
+        - /url: /feed/subscriptions
+        - generic [ref=e78]:
+          - img
+        - generic [ref=e79]: Subscriptions
+      - link "You" [ref=e81] [cursor=pointer]:
+        - /url: /feed/you
+        - generic [ref=e84]:
+          - img
+        - generic [ref=e85]: You
+  - generic [ref=e86]:
+    - text: •
+    - main [ref=e235]:
+      - generic [ref=e236]:
+        - generic [ref=e238]:
+          - tablist [ref=e243]:
+            - tab "All" [selected] [ref=e247] [cursor=pointer]:
+              - generic [ref=e249]: All
+            - tab "Shorts" [ref=e256] [cursor=pointer]:
+              - generic [ref=e258]: Shorts
+            - tab "Videos" [ref=e265] [cursor=pointer]:
+              - generic [ref=e267]: Videos
+            - tab "Unwatched" [ref=e274] [cursor=pointer]:
+              - generic [ref=e276]: Unwatched
+            - tab "Watched" [ref=e283] [cursor=pointer]:
+              - generic [ref=e285]: Watched
+            - tab "Recently uploaded" [ref=e292] [cursor=pointer]:
+              - generic [ref=e294]: Recently uploaded
+            - tab "Live" [ref=e301] [cursor=pointer]:
+              - generic [ref=e303]: Live
+          - link "About these results" [ref=e310] [cursor=pointer]:
+            - /url: https://www.youtube.com/howyoutubeworks/product-features/search/
+            - generic [ref=e311]: About these results
+            - generic [ref=e315]:
+              - img
+          - generic [ref=e320]:
+            - button "Search filters" [ref=e322] [cursor=pointer]:
+              - generic [ref=e323]: Filters
+              - generic [ref=e327]:
+                - img
+            - tooltip "tooltip"
+        - generic [ref=e334]:
+          - generic [ref=e336]:
+            - generic [ref=e341]:
+              - img [ref=e347]:
+                - generic [ref=e349]:
+                  - img
+              - generic [ref=e351] [cursor=pointer]:
+                - generic [ref=e352]:
+                  - link "Automate any task you imagine" [ref=e355]:
+                    - /url: https://www.googleadservices.com/pagead/aclk?sa=L&ai=CDp8YCZGwaeWxL9CvjMoPusynsQnE_d7LhQGzhLv92RWwkB8QASAAYIOl4YXoG4IBF2NhLXB1Yi02MjE5ODExNzQ3MDQ5MzcxoAHt59WEK6gDBMgDCqoEpgJP0E5ekLNJ_36_4L_d4SJhLMX9uoWChanwoY5H1WaIIwi7amSVZkj08eoAEaq8ZBziyTXnc3qwsriFgq053UYtaxFVZj6uc1ywEeWyZAUobiHWka9AM2lpAEbxhZt-HEDDeVeu5tTQp0Dz-AeJwaepV9hG2K3EeBjHQJwy9A0FGKPMIXwhtuZzbVhjrqpCoArysDZycR5ULX_ybu3RSP9JjqxI2NWdnw10DUT6jGes7EW9qcXFq0QAMy2O_aKmen3fJ7l7VLnzGHoD0pTR2JONbSiyIy_YHqAOoUGHPYA4IA42LPZRbcw7NbzOhxI_XlwAJ1yHwDO1dovV3n1zWc1ozL60qYEzs1lAhs6RcNk7rfN6_el3fYlRBK-mDiR3fd53LoFF7hKIBZH__dlXkgUICBN4pcr2wxmgBm6AB_TmurMZkAcBqAfywLECqAfytLECqAe4xLECqAfhtrECqAelz7ECqAfnnbECqAfonbECqAfvtbECqAfwtbECqAf507ECqAfJ2rECqAep4LECqAeECKgHptSxAqgHqNIbqAe2B6gHsJuxAqgHrrGxAqgH5ryxAqgHyrqxAqgH_bKxAqgH97ixAqgH-LixAqgHyM-xAqgHyc-xAqgHreCxAqgHzcexAqgH8dGxAqgH_NWxAqgH-9WxAqgHjNaxAqgHi9axAqgHndexAqgHndSxAqgHgcYbqAf8r7ECqAerxRuoB7ehsQKoB9WpsQKoB9imsQKoB961sQK4CAHSCDcIgMGAUBABGF4yCKOCwICAgKAMOhKAwoCAgJCAAoCAgICAkIbgAypI2aDSNVAUWLDH7YinlpMDmgkhaHR0cHM6Ly9uZXhvcy5haS9vZmZlci9haS1hZ2VudHMvsQkjBq82uaV8CcgJAMgJigKYCwG6Cz8IAxAFGAQgCCgBMBxAAUgAUAFYTmAAaABwAYgBAJgBAaIBCwoAoAIBqAID2AIB2AEBgAIBiAIFugMFdmlncnHQCxKiDAwqCgoI1tqxAujCsQLSDAIQAZoNARKqDQJST8gNAdINvAFodHRwczovL25leG9zLmFpL29mZmVyL2FpLWFnZW50cy8_dXRtX3NvdXJjZT1nb29nbGUmdXRtX21lZGl1bT1jcGMmdXRtX2NhbXBhaWduPURlbWFuZEdlbi1zZWxmLXNlcnZpY2UmdXRtX2NvbnRlbnQ9cmVtYXJrZXRpbmctdmlzaXRvcnMtVVMmdXRtX3Rlcm09JmdhZF9zb3VyY2U9MiZnYWRfY2FtcGFpZ25pZD0yMzU0MjU5NTQ3M7gT____________AbAUA8AVgYCAQNAVAdgVAeIWAggBgBcBihcWCAMYASABKAEwATgBQAFIAVABWAFgAqAXAakXGrCswC_A1DC6FwYoADAAOAHQGAHwGAHCGQIIAQ&gclid=EAIaIQobChMIpdrtiKeWkwMV0BdDAx065imWEAEYASAAEgIYBPD_BwE&num=1&cid=CAASF-Ro9pvbaZzIX4gJly4_EjYteSKAruHp&sig=AOD64_3q4GpUrA6EXeBgJcTILs5t8mSsuQ&ms=%5BCLICK_MS%5D&nb=0&nx=%5BNX%5D&ny=%5BNY%5D&dim=%5BDIM%5D
+                  - link "Take a break from busywork. Build Agents in minutes without writing a single line of code." [ref=e358]:
+                    - /url: https://www.googleadservices.com/pagead/aclk?sa=L&ai=CDp8YCZGwaeWxL9CvjMoPusynsQnE_d7LhQGzhLv92RWwkB8QASAAYIOl4YXoG4IBF2NhLXB1Yi02MjE5ODExNzQ3MDQ5MzcxoAHt59WEK6gDBMgDCqoEpgJP0E5ekLNJ_36_4L_d4SJhLMX9uoWChanwoY5H1WaIIwi7amSVZkj08eoAEaq8ZBziyTXnc3qwsriFgq053UYtaxFVZj6uc1ywEeWyZAUobiHWka9AM2lpAEbxhZt-HEDDeVeu5tTQp0Dz-AeJwaepV9hG2K3EeBjHQJwy9A0FGKPMIXwhtuZzbVhjrqpCoArysDZycR5ULX_ybu3RSP9JjqxI2NWdnw10DUT6jGes7EW9qcXFq0QAMy2O_aKmen3fJ7l7VLnzGHoD0pTR2JONbSiyIy_YHqAOoUGHPYA4IA42LPZRbcw7NbzOhxI_XlwAJ1yHwDO1dovV3n1zWc1ozL60qYEzs1lAhs6RcNk7rfN6_el3fYlRBK-mDiR3fd53LoFF7hKIBZH__dlXkgUICBN4pcr2wxmgBm6AB_TmurMZkAcBqAfywLECqAfytLECqAe4xLECqAfhtrECqAelz7ECqAfnnbECqAfonbECqAfvtbECqAfwtbECqAf507ECqAfJ2rECqAep4LECqAeECKgHptSxAqgHqNIbqAe2B6gHsJuxAqgHrrGxAqgH5ryxAqgHyrqxAqgH_bKxAqgH97ixAqgH-LixAqgHyM-xAqgHyc-xAqgHreCxAqgHzcexAqgH8dGxAqgH_NWxAqgH-9WxAqgHjNaxAqgHi9axAqgHndexAqgHndSxAqgHgcYbqAf8r7ECqAerxRuoB7ehsQKoB9WpsQKoB9imsQKoB961sQK4CAHSCDcIgMGAUBABGF4yCKOCwICAgKAMOhKAwoCAgJCAAoCAgICAkIbgAypI2aDSNVAUWLDH7YinlpMDmgkhaHR0cHM6Ly9uZXhvcy5haS9vZmZlci9haS1hZ2VudHMvsQkjBq82uaV8CcgJAMgJigKYCwG6Cz8IAxAFGAQgCCgBMBxAAUgAUAFYTmAAaABwAYgBAJgBAaIBCwoAoAIBqAID2AIB2AEBgAIBiAIFugMFdmlncnHQCxKiDAwqCgoI1tqxAujCsQLSDAIQAZoNARKqDQJST8gNAdINvAFodHRwczovL25leG9zLmFpL29mZmVyL2FpLWFnZW50cy8_dXRtX3NvdXJjZT1nb29nbGUmdXRtX21lZGl1bT1jcGMmdXRtX2NhbXBhaWduPURlbWFuZEdlbi1zZWxmLXNlcnZpY2UmdXRtX2NvbnRlbnQ9cmVtYXJrZXRpbmctdmlzaXRvcnMtVVMmdXRtX3Rlcm09JmdhZF9zb3VyY2U9MiZnYWRfY2FtcGFpZ25pZD0yMzU0MjU5NTQ3M7gT____________AbAUA8AVgYCAQNAVAdgVAeIWAggBgBcBihcWCAMYASABKAEwATgBQAFIAVABWAFgAqAXAakXGrCswC_A1DC6FwYoADAAOAHQGAHwGAHCGQIIAQ&gclid=EAIaIQobChMIpdrtiKeWkwMV0BdDAx065imWEAEYASAAEgIYBPD_BwE&num=1&cid=CAASF-Ro9pvbaZzIX4gJly4_EjYteSKAruHp&sig=AOD64_3q4GpUrA6EXeBgJcTILs5t8mSsuQ&ms=%5BCLICK_MS%5D&nb=7&nx=%5BNX%5D&ny=%5BNY%5D&dim=%5BDIM%5D
+                  - generic [ref=e359]:
+                    - generic [ref=e361]:
+                      - generic [ref=e362]: Sponsored
+                      - text: ·
+                    - generic [ref=e364]: nexos.ai
+                - button "My Ad Centre" [ref=e367]:
+                  - generic [ref=e371]:
+                    - img
+            - generic [ref=e376]:
+              - link [ref=e378] [cursor=pointer]:
+                - /url: /watch?v=CwHD6Fg-Mjs&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                - img [ref=e380]
+                - img [ref=e383]:
+                  - generic [ref=e384]: 13:26
+                - generic:
+                  - generic: Now playing
+                  - generic:
+                    - img
+              - generic [ref=e385] [cursor=pointer]:
+                - generic [ref=e386]:
+                  - generic [ref=e387]:
+                    - heading "I vibe coded a $20K/month mobile app in 14 days 13 minutes, 26 seconds" [level=3] [ref=e388]:
+                      - link "I vibe coded a $20K/month mobile app in 14 days 13 minutes, 26 seconds" [ref=e389]:
+                        - /url: /watch?v=CwHD6Fg-Mjs&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                        - text: I vibe coded a $20K/month mobile app in 14 days
+                    - button "Action menu" [ref=e393]:
+                      - generic [ref=e396]:
+                        - img
+                  - generic [ref=e399]:
+                    - generic [ref=e400]: 393k views
+                    - generic [ref=e401]: •4 months ago
+                - generic [ref=e402]:
+                  - link "Go to channel Starter Story" [ref=e403]:
+                    - /url: /@starterstory
+                  - generic [ref=e405]:
+                    - link "Starter Story" [ref=e409]:
+                      - /url: /@starterstory
+                    - img "Verified" [ref=e412]:
+                      - generic [ref=e415]:
+                        - img
+                - generic [ref=e416]:
+                  - generic [ref=e417]: Connor Burd is a 23-year-old founder who has built several apps that make $100K/month. He vibe-coded his latest project in just ...
+                  - tooltip "tooltip"
+                - generic [ref=e420]:
+                  - generic [ref=e421]:
+                    - generic [ref=e425]: 12 chapters
+                    - button "Intro | Who is Connor | Numbers behind his apps | Connor's background | The $1M vibe coding process | Connor's validation framework | 20K/mo marketing playbook | The $20K/mo app reveal | What made Payout successful | Tech stack | The key to a successful app | The final word" [ref=e426]
+                  - button "More" [ref=e431]:
+                    - generic [ref=e435]:
+                      - img
+            - generic [ref=e440]:
+              - link [ref=e442] [cursor=pointer]:
+                - /url: /watch?v=tRh729U9wa8&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                - img [ref=e444]
+                - img [ref=e447]:
+                  - generic [ref=e448]: 9:15
+                - generic:
+                  - generic: Now playing
+                  - generic:
+                    - img
+              - generic [ref=e449] [cursor=pointer]:
+                - generic [ref=e450]:
+                  - generic [ref=e451]:
+                    - heading "Need vibe coding ideas? Watch this. 9 minutes, 15 seconds" [level=3] [ref=e452]:
+                      - link "Need vibe coding ideas? Watch this. 9 minutes, 15 seconds" [ref=e453]:
+                        - /url: /watch?v=tRh729U9wa8&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                        - text: Need vibe coding ideas? Watch this.
+                    - button "Action menu" [ref=e457]:
+                      - generic [ref=e460]:
+                        - img
+                  - generic [ref=e463]:
+                    - generic [ref=e464]: 638 views
+                    - generic [ref=e465]: •5 months ago
+                - generic [ref=e466]:
+                  - link "Go to channel Code Playbook" [ref=e467]:
+                    - /url: /@codeplaybook
+                  - link "Code Playbook" [ref=e473]:
+                    - /url: /@codeplaybook
+                - generic [ref=e474]:
+                  - generic [ref=e475]: Here's my exact strategy for generating loads of app ideas (and 1 "deep research" prompt). SUBSCRIBE ...
+                  - tooltip "tooltip"
+                - generic [ref=e478]:
+                  - generic [ref=e479]:
+                    - generic [ref=e483]: 9 chapters
+                    - button "Intro & The Plan | Use this \"filter\" | Strategy 1 | Strategy 2 | Strategy 3 | Strategy 4 | Strategy 5 | Idea Generator | Next step" [ref=e484]
+                  - button "More" [ref=e489]:
+                    - generic [ref=e493]:
+                      - img
+          - generic [ref=e503]:
+            - generic [ref=e506] [cursor=pointer]:
+              - generic [ref=e508]: Pro Vibe Coding Tools 2026
+              - img [ref=e510]:
+                - generic [ref=e512]:
+                  - img
+            - generic [ref=e513]:
+              - generic [ref=e514] [cursor=pointer]:
+                - generic [ref=e515]:
+                  - 'link "Best AI Vibe Coding Platform - Turn your ideas into full apps without coding. Scalable. Fast. AI-powered. Atoms auto-generates full apps & sites—then pushes them live instantly. Pro Plan As Low As 15.8$ Annual Plan 21% Off. Services: Website Builder, App Builder, Vibe Coding, Deep Research." [ref=e518]':
+                    - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQAhoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYASAAEgLngvD_BwE&num=1&category=acrcp_v1_32&sig=AOD64_2pW7Hrzc4QPuQZzpM_V_bTRKQ9jw&adurl=https://atoms.dev/%3Futm_source%3Dgooglle%26utm_medium%3Dsearch%26utm_campaign%3DAdsmarch%26utm_id%3D23625996630%26gad_source%3D2%26gad_campaignid%3D23625996630&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=0
+                  - generic [ref=e519]:
+                    - generic [ref=e521]:
+                      - generic [ref=e522]: Sponsored
+                      - text: ·
+                    - generic [ref=e524]: https://www.atoms.dev/
+                - button "My Ad Centre" [ref=e527]:
+                  - generic [ref=e531]:
+                    - img
+              - generic [ref=e535]:
+                - link "Pricing & Plans" [ref=e536]:
+                  - generic [ref=e537]: Pricing & Plans
+                - link "Build Apps & Websites" [ref=e538]:
+                  - generic [ref=e539]: Build Apps & Websites
+                - link "Website Builder" [ref=e540]:
+                  - generic [ref=e541]: Website Builder
+                - link "No-Code Web Design" [ref=e542]:
+                  - generic [ref=e543]: No-Code Web Design
+                - link "Sign up" [ref=e544]:
+                  - generic [ref=e545]: Sign up
+          - generic [ref=e547]:
+            - generic [ref=e548]:
+              - generic [ref=e551]:
+                - img [ref=e553]:
+                  - generic [ref=e555]:
+                    - img
+                - heading "Shorts" [level=2] [ref=e558]
+              - generic [ref=e560]:
+                - generic [ref=e563]:
+                  - link [ref=e564] [cursor=pointer]:
+                    - /url: /shorts/TGRHzke8MuI
+                  - generic [ref=e568] [cursor=pointer]:
+                    - link "Ranking Vibe Coding Tools From Beginner to Advanced" [ref=e569]:
+                      - /url: /shorts/TGRHzke8MuI
+                    - generic [ref=e570]: 215k views
+                  - button "More actions" [ref=e572] [cursor=pointer]:
+                    - generic [ref=e576]:
+                      - img
+                - generic [ref=e582]:
+                  - link [ref=e583] [cursor=pointer]:
+                    - /url: /shorts/bcFTdbvYEi0
+                  - generic [ref=e587] [cursor=pointer]:
+                    - link "Vibe-coding 101 (beginner friendly) 🍥🫶" [ref=e588]:
+                      - /url: /shorts/bcFTdbvYEi0
+                    - generic [ref=e589]: 163k views
+                  - button "More actions" [ref=e591] [cursor=pointer]:
+                    - generic [ref=e595]:
+                      - img
+                - generic [ref=e601]:
+                  - link [ref=e602] [cursor=pointer]:
+                    - /url: /shorts/82zhfSRKfWo
+                  - generic [ref=e606] [cursor=pointer]:
+                    - link "The best mobile app ideas to build in 2025" [ref=e607]:
+                      - /url: /shorts/82zhfSRKfWo
+                    - generic [ref=e608]: 91k views
+                  - button "More actions" [ref=e610] [cursor=pointer]:
+                    - generic [ref=e614]:
+                      - img
+                - generic [ref=e620]:
+                  - link [ref=e621] [cursor=pointer]:
+                    - /url: /shorts/dZMMRGtvrvQ
+                  - generic [ref=e625] [cursor=pointer]:
+                    - 'link "Night Chill Vibe Coding: Building Mobile Apps🌟👩‍💻 #ios #codelife #mobile #appledeveloper #xcode" [ref=e626]':
+                      - /url: /shorts/dZMMRGtvrvQ
+                    - generic [ref=e627]: 45k views
+                  - button "More actions" [ref=e629] [cursor=pointer]:
+                    - generic [ref=e633]:
+                      - img
+                - generic [ref=e639]:
+                  - link [ref=e640] [cursor=pointer]:
+                    - /url: /shorts/cgD-bTTe20I
+                  - generic [ref=e644] [cursor=pointer]:
+                    - 'link "Stop Vibe Coding!! #ai #vibecoding" [ref=e645]':
+                      - /url: /shorts/cgD-bTTe20I
+                    - generic [ref=e646]: 588k views
+                  - button "More actions" [ref=e648] [cursor=pointer]:
+                    - generic [ref=e652]:
+                      - img
+              - button "Show more" [ref=e659] [cursor=pointer]:
+                - generic [ref=e660]: Show more
+                - generic [ref=e664]:
+                  - img
+            - generic [ref=e669]:
+              - link [ref=e671] [cursor=pointer]:
+                - /url: /watch?v=UgHck28tls8&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e673] [cursor=pointer]:
+                - generic [ref=e674]:
+                  - generic [ref=e675]:
+                    - heading "Steal These AI App Ideas 24 minutes" [level=3] [ref=e676]:
+                      - link "Steal These AI App Ideas 24 minutes" [ref=e677]:
+                        - /url: /watch?v=UgHck28tls8&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Steal These AI App Ideas
+                    - button "Action menu" [ref=e681]:
+                      - generic [ref=e684]:
+                        - img
+                  - generic [ref=e687]:
+                    - generic [ref=e688]: 3.9k views
+                    - generic [ref=e689]: •3 months ago
+                - generic [ref=e690]:
+                  - link "Go to channel Jacob Klug" [ref=e691]:
+                    - /url: /@jacobsklug
+                  - link "Jacob Klug" [ref=e696]:
+                    - /url: /@jacobsklug
+                - generic [ref=e697]:
+                  - generic [ref=e698]: These are the best and worst apps you can easily build with vibe coding. Some of the ideas could easily build a business that ...
+                  - tooltip "tooltip"
+          - generic [ref=e705]:
+            - generic [ref=e708] [cursor=pointer]:
+              - generic [ref=e710]: From Idea to App in 1 Minute
+              - img [ref=e712]:
+                - generic [ref=e714]:
+                  - img
+            - generic [ref=e715]:
+              - generic [ref=e716] [cursor=pointer]:
+                - generic [ref=e717]:
+                  - link "Create an App in Minutes! Create stunning apps, websites, and prototypes in minutes - Hercules. Build beautiful apps, websites, and prototypes by chatting with..." [ref=e720]:
+                    - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQChoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYAiAAEgJU7PD_BwE&num=2&category=acrcp_v1_32&sig=AOD64_1v4IBqht4iqSOn1xMxJUMFT6IOhw&adurl=https://hercules.app%3Fgad_source%3D2%26gad_campaignid%3D23140706054&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=0
+                  - generic [ref=e721]:
+                    - generic [ref=e723]:
+                      - generic [ref=e724]: Sponsored
+                      - text: ·
+                    - generic [ref=e726]: https://www.hercules.app/
+                - button "My Ad Centre" [ref=e729]:
+                  - generic [ref=e733]:
+                    - img
+              - generic [ref=e737]:
+                - link "Transparent Pricing" [ref=e738]:
+                  - generic [ref=e739]: Transparent Pricing
+                - link "Launch Your Product" [ref=e740]:
+                  - generic [ref=e741]: Launch Your Product
+                - link "Templates" [ref=e742]:
+                  - generic [ref=e743]: Templates
+                - link "How does Hercules work?" [ref=e744]:
+                  - generic [ref=e745]: How does Hercules work?
+                - link "Sign up" [ref=e746]:
+                  - generic [ref=e747]: Sign up
+          - generic [ref=e749]:
+            - generic [ref=e751]:
+              - link [ref=e753] [cursor=pointer]:
+                - /url: /watch?v=SordE3oOSyc&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e755] [cursor=pointer]:
+                - generic [ref=e756]:
+                  - generic [ref=e757]:
+                    - heading "Vibe Coding Tools Ranked from Worst to Best (2026) 32 minutes" [level=3] [ref=e758]:
+                      - link "Vibe Coding Tools Ranked from Worst to Best (2026) 32 minutes" [ref=e759]:
+                        - /url: /watch?v=SordE3oOSyc&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Vibe Coding Tools Ranked from Worst to Best (2026)
+                    - button "Action menu" [ref=e763]:
+                      - generic [ref=e766]:
+                        - img
+                  - generic [ref=e769]:
+                    - generic [ref=e770]: 27k views
+                    - generic [ref=e771]: •13 days ago
+                - generic [ref=e772]:
+                  - link "Go to channel Mikey No Code" [ref=e773]:
+                    - /url: /@mikeynocode
+                  - link "Mikey No Code" [ref=e778]:
+                    - /url: /@mikeynocode
+                - generic [ref=e779]:
+                  - generic [ref=e780]: Best Vibe Coding Tool is Base44 https://base44.pxf.io/c/6440076/2049275/25619?trafcat=base&sharedid=video92 ✓ FREE ...
+                  - tooltip "tooltip"
+                - generic [ref=e783]:
+                  - generic [ref=e784]:
+                    - generic [ref=e788]: Matching chapter
+                    - 'button "0:00 Intro: The Best Vibe Coding Tools for 2026" [ref=e789]'
+                  - button "More" [ref=e794]:
+                    - generic [ref=e798]:
+                      - img
+            - generic [ref=e803]:
+              - link [ref=e805] [cursor=pointer]:
+                - /url: /watch?v=FiWmcZ8gQ8c&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e807] [cursor=pointer]:
+                - generic [ref=e808]:
+                  - generic [ref=e809]:
+                    - heading "Watch Me Design And Build a Mobile App In 18 minutes [Tutorial] 17 minutes" [level=3] [ref=e810]:
+                      - link "Watch Me Design And Build a Mobile App In 18 minutes [Tutorial] 17 minutes" [ref=e811]:
+                        - /url: /watch?v=FiWmcZ8gQ8c&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Watch Me Design And Build a Mobile App In 18 minutes [Tutorial]
+                    - button "Action menu" [ref=e815]:
+                      - generic [ref=e818]:
+                        - img
+                  - generic [ref=e821]:
+                    - generic [ref=e822]: 19k views
+                    - generic [ref=e823]: •10 days ago
+                - generic [ref=e824]:
+                  - link "Go to channel Starter Story Build" [ref=e825]:
+                    - /url: /@StarterStoryBuild
+                  - link "Starter Story Build" [ref=e830]:
+                    - /url: /@StarterStoryBuild
+                - generic [ref=e831]:
+                  - generic [ref=e832]: Watch us find an app idea, design it with AI, and build it... all in under 20 minutes :) *Extended version:* ...
+                  - tooltip "tooltip"
+                - img "4K" [ref=e835]:
+                  - generic [ref=e836]: 4K
+                - generic [ref=e839]:
+                  - generic [ref=e840]:
+                    - generic [ref=e844]: 10 chapters
+                    - button "Every AI app looks the same | Follow along and build | Who is Mattia? | By the end of the video... | How to find mobile app ideas | 20 AI app ideas | Designing the app with AI (mascots, illustrations, etc.) | Build with Cursor & Claude Code | MVP of the app | Final steps and advice" [ref=e845]
+                  - button "More" [ref=e850]:
+                    - generic [ref=e854]:
+                      - img
+            - generic [ref=e858]:
+              - generic [ref=e861]:
+                - img [ref=e863]:
+                  - generic [ref=e865]:
+                    - img
+                - heading "Shorts" [level=2] [ref=e868]
+              - generic [ref=e870]:
+                - generic [ref=e873]:
+                  - link [ref=e874] [cursor=pointer]:
+                    - /url: /shorts/uaY6ZnYPFrE
+                  - generic [ref=e878] [cursor=pointer]:
+                    - link "Here’s how you can vibe code any app or website without writing a single line of code." [ref=e879]:
+                      - /url: /shorts/uaY6ZnYPFrE
+                    - generic [ref=e880]: 15k views
+                  - button "More actions" [ref=e882] [cursor=pointer]:
+                    - generic [ref=e886]:
+                      - img
+                - generic [ref=e892]:
+                  - link [ref=e893] [cursor=pointer]:
+                    - /url: /shorts/SueFKqQVm3s
+                  - generic [ref=e897] [cursor=pointer]:
+                    - link "This Free UI Library makes Vibe coded apps 10X better 😲🤯" [ref=e898]:
+                      - /url: /shorts/SueFKqQVm3s
+                    - generic [ref=e899]: 7.7k views
+                  - button "More actions" [ref=e901] [cursor=pointer]:
+                    - generic [ref=e905]:
+                      - img
+                - generic [ref=e911]:
+                  - link [ref=e912] [cursor=pointer]:
+                    - /url: /shorts/ffWeNHV2XAA
+                  - generic [ref=e916] [cursor=pointer]:
+                    - link "Can I Vibe Code for 24 Hours?" [ref=e917]:
+                      - /url: /shorts/ffWeNHV2XAA
+                    - generic [ref=e918]: 45k views
+                  - button "More actions" [ref=e920] [cursor=pointer]:
+                    - generic [ref=e924]:
+                      - img
+                - generic [ref=e930]:
+                  - link [ref=e931] [cursor=pointer]:
+                    - /url: /shorts/m_pF-n148AY
+                  - generic [ref=e935] [cursor=pointer]:
+                    - 'link "Vibe Coding: Build 5 Apps with Claude Code & AI! #shorts" [ref=e936]':
+                      - /url: /shorts/m_pF-n148AY
+                    - generic [ref=e937]: 1.1k views
+                  - button "More actions" [ref=e939] [cursor=pointer]:
+                    - generic [ref=e943]:
+                      - img
+                - generic [ref=e949]:
+                  - link [ref=e950] [cursor=pointer]:
+                    - /url: /shorts/aKbdVCMJ7N4
+                  - generic [ref=e954] [cursor=pointer]:
+                    - 'link "1,000 hours of vibe coding here is what I’ve learnt #ai #saas #vibecoding #entrepreneur #cursorai" [ref=e955]':
+                      - /url: /shorts/aKbdVCMJ7N4
+                    - generic [ref=e956]: 2.3k views
+                  - button "More actions" [ref=e958] [cursor=pointer]:
+                    - generic [ref=e962]:
+                      - img
+              - button "Show more" [ref=e969] [cursor=pointer]:
+                - generic [ref=e970]: Show more
+                - generic [ref=e974]:
+                  - img
+            - generic [ref=e979]:
+              - link [ref=e981] [cursor=pointer]:
+                - /url: /watch?v=vMyk77NNJeU&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e983] [cursor=pointer]:
+                - generic [ref=e984]:
+                  - generic [ref=e985]:
+                    - heading "101 AI Apps You Can Vibe Code 28 minutes" [level=3] [ref=e986]:
+                      - link "101 AI Apps You Can Vibe Code 28 minutes" [ref=e987]:
+                        - /url: /watch?v=vMyk77NNJeU&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: 101 AI Apps You Can Vibe Code
+                    - button "Action menu" [ref=e991]:
+                      - generic [ref=e994]:
+                        - img
+                  - generic [ref=e997]:
+                    - generic [ref=e998]: 44k views
+                    - generic [ref=e999]: •5 months ago
+                - generic [ref=e1000]:
+                  - link "Go to channel Tina Huang" [ref=e1001]:
+                    - /url: /@TinaHuang1
+                  - generic [ref=e1002]:
+                    - link "Tina Huang" [ref=e1006]:
+                      - /url: /@TinaHuang1
+                    - img "Verified" [ref=e1009]:
+                      - generic [ref=e1012]:
+                        - img
+                - generic [ref=e1013]:
+                  - generic [ref=e1014]: Start building your app with ...
+                  - tooltip "tooltip"
+                - generic [ref=e1017]:
+                  - generic [ref=e1018]:
+                    - generic [ref=e1022]: 9 chapters
+                    - button "Intro | 5 Step Framework For Building Apps | Database/Data Management Apps | Hardware Apps | Dashboard Apps | Chatbots/Assistant Apps | Personal Coach Apps | Multimodal Apps | Automations and Macros" [ref=e1023]
+                  - button "More" [ref=e1028]:
+                    - generic [ref=e1032]:
+                      - img
+            - generic [ref=e1037]:
+              - link [ref=e1039] [cursor=pointer]:
+                - /url: /watch?v=ud0bv2J3xWY&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1041] [cursor=pointer]:
+                - generic [ref=e1042]:
+                  - generic [ref=e1043]:
+                    - heading "The Best Vibe Coding Tools in 2026 25 minutes" [level=3] [ref=e1044]:
+                      - link "The Best Vibe Coding Tools in 2026 25 minutes" [ref=e1045]:
+                        - /url: /watch?v=ud0bv2J3xWY&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: The Best Vibe Coding Tools in 2026
+                    - button "Action menu" [ref=e1049]:
+                      - generic [ref=e1052]:
+                        - img
+                  - generic [ref=e1055]:
+                    - generic [ref=e1056]: 81k views
+                    - generic [ref=e1057]: •4 months ago
+                - generic [ref=e1058]:
+                  - link "Go to channel Greg Isenberg" [ref=e1059]:
+                    - /url: /@GregIsenberg
+                  - link "Greg Isenberg" [ref=e1064]:
+                    - /url: /@GregIsenberg
+                - generic [ref=e1065]:
+                  - generic [ref=e1066]: Micky and I rank the top vibe coding apps in 2025, from Cursor and Claude Code to Lovable, V0, Bolt, Windsurf, and emerging ...
+                  - tooltip "tooltip"
+                - generic [ref=e1067]:
+                  - link "10 minutes, 34 seconds ... mobile <b>apps</b> right So there&#39;s this new class of <b>vibe coding apps</b> for literal mobile <b>apps</b> and that&#39;s <b>Vibe Code</b> App uh by Riley our&nbsp;..." [ref=e1068]:
+                    - /url: /watch?v=ud0bv2J3xWY&t=634s&pp=0gcJCZcCg7Wk3p_U
+                    - text: 10:34
+                    - generic [ref=e1069]: ... mobile apps right So there's this new class of vibe coding apps for literal mobile apps and that's Vibe Code App uh by Riley our ...
+                  - tooltip "tooltip"
+          - generic [ref=e1076]:
+            - img [ref=e1082]:
+              - generic [ref=e1084]:
+                - img
+            - generic [ref=e1086] [cursor=pointer]:
+              - generic [ref=e1087]:
+                - 'link "Vibe Coding: Build Real Apps with AI — No Coding Needed" [ref=e1090]':
+                  - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQCBoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYAyAAEgJATfD_BwE&num=3&category=acrcp_v1_32&sig=AOD64_3OYm6L-dVLlTMKm_SGHc0rP5_0jw&adurl=https://www.udemy.com/course/vibe_coding/%3Futm_campaign%3DSearch_DSA_Beta_Prof_la.EN_cc.ROW-English%26utm_source%3Dgoogle%26utm_medium%3Dpaid-search%26portfolio%3DROW-English%26utm_audience%3Dmx%26utm_tactic%3Dnb%26utm_term%3D%26utm_content%3Ds%26funnel%3D%26test%3D%26gad_source%3D2%26gad_campaignid%3D21168154305&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=0
+                - link "Shop thousands of high-quality on-demand online courses. 30-day satisfaction guarantee. Learn online at your own pace. Start today..." [ref=e1093]:
+                  - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQCBoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYAyAAEgJATfD_BwE&num=3&category=acrcp_v1_32&sig=AOD64_3OYm6L-dVLlTMKm_SGHc0rP5_0jw&adurl=https://www.udemy.com/course/vibe_coding/%3Futm_campaign%3DSearch_DSA_Beta_Prof_la.EN_cc.ROW-English%26utm_source%3Dgoogle%26utm_medium%3Dpaid-search%26portfolio%3DROW-English%26utm_audience%3Dmx%26utm_tactic%3Dnb%26utm_term%3D%26utm_content%3Ds%26funnel%3D%26test%3D%26gad_source%3D2%26gad_campaignid%3D21168154305&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=7
+                - generic [ref=e1094]:
+                  - generic [ref=e1096]:
+                    - generic [ref=e1097]: Sponsored
+                    - text: ·
+                  - generic [ref=e1099]: https://www.udemy.com/
+              - button "My Ad Centre" [ref=e1102]:
+                - generic [ref=e1106]:
+                  - img
+          - generic [ref=e1111]:
+            - generic [ref=e1113]:
+              - heading "People also watched" [level=2] [ref=e1116]:
+                - generic [ref=e1118]: People also watched
+              - generic [ref=e1120]:
+                - generic [ref=e1121]:
+                  - generic [ref=e1123]:
+                    - link [ref=e1125] [cursor=pointer]:
+                      - /url: /watch?v=KBEpfigHyds&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                    - generic [ref=e1127] [cursor=pointer]:
+                      - generic [ref=e1128]:
+                        - generic [ref=e1129]:
+                          - heading "We Vibe Coded a $4.8m App in 32 Minutes (iOS Payments Guide) 32 minutes" [level=3] [ref=e1130]:
+                            - link "We Vibe Coded a $4.8m App in 32 Minutes (iOS Payments Guide) 32 minutes" [ref=e1131]:
+                              - /url: /watch?v=KBEpfigHyds&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                              - text: We Vibe Coded a $4.8m App in 32 Minutes (iOS Payments Guide)
+                          - button "Action menu" [ref=e1135]:
+                            - generic [ref=e1138]:
+                              - img
+                        - generic [ref=e1141]:
+                          - generic [ref=e1142]: 53k views
+                          - generic [ref=e1143]: •3 months ago
+                      - generic [ref=e1144]:
+                        - link "Go to channel Riley Brown" [ref=e1145]:
+                          - /url: /@rileybrownai
+                        - link "Riley Brown" [ref=e1150]:
+                          - /url: /@rileybrownai
+                      - generic [ref=e1151]:
+                        - generic [ref=e1152]: "Vibe Coding Mobile Apps that COLLECT PAYMENTS (Complete Guide) In this video we: -Built an app that does $5M / Year w/ AI ..."
+                        - tooltip "tooltip"
+                      - generic [ref=e1155]:
+                        - generic [ref=e1156]:
+                          - generic [ref=e1160]: 15 chapters
+                          - button "Intro | The $5M App We're Teaching you how to build | First Prompt with Claude 4.5 Opus | Adding Gemini 3 API's and other Featurees | Testing Nano Banana Pro In App | Adding Payments to our App Starting the Flow | What is RevenueCat | Connecting RevenueCat | Prompting the Paywall with Products | Testing the Paywall | Altering the Paywall in RevenueCat | Shipping the App to the App Store | Additional Set up in App Store Connect | Testing the TEST FLIGHT Version | Final Thoughts" [ref=e1161]
+                        - button "More" [ref=e1166]:
+                          - generic [ref=e1170]:
+                            - img
+                  - generic [ref=e1175]:
+                    - link [ref=e1177] [cursor=pointer]:
+                      - /url: /watch?v=VfNRd5Rk0cM&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                    - generic [ref=e1179] [cursor=pointer]:
+                      - generic [ref=e1180]:
+                        - generic [ref=e1181]:
+                          - heading "This app made over $1M 15 minutes" [level=3] [ref=e1182]:
+                            - link "This app made over $1M 15 minutes" [ref=e1183]:
+                              - /url: /watch?v=VfNRd5Rk0cM&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                              - text: This app made over $1M
+                          - button "Action menu" [ref=e1187]:
+                            - generic [ref=e1190]:
+                              - img
+                        - generic [ref=e1193]:
+                          - generic [ref=e1194]: 422k views
+                          - generic [ref=e1195]: •6 months ago
+                      - generic [ref=e1196]:
+                        - link "Go to channel Starter Story" [ref=e1197]:
+                          - /url: /@starterstory
+                        - generic [ref=e1198]:
+                          - link "Starter Story" [ref=e1202]:
+                            - /url: /@starterstory
+                          - img "Verified" [ref=e1205]:
+                            - generic [ref=e1208]:
+                              - img
+                      - generic [ref=e1209]:
+                        - generic [ref=e1210]: Ania Wysocka experienced a panic attack in university and decided to build a mental health app. Today, Rootd has been ...
+                        - tooltip "tooltip"
+                      - generic [ref=e1213]:
+                        - generic [ref=e1214]:
+                          - generic [ref=e1218]: 17 chapters
+                          - 'button "Intro | Who is Ania & what she built | Idea for Rootd | How Ania validated the idea | Ania''s validation framework | Building as a non-technical person | Building the full app | Growth timeline of Rootd | Building alongside a 9-5 | Build your own app | Growth: from 0 to 4M downloads | Growth hack: being helpful on social media | Ania''s successful app playbook | The most important metric | What is Rootd | Listen to users | The final word" [ref=e1219]'
+                        - button "More" [ref=e1224]:
+                          - generic [ref=e1228]:
+                            - img
+                  - generic [ref=e1233]:
+                    - link [ref=e1235] [cursor=pointer]:
+                      - /url: /watch?v=NnYLzGMk8Tg&t=750s&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                    - generic [ref=e1237] [cursor=pointer]:
+                      - generic [ref=e1238]:
+                        - generic [ref=e1239]:
+                          - heading "Can I Vibecode a $250M App Better Than a Pro Developer? (With No Code) 55 minutes" [level=3] [ref=e1240]:
+                            - link "Can I Vibecode a $250M App Better Than a Pro Developer? (With No Code) 55 minutes" [ref=e1241]:
+                              - /url: /watch?v=NnYLzGMk8Tg&t=750s&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz0gcJCcUKAYcqIYzv
+                              - text: Can I Vibecode a $250M App Better Than a Pro Developer? (With No Code)
+                          - button "Action menu" [ref=e1245]:
+                            - generic [ref=e1248]:
+                              - img
+                        - generic [ref=e1251]:
+                          - generic [ref=e1252]: 678k views
+                          - generic [ref=e1253]: •6 months ago
+                      - generic [ref=e1254]:
+                        - link "Go to channel Riley Brown" [ref=e1255]:
+                          - /url: /@rileybrownai
+                        - link "Riley Brown" [ref=e1260]:
+                          - /url: /@rileybrownai
+                      - generic [ref=e1261]:
+                        - generic [ref=e1262]: Can a vibe coder make a better app than a senior iOS engineer? In this video, Vishal and I compete to see who can build a better ...
+                        - tooltip "tooltip"
+                      - generic [ref=e1265]:
+                        - generic [ref=e1266]:
+                          - generic [ref=e1270]: Matching chapter
+                          - button "12:30 The Vibe Coder Stack for Mobile Apps" [ref=e1271]
+                        - button "More" [ref=e1276]:
+                          - generic [ref=e1280]:
+                            - img
+                  - generic [ref=e1285]:
+                    - link [ref=e1287] [cursor=pointer]:
+                      - /url: /watch?v=8BtHk-oNlN0&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                    - generic [ref=e1289] [cursor=pointer]:
+                      - generic [ref=e1290]:
+                        - generic [ref=e1291]:
+                          - heading "I cloned 3 apps and now make $35K/month 13 minutes, 38 seconds" [level=3] [ref=e1292]:
+                            - link "I cloned 3 apps and now make $35K/month 13 minutes, 38 seconds" [ref=e1293]:
+                              - /url: /watch?v=8BtHk-oNlN0&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                              - text: I cloned 3 apps and now make $35K/month
+                          - button "Action menu" [ref=e1297]:
+                            - generic [ref=e1300]:
+                              - img
+                        - generic [ref=e1303]:
+                          - generic [ref=e1304]: 858k views
+                          - generic [ref=e1305]: •7 months ago
+                      - generic [ref=e1306]:
+                        - link "Go to channel Starter Story" [ref=e1307]:
+                          - /url: /@starterstory
+                        - generic [ref=e1308]:
+                          - link "Starter Story" [ref=e1312]:
+                            - /url: /@starterstory
+                          - img "Verified" [ref=e1315]:
+                            - generic [ref=e1318]:
+                              - img
+                      - generic [ref=e1319]:
+                        - generic [ref=e1320]: This is how Samuel Rondot built 3 apps that are making a total $35K per month, by copying already successful projects. Discover ...
+                        - tooltip "tooltip"
+                      - img "4K" [ref=e1323]:
+                        - generic [ref=e1324]: 4K
+                      - generic [ref=e1327]:
+                        - generic [ref=e1328]:
+                          - generic [ref=e1332]: 15 chapters
+                          - button "Intro | Who is Samuel Rondot | How Samuel taught himself coding | Framework for learning coding | Samuel's ideation strategy | Validating an idea | How Samuel copied his apps | Discover real-world design inspiration | Samuel's businesses breakdown | Marketing strategy | Tech stack | Costs & margins | You don't need to innovate | How to start building apps | Turn your idea into a real-world app" [ref=e1333]
+                        - button "More" [ref=e1338]:
+                          - generic [ref=e1342]:
+                            - img
+                - generic "+6 more" [ref=e1347] [cursor=pointer]
+            - generic [ref=e1349]:
+              - link [ref=e1351] [cursor=pointer]:
+                - /url: /watch?v=LuOZ2PKvd4s&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1353] [cursor=pointer]:
+                - generic [ref=e1354]:
+                  - generic [ref=e1355]:
+                    - heading "10 Unknown Apps Making $50K+ MRR (Copy Them) 33 minutes" [level=3] [ref=e1356]:
+                      - link "10 Unknown Apps Making $50K+ MRR (Copy Them) 33 minutes" [ref=e1357]:
+                        - /url: /watch?v=LuOZ2PKvd4s&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: 10 Unknown Apps Making $50K+ MRR (Copy Them)
+                    - button "Action menu" [ref=e1361]:
+                      - generic [ref=e1364]:
+                        - img
+                  - generic [ref=e1367]:
+                    - generic [ref=e1368]: 112k views
+                    - generic [ref=e1369]: •3 months ago
+                - generic [ref=e1370]:
+                  - link "Go to channel Greg Isenberg" [ref=e1371]:
+                    - /url: /@GregIsenberg
+                  - link "Greg Isenberg" [ref=e1376]:
+                    - /url: /@GregIsenberg
+                - generic [ref=e1377]:
+                  - generic [ref=e1378]: On this episode, I breakdown eight little-known mobile apps that each generate around $50000+ per month and explain why they ...
+                  - tooltip "tooltip"
+                - generic [ref=e1381]:
+                  - generic [ref=e1382]:
+                    - generic [ref=e1386]: 13 chapters
+                    - 'button "Intro | App 1: Flashloop: AI Video Generator for Viral Character Clips | App 2: Bible Note-Taker & Prayer Recorder for Churchgoers | App 3: AI Home Decor Interior Design App and Visualization Pain | App 4: Moji Lab: Emoji/Sticker Packs and Expression as a Business | App 5: Vinyl Snap: Scanning Vinyl Records for Accurate Pricing | App 6: Genora AI: Bundling Multiple LLMs into One Assistant | App 7: Logo Maker: AI Generated Logos | App 8: Menu Fit: Healthy Eating Recommendations at Any Restaurant | App 9: LangLearn: Personal AI English Tutor and Duolingo Comparison | App 10: Zozo Fit 3D Body Scanner: Tracking Body Change, Not the Scale | The “ 50K MRR App Framework” | Bonus Startup Ideas" [ref=e1387]'
+                  - button "More" [ref=e1392]:
+                    - generic [ref=e1396]:
+                      - img
+            - generic [ref=e1401]:
+              - link [ref=e1403] [cursor=pointer]:
+                - /url: /watch?v=PLKrSVuT-Dg&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1405] [cursor=pointer]:
+                - generic [ref=e1406]:
+                  - generic [ref=e1407]:
+                    - heading "How to make vibe coding not suck… 5 minutes, 44 seconds" [level=3] [ref=e1408]:
+                      - link "How to make vibe coding not suck… 5 minutes, 44 seconds" [ref=e1409]:
+                        - /url: /watch?v=PLKrSVuT-Dg&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: How to make vibe coding not suck…
+                    - button "Action menu" [ref=e1413]:
+                      - generic [ref=e1416]:
+                        - img
+                  - generic [ref=e1419]:
+                    - generic [ref=e1420]: 793k views
+                    - generic [ref=e1421]: •4 months ago
+                - generic [ref=e1422]:
+                  - link "Go to channel Fireship" [ref=e1423]:
+                    - /url: /@Fireship
+                  - generic [ref=e1424]:
+                    - link "Fireship" [ref=e1428]:
+                      - /url: /@Fireship
+                    - img "Verified" [ref=e1431]:
+                      - generic [ref=e1434]:
+                        - img
+                - generic [ref=e1435]:
+                  - generic [ref=e1436]: Deploy your app the easy way with Sevalla and get $50 in free credits - https://sevalla.com/fireship AI coding may be overhyped ...
+                  - tooltip "tooltip"
+                - generic [ref=e1439]:
+                  - generic [ref=e1440]:
+                    - generic [ref=e1441]:
+                      - generic [ref=e1444]:
+                        - img
+                      - generic [ref=e1445]: Summary
+                    - button "This Fireship tutorial explores seven Model Context Protocol (MCP) servers to streamline AI coding. Learn how these servers enhance interactions with external systems, improving AI's code generation. Discover how to leverage MCPs for various coding tasks, from framework optimization to infrastructure scaling." [ref=e1446]
+                    - text: ·
+                  - button "More" [ref=e1451]:
+                    - generic [ref=e1455]:
+                      - img
+            - generic [ref=e1460]:
+              - link [ref=e1462] [cursor=pointer]:
+                - /url: /watch?v=jSWuepkuFrU&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1464] [cursor=pointer]:
+                - generic [ref=e1465]:
+                  - generic [ref=e1466]:
+                    - heading "How I Design Apps 10x Better (Free Course) 47 minutes" [level=3] [ref=e1467]:
+                      - link "How I Design Apps 10x Better (Free Course) 47 minutes" [ref=e1468]:
+                        - /url: /watch?v=jSWuepkuFrU&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: How I Design Apps 10x Better (Free Course)
+                    - button "Action menu" [ref=e1472]:
+                      - generic [ref=e1475]:
+                        - img
+                  - generic [ref=e1478]:
+                    - generic [ref=e1479]: 70k views
+                    - generic [ref=e1480]: •3 months ago
+                - generic [ref=e1481]:
+                  - link "Go to channel Greg Isenberg" [ref=e1482]:
+                    - /url: /@GregIsenberg
+                  - link "Greg Isenberg" [ref=e1487]:
+                    - /url: /@GregIsenberg
+                - generic [ref=e1488]:
+                  - generic [ref=e1489]: On this episode I sit down with indie app builder and designer Chris Raroque to break down how solo developers can make apps ...
+                  - tooltip "tooltip"
+                - generic [ref=e1490]:
+                  - link "34 minutes, 2 seconds ... this is a huge tell for vibecoded <b>apps</b> because usually when you <b>vibe code</b> an app you don&#39;t really think too much about the icon&nbsp;..." [ref=e1491]:
+                    - /url: /watch?v=jSWuepkuFrU&t=2042s
+                    - text: 34:02
+                    - generic [ref=e1492]: ... this is a huge tell for vibecoded apps because usually when you vibe code an app you don't really think too much about the icon ...
+                  - tooltip "tooltip"
+            - generic [ref=e1494]:
+              - link [ref=e1496] [cursor=pointer]:
+                - /url: /watch?v=ya6520zh4pQ&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1498] [cursor=pointer]:
+                - generic [ref=e1499]:
+                  - generic [ref=e1500]:
+                    - heading "Vibe Coding is a Trap (What Senior Devs See That You Don't) 6 minutes, 2 seconds" [level=3] [ref=e1501]:
+                      - link "Vibe Coding is a Trap (What Senior Devs See That You Don't) 6 minutes, 2 seconds" [ref=e1502]:
+                        - /url: /watch?v=ya6520zh4pQ&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Vibe Coding is a Trap (What Senior Devs See That You Don't)
+                    - button "Action menu" [ref=e1506]:
+                      - generic [ref=e1509]:
+                        - img
+                  - generic [ref=e1512]:
+                    - generic [ref=e1513]: 175k views
+                    - generic [ref=e1514]: •3 weeks ago
+                - generic [ref=e1515]:
+                  - link "Go to channel DevForge" [ref=e1516]:
+                    - /url: /@devforgehq
+                  - link "DevForge" [ref=e1521]:
+                    - /url: /@devforgehq
+                - generic [ref=e1522]:
+                  - generic [ref=e1523]: Thinking about how to code with AI? While AI can be a powerful tool, we'll show you why relying solely on vibe code app tutorial ...
+                  - tooltip "tooltip"
+          - generic [ref=e1530]:
+            - img [ref=e1536]:
+              - generic [ref=e1538]:
+                - img
+            - generic [ref=e1540] [cursor=pointer]:
+              - generic [ref=e1541]:
+                - link "2026 Vibe Code - One AI to Replace Them All" [ref=e1544]:
+                  - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQABoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYBCAAEgJn8vD_BwE&num=4&category=acrcp_v1_32&sig=AOD64_22eyor3q_E4lv8gwZ4fXO52FqbSw&adurl=https://clickup.com/lp/brain%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3Dgs_cpc_emea-eea_nnc_nb_trial_all-devices_troas_lp_x_all-departments_x_ai-general%26utm_content%3D%26utm_term%3Dvibe%2520code%26utm_creative%3D780294659697_product1_rsa%26utm_custom1%3D%26utm_custom2%3D%26utm_lptheme%3D%26utm_lpmod%3D%26utm_mt%3Db%26gad_source%3D2%26gad_campaignid%3D22620965195&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=0
+                - link "4,000,000+ teams use ClickUp™ Brain to automate work and connect tasks, docs, & people. Vibe Code | Boost Productivity — 85% of..." [ref=e1547]:
+                  - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwjVmP-Ip5aTAxVCmYMHHQH3CZwYACICCAEQABoCZWY&co=1&ase=2&gclid=EAIaIQobChMI1Zj_iKeWkwMVQpmDBx0B9wmcEAEYBCAAEgJn8vD_BwE&num=4&category=acrcp_v1_32&sig=AOD64_22eyor3q_E4lv8gwZ4fXO52FqbSw&adurl=https://clickup.com/lp/brain%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3Dgs_cpc_emea-eea_nnc_nb_trial_all-devices_troas_lp_x_all-departments_x_ai-general%26utm_content%3D%26utm_term%3Dvibe%2520code%26utm_creative%3D780294659697_product1_rsa%26utm_custom1%3D%26utm_custom2%3D%26utm_lptheme%3D%26utm_lpmod%3D%26utm_mt%3Db%26gad_source%3D2%26gad_campaignid%3D22620965195&ms=[CLICK_MS]&nx=[NX]&ny=[NY]&nb=7
+                - generic [ref=e1548]:
+                  - generic [ref=e1550]:
+                    - generic [ref=e1551]: Sponsored
+                    - text: ·
+                  - generic [ref=e1553]: https://www.clickup.com/vibe+code/clickup
+              - button "My Ad Centre" [ref=e1556]:
+                - generic [ref=e1560]:
+                  - img
+          - generic [ref=e1565]:
+            - generic [ref=e1567] [cursor=pointer]:
+              - link [ref=e1568]:
+                - /url: /watch?v=KFNfQwmLnS8&list=PLkD4ksZgZ-noUIybdspTAuzbl0QKj5uhC
+                - generic [ref=e1578]:
+                  - generic [ref=e1581]:
+                    - img
+                  - generic [ref=e1582]: 16 videos
+              - generic [ref=e1585]:
+                - heading "Vibe Coding Course (for Beginners)" [level=3] [ref=e1586]:
+                  - link "Vibe Coding Course (for Beginners)" [ref=e1587]:
+                    - /url: /watch?v=KFNfQwmLnS8&list=PLkD4ksZgZ-noUIybdspTAuzbl0QKj5uhC
+                - generic [ref=e1589]:
+                  - generic [ref=e1590]:
+                    - link "Code Playbook" [ref=e1593]:
+                      - /url: /@codeplaybook
+                    - generic [ref=e1594]: •
+                    - link "Playlist" [ref=e1597]:
+                      - /url: /@codeplaybook
+                  - link "Vibe Coding Course 1 – What Is Vibe Coding (And Who Cares?) · 7:48" [ref=e1601]:
+                    - /url: /watch?v=KFNfQwmLnS8&list=PLkD4ksZgZ-noUIybdspTAuzbl0QKj5uhC
+                  - link "Vibe Coding Course 2 – How Apps Really Work (Do NOT Skip This) · 16:57" [ref=e1604]:
+                    - /url: /watch?v=XjDRuB3cmbM&list=PLkD4ksZgZ-noUIybdspTAuzbl0QKj5uhC
+                  - link "View full playlist" [ref=e1609]:
+                    - /url: /playlist?list=PLkD4ksZgZ-noUIybdspTAuzbl0QKj5uhC
+            - generic [ref=e1611]:
+              - link [ref=e1613] [cursor=pointer]:
+                - /url: /watch?v=p_q7-iW606U&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1615] [cursor=pointer]:
+                - generic [ref=e1616]:
+                  - generic [ref=e1617]:
+                    - heading "Vibe coding beautiful UIs in 3 simple steps 8 minutes, 10 seconds" [level=3] [ref=e1618]:
+                      - link "Vibe coding beautiful UIs in 3 simple steps 8 minutes, 10 seconds" [ref=e1619]:
+                        - /url: /watch?v=p_q7-iW606U&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Vibe coding beautiful UIs in 3 simple steps
+                    - button "Action menu" [ref=e1623]:
+                      - generic [ref=e1626]:
+                        - img
+                  - generic [ref=e1629]:
+                    - generic [ref=e1630]: 136k views
+                    - generic [ref=e1631]: •2 months ago
+                - generic [ref=e1632]:
+                  - link "Go to channel Morning Maker Show with Sandra and Dan" [ref=e1633]:
+                    - /url: /@MorningMakerShow
+                  - link "Morning Maker Show with Sandra and Dan" [ref=e1638]:
+                    - /url: /@MorningMakerShow
+                - generic [ref=e1639]:
+                  - generic [ref=e1640]: Stop making ugly AI-generated UIs powered by unmaintainable code and do this instead. I'll share the secret to getting AI to ...
+                  - tooltip "tooltip"
+                - generic [ref=e1643]:
+                  - generic [ref=e1644]:
+                    - generic [ref=e1648]: 8 chapters
+                    - button "Demo of UI | Process Overview | Preparing a Design | Making Design Brief with ChatGPT | Generating Code in Cursor | Result of AI Coding | Code Review | Important Step for Vibe Coding success" [ref=e1649]
+                  - button "More" [ref=e1654]:
+                    - generic [ref=e1658]:
+                      - img
+            - generic [ref=e1663]:
+              - link [ref=e1665] [cursor=pointer]:
+                - /url: /watch?v=z_fARFqjLoY&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1667] [cursor=pointer]:
+                - generic [ref=e1668]:
+                  - generic [ref=e1669]:
+                    - heading "How I Find App Ideas That Print ($90k/month Micro SaaS) 10 minutes, 26 seconds" [level=3] [ref=e1670]:
+                      - link "How I Find App Ideas That Print ($90k/month Micro SaaS) 10 minutes, 26 seconds" [ref=e1671]:
+                        - /url: /watch?v=z_fARFqjLoY&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: How I Find App Ideas That Print ($90k/month Micro SaaS)
+                    - button "Action menu" [ref=e1675]:
+                      - generic [ref=e1678]:
+                        - img
+                  - generic [ref=e1681]:
+                    - generic [ref=e1682]: 47k views
+                    - generic [ref=e1683]: •4 months ago
+                - generic [ref=e1684]:
+                  - link "Go to channel Steven Cravotta" [ref=e1685]:
+                    - /url: /@stevencravotta
+                  - link "Steven Cravotta" [ref=e1690]:
+                    - /url: /@stevencravotta
+                - generic [ref=e1691]:
+                  - text: "Work with me 1 on 1: https://www.joinappaccelerator.com/start Check out ViralAdLibrary: https://www.viraladlibrary.com/ My exact ..."
+                  - tooltip "tooltip"
+            - generic [ref=e1693]:
+              - link [ref=e1695] [cursor=pointer]:
+                - /url: /watch?v=vhMMKwYYYsc&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1697] [cursor=pointer]:
+                - generic [ref=e1698]:
+                  - generic [ref=e1699]:
+                    - heading "How to Find $10,000p/m App Ideas & Build Them With AI (Beginner Method) 35 minutes" [level=3] [ref=e1700]:
+                      - link "How to Find $10,000p/m App Ideas & Build Them With AI (Beginner Method) 35 minutes" [ref=e1701]:
+                        - /url: /watch?v=vhMMKwYYYsc&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: How to Find $10,000p/m App Ideas & Build Them With AI (Beginner Method)
+                    - button "Action menu" [ref=e1705]:
+                      - generic [ref=e1708]:
+                        - img
+                  - generic [ref=e1711]:
+                    - generic [ref=e1712]: 28k views
+                    - generic [ref=e1713]: •2 months ago
+                - generic [ref=e1714]:
+                  - link "Go to channel Liam Ottley" [ref=e1715]:
+                    - /url: /@LiamOttley
+                  - generic [ref=e1716]:
+                    - link "Liam Ottley" [ref=e1720]:
+                      - /url: /@LiamOttley
+                    - img "Verified" [ref=e1723]:
+                      - generic [ref=e1726]:
+                        - img
+                - generic [ref=e1727]:
+                  - text: "Join the #1 community for AI entrepreneurs, get all my resources & connect with 280k+ members: https://bit.ly/4rZGFQL Become ..."
+                  - tooltip "tooltip"
+                - img "4K" [ref=e1730]:
+                  - generic [ref=e1731]: 4K
+                - generic [ref=e1734]:
+                  - generic [ref=e1735]:
+                    - generic [ref=e1739]: 7 chapters
+                    - button "What We're Covering | The shift that made solo builders viable | How to spot ideas that only work right now | Choosing small, focused problems that win | Validating ideas before you overbuild | Launching with distribution (not hope) | Why most apps die after Ship Day" [ref=e1740]
+                  - button "More" [ref=e1745]:
+                    - generic [ref=e1749]:
+                      - img
+            - generic [ref=e1754]:
+              - link [ref=e1756] [cursor=pointer]:
+                - /url: /watch?v=RqD9CB1gg0Q&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+              - generic [ref=e1758] [cursor=pointer]:
+                - generic [ref=e1759]:
+                  - generic [ref=e1760]:
+                    - heading "Which AI Vibe Coding Tool Is The Best? 21 minutes" [level=3] [ref=e1761]:
+                      - link "Which AI Vibe Coding Tool Is The Best? 21 minutes" [ref=e1762]:
+                        - /url: /watch?v=RqD9CB1gg0Q&pp=ygUYYmVzdCB2aWJlIGNvZGUgYXBwIGlkZWFz
+                        - text: Which AI Vibe Coding Tool Is The Best?
+                    - button "Action menu" [ref=e1766]:
+                      - generic [ref=e1769]:
+                        - img
+                  - generic [ref=e1772]:
+                    - generic [ref=e1773]: 6.6k views
+                    - generic [ref=e1774]: •2 months ago
+                - generic [ref=e1775]:
+                  - link "Go to channel Jacob Klug" [ref=e1776]:
+                    - /url: /@jacobsklug
+                  - link "Jacob Klug" [ref=e1781]:
+                    - /url: /@jacobsklug
+                - generic [ref=e1782]:
+                  - generic [ref=e1783]: "Let's build AI apps together: Join free community: https://dub.link/mYgx0Wj Start building your app today: ..."
+                  - tooltip "tooltip"
+                - generic [ref=e1786]:
+                  - generic [ref=e1787]:
+                    - generic [ref=e1791]: 7 chapters
+                    - button "Intro | Prompt | Bolt | Base44 | Replit | Lovable | 21:23 - Outro" [ref=e1792]
+                  - button "More" [ref=e1797]:
+                    - generic [ref=e1801]:
+                      - img

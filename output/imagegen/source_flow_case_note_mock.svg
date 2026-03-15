@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <style>
+      .bg { fill: #eceef1; }
+      .top { fill: #2b2e35; }
+      .toptext { fill: #e6e8ec; font: 700 22px Arial, sans-serif; }
+      .stage { fill: #d2d6dc; stroke: #bcc1c9; stroke-width: 2; }
+      .stageTitle { fill: #2a2f36; font: 700 20px Arial, sans-serif; }
+      .actor { fill: #c7e2fa; stroke: #5993cc; stroke-width: 2; }
+      .actorHead { fill: #2f86e0; stroke: #5993cc; stroke-width: 2; }
+      .actorHeadGreen { fill: #2eb08d; stroke: #4f9f90; stroke-width: 2; }
+      .actorHeadPurple { fill: #a060db; stroke: #8a56bd; stroke-width: 2; }
+      .actorTitle { fill: #ffffff; font: 700 18px Arial, sans-serif; }
+      .actorSub { fill: #59616e; font: 16px Arial, sans-serif; }
+      .note { fill: #333c4d; font: 16px Arial, sans-serif; }
+      .conn { stroke: #6f7a8d; stroke-width: 3; fill: none; }
+      .portIn { fill: #fba84d; stroke: #b26e28; stroke-width: 1; }
+      .portOut { fill: #f7f8fa; stroke: #b2b8c3; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900"/>
+  <rect class="top" x="0" y="0" width="1600" height="54"/>
+  <text class="toptext" x="18" y="35">case_note_refresh_flow  &gt;</text>
+
+  <rect class="stage" x="20" y="80" width="230" height="800" rx="6"/>
+  <rect class="stage" x="260" y="80" width="230" height="800" rx="6"/>
+  <rect class="stage" x="500" y="80" width="230" height="800" rx="6"/>
+  <rect class="stage" x="740" y="80" width="230" height="800" rx="6"/>
+  <rect class="stage" x="980" y="80" width="230" height="800" rx="6"/>
+  <rect class="stage" x="1220" y="80" width="340" height="800" rx="6"/>
+
+  <text class="stageTitle" x="36" y="108">Input</text>
+  <text class="stageTitle" x="276" y="108">Source</text>
+  <text class="stageTitle" x="516" y="108">Stage 1</text>
+  <text class="stageTitle" x="756" y="108">Stage 2</text>
+  <text class="stageTitle" x="996" y="108">Stage 3</text>
+  <text class="stageTitle" x="1236" y="108">LU Table</text>
+
+  <!-- Input -->
+  <rect class="actor" x="35" y="130" width="200" height="118" rx="8"/>
+  <rect class="actorHeadPurple" x="35" y="130" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="46" y="153">PopulationArgs</text>
+  <text class="actorSub" x="47" y="186">id</text>
+
+  <rect class="actor" x="35" y="266" width="200" height="95" rx="8"/>
+  <rect class="actorHead" x="35" y="266" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="46" y="289">SyncDeleteMode</text>
+  <text class="actorSub" x="47" y="322">table</text>
+
+  <!-- Source -->
+  <rect class="actor" x="275" y="130" width="200" height="125" rx="8"/>
+  <rect class="actorHead" x="275" y="130" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="286" y="153">DbCommand1</text>
+  <text class="actorSub" x="287" y="186">select ... from case_note</text>
+  <text class="actorSub" x="287" y="212">[result], affected</text>
+
+  <!-- Stage 1 -->
+  <rect class="actor" x="515" y="130" width="200" height="95" rx="8"/>
+  <rect class="actorHeadGreen" x="515" y="130" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="526" y="153">JavaScript1</text>
+  <text class="actorSub" x="527" y="186">hasRows bool</text>
+  <text class="note" x="516" y="262">rows != null &amp;&amp; rows.length &gt; 0</text>
+
+  <!-- Stage 2 -->
+  <rect class="actor" x="755" y="130" width="200" height="125" rx="8"/>
+  <rect class="actorHeadGreen" x="755" y="130" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="766" y="153">IfElse1</text>
+  <text class="actorSub" x="767" y="186">test, a, b</text>
+  <text class="note" x="756" y="278">true =&gt; set flag + load</text>
+  <text class="note" x="756" y="302">false =&gt; skip</text>
+
+  <!-- Stage 3 -->
+  <rect class="actor" x="995" y="130" width="200" height="110" rx="8"/>
+  <rect class="actorHead" x="995" y="130" width="200" height="34" rx="8"/>
+  <text class="actorTitle" x="1006" y="153">FabricSet1</text>
+  <text class="actorSub" x="1007" y="186">key=g_case_note_refreshed</text>
+  <text class="actorSub" x="1007" y="210">value=true</text>
+
+  <!-- LU Table -->
+  <rect class="actor" x="1235" y="130" width="310" height="325" rx="8"/>
+  <rect class="actorHead" x="1235" y="130" width="310" height="34" rx="8"/>
+  <text class="actorTitle" x="1246" y="153">CASE_NOTE</text>
+  <text class="actorSub" x="1247" y="186">schema, table, [keys], params</text>
+  <text class="actorSub" x="1247" y="213">CASE_ID</text>
+  <text class="actorSub" x="1247" y="240">NOTE_ID</text>
+  <text class="actorSub" x="1247" y="267">NOTE_DATE</text>
+  <text class="actorSub" x="1247" y="294">NOTE_TEXT</text>
+  <text class="note" x="1247" y="340">only runs on true path</text>
+
+  <!-- connectors -->
+  <path class="conn" d="M235 185 L275 185"/>
+  <path class="conn" d="M475 185 L515 185"/>
+  <path class="conn" d="M715 185 L755 185"/>
+  <path class="conn" d="M955 185 L995 185"/>
+  <path class="conn" d="M1195 185 L1235 185"/>
+
+  <!-- helper notes -->
+  <text class="note" x="24" y="740">Clone this exact flow for activity and cases.</text>
+  <text class="note" x="24" y="768">Only change: source query, table actor, and FabricSet key.</text>
+
+  <!-- Ports -->
+  <circle class="portIn" cx="250" cy="185" r="5"/>
+  <circle class="portIn" cx="490" cy="185" r="5"/>
+  <circle class="portIn" cx="730" cy="185" r="5"/>
+  <circle class="portIn" cx="970" cy="185" r="5"/>
+  <circle class="portIn" cx="1210" cy="185" r="5"/>
+  <circle class="portOut" cx="1550" cy="185" r="5"/>
+</svg>

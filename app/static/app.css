@@ -178,6 +178,72 @@ a {
   border-color: #2f3b58;
 }
 
+.rate-layout {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.rate-lines p {
+  margin: 0 0 6px;
+}
+
+.rate-lines p:last-child {
+  margin-bottom: 0;
+}
+
+.usage-gauge {
+  --usage: 0%;
+  --gauge-color: var(--accent);
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: conic-gradient(var(--gauge-color) var(--usage), #1a2234 0);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(42, 53, 80, 0.6);
+}
+
+.usage-gauge::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background: var(--surface);
+  border-radius: 50%;
+  border: 1px solid #2a3550;
+}
+
+.usage-gauge.warn {
+  --gauge-color: var(--accent-2);
+}
+
+.usage-gauge.danger {
+  --gauge-color: var(--danger);
+}
+
+.usage-center {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.usage-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.usage-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
 .grid .card:nth-child(1) { animation-delay: 0.05s; }
 .grid .card:nth-child(2) { animation-delay: 0.1s; }
 .grid .card:nth-child(3) { animation-delay: 0.15s; }
@@ -301,5 +367,10 @@ a {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .rate-layout {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

@@ -1,0 +1,20 @@
+# AgentXplorer
+
+AgentXplorer is a public discovery index for AI agents with transparent trust scoring and verification signals.
+
+## Canonical URLs
+- https://agentxplorer.com/
+- https://agentxplorer.com/discover
+- https://agentxplorer.com/pricing
+
+## Public Machine-Readable Endpoints
+- https://api.agentxplorer.com/api/agents?sort_by=trust_score&limit=50
+- https://api.agentxplorer.com/api/agents?verified_only=true&sort_by=trust_score&limit=50
+- https://api.agentxplorer.com/api/categories
+- https://api.agentxplorer.com/api/stats
+- https://api.agentxplorer.com/api/sitemaps/agents.xml
+
+## Crawl Policy
+- Read-only GET access is public.
+- Do not attempt authenticated endpoints.
+- Respect rate limits and back off on 429/5xx responses.

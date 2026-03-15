@@ -1,0 +1,73 @@
+{
+  "duration": null,
+  "segments": [
+    {
+      "id": "seg_0",
+      "end": 3.0,
+      "speaker": "A",
+      "start": 0.95,
+      "text": " Good morning, Delta 482,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_1",
+      "end": 5.55,
+      "speaker": "A",
+      "start": 3.05,
+      "text": " 10.8117,000 feet rating.",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_2",
+      "end": 9.4,
+      "speaker": "B",
+      "start": 7.8999999999999995,
+      "text": " Delta 482,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_3",
+      "end": 10.55,
+      "speaker": "B",
+      "start": 9.450000000000001,
+      "text": " runway center, welcome,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_4",
+      "end": 13.55,
+      "speaker": "B",
+      "start": 10.700000000000001,
+      "text": " maintain 280 knots and climb maintain 12,300.",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_5",
+      "end": 16.45,
+      "speaker": "A",
+      "start": 14.3,
+      "text": " Climb maintain 12,300 and speed 280,",
+      "type": "transcript.text.segment"
+    },
+    {
+      "id": "seg_6",
+      "end": 17.299999999999997,
+      "speaker": "A",
+      "start": 16.599999999999998,
+      "text": " Delta 482.",
+      "type": "transcript.text.segment"
+    }
+  ],
+  "task": null,
+  "text": "Good morning, Delta 482, 10.8117,000 feet rating. Delta 482, runway center, welcome, maintain 280 knots and climb maintain 12 ,300. Climb maintain 12,300 and speed 280, Delta 482.",
+  "usage": {
+    "input_tokens": 193,
+    "output_tokens": 557,
+    "total_tokens": 750,
+    "type": "tokens",
+    "input_token_details": {
+      "audio_tokens": 193,
+      "text_tokens": 0
+    }
+  }
+}

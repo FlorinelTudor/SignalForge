@@ -1,0 +1,69 @@
+- generic [ref=e2]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - button "Guide" [ref=e9] [cursor=pointer]:
+          - generic [ref=e12]:
+            - img
+        - generic [ref=e13]:
+          - link "YouTube Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e19]:
+              - img
+          - generic [ref=e20]: RO
+        - button "Skip navigation" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: Skip navigation
+      - search [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - combobox "Search" [expanded] [ref=e34]: best vibe code app ideas
+            - button "Clear search query" [ref=e226] [cursor=pointer]:
+              - generic [ref=e229]:
+                - img
+          - button "Search" [ref=e35] [cursor=pointer]:
+            - generic [ref=e38]:
+              - img
+      - generic [ref=e40]:
+        - button "Settings" [ref=e45] [cursor=pointer]:
+          - generic [ref=e48]:
+            - img
+        - link "Sign in" [ref=e51] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den-GB%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en-GB&ec=65620
+          - generic [ref=e55]:
+            - img
+          - generic [ref=e56]: Sign in
+  - navigation [ref=e60]:
+    - generic [ref=e61]:
+      - link "Home" [ref=e63] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e66]:
+          - img
+        - generic [ref=e67]: Home
+      - link "Shorts" [ref=e69] [cursor=pointer]:
+        - /url: /shorts/
+        - generic [ref=e72]:
+          - img
+        - generic [ref=e73]: Shorts
+      - link "Subscriptions" [ref=e75] [cursor=pointer]:
+        - /url: /feed/subscriptions
+        - generic [ref=e78]:
+          - img
+        - generic [ref=e79]: Subscriptions
+      - link "You" [ref=e81] [cursor=pointer]:
+        - /url: /feed/you
+        - generic [ref=e84]:
+          - img
+        - generic [ref=e85]: You
+  - generic [ref=e86]:
+    - main [ref=e87]:
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - generic [ref=e98]: Your YouTube History is off
+          - generic "You can turn on watch and search history at any time to get the latest videos tailored to you. To update your selection, turn on YouTube History and confirm your settings to accept the use of cookies and data. Learn more" [ref=e100]:
+            - text: You can turn on watch and search history at any time to get the latest videos tailored to you. To update your selection, turn on YouTube History and confirm your settings to accept the use of cookies and data.
+            - link "Learn more" [ref=e101] [cursor=pointer]:
+              - /url: https://support.google.com/youtube/answer/95725
+        - link "Update setting" [ref=e106] [cursor=pointer]:
+          - /url: https://consent.youtube.com/d?continue=https://www.youtube.com/%3Fcbrd%3D1&gl=RO&m=0&pc=yt&oyh=1&cm=6&hl=en-GB&src=4
+          - generic [ref=e107]: Update setting
+    - text: •

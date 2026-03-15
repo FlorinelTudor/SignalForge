@@ -49,3 +49,15 @@ Outputs:
 
 - `matches.csv`: Every matched post/comment with metadata and a short snippet
 - `summary.csv`: Idea clusters with mention counts
+
+## Photoshoot sub-app
+
+A separate FastAPI app that turns selfies into professional-style portraits using the xAI Image API.
+
+Run it:
+
+```bash
+uvicorn photoshoot_app.main:app --host 127.0.0.1 --port 8001 --reload
+```
+
+Open `http://127.0.0.1:8001`.
