@@ -1,0 +1,12 @@
+Use case: logo-brand
+Asset type: fintech SaaS logo
+Primary request: premium logo for a stock and crypto portfolio tracker called PulseHound
+Subject: an abstract hound head merged with a market pulse line and subtle candlestick chart motif
+Style/medium: clean vector-friendly brand mark with matching wordmark
+Composition/framing: centered symbol above or beside the word PulseHound, balanced spacing, app-icon friendly
+Lighting/mood: sharp, confident, trustworthy, modern fintech
+Color palette: deep navy, electric teal, bright mint, white
+Materials/textures: flat vector shapes, crisp edges, no gradients that would break logo usability
+Text (verbatim): "PulseHound"
+Constraints: premium SaaS branding, scalable, simple enough for app icon and landing page, transparent background
+Avoid: mascot cartoon, clutter, photo realism, watermark, mockup scene, extra text

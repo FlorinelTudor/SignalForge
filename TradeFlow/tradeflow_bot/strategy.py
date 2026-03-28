@@ -13,6 +13,8 @@ class StrategyParams:
     volatility_window: int
     momentum_threshold: float
     zscore_threshold: float
+    momentum_signal_weight: float = 0.6
+    mean_reversion_signal_weight: float = 0.4
 
 
 def engineer_features(df: pd.DataFrame, params: StrategyParams) -> pd.DataFrame:
@@ -41,7 +43,7 @@ def rule_signal(features: pd.DataFrame, params: StrategyParams) -> pd.Series:
     mr_sig = np.where(zscore < -params.zscore_threshold, 1, 0)
     mr_sig = np.where(zscore > params.zscore_threshold, -1, mr_sig)
 
-    combined = 0.6 * mom_sig + 0.4 * mr_sig
+    combined = (params.momentum_signal_weight * mom_sig) + (params.mean_reversion_signal_weight * mr_sig)
     signal = np.sign(combined)
     return pd.Series(signal, index=features.index, name="rule_signal").fillna(0)
 

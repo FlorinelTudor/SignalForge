@@ -57,6 +57,36 @@ This will:
 - apply strategy parameter suggestions into `.env`
 - save a JSON improvement report in `reports/`
 
+## 3c) Strategy-Only Autoresearch
+
+TradeFlow includes a constrained `autoresearch` sandbox:
+
+- `autoresearch_trading/candidate_strategy.py`
+- `autoresearch_trading/evaluator.py`
+- `autoresearch_trading/program.md`
+
+This follows the fixed-evaluator pattern:
+
+- the candidate strategy file is the editable surface
+- evaluator and promotion rules stay fixed
+- live execution code is not editable by the research loop
+
+Evaluate the current candidate strategy on the configured live basket:
+
+```bash
+python -m tradeflow_bot --action autoresearch-eval --data-source synthetic
+```
+
+If the candidate clears the promotion gate, the best artifact is written to:
+
+- `reports/autoresearch_best.json`
+
+Promote approved strategy parameters into `.env` and journal the result:
+
+```bash
+python -m tradeflow_bot --action autoresearch-promote
+```
+
 ## 4) Continuous Operation
 
 ```bash
@@ -83,6 +113,7 @@ Trade decisions are written to `logs/trades_v4.csv`.
 - Adaptive tuning runs every `STRATEGY_TUNE_INTERVAL_MINUTES` (if `TUNING_ENABLED=true`).
 - Tuned thresholds are persisted in `models/adaptive_state.json`.
 - Every tuning event appends an entry to `Strategy.md`.
+- Every successful autoresearch promotion also appends an entry to `Strategy.md`.
 - News/sector context settings are controlled with `NEWS_*` and `SECTOR_*` env variables.
 - Imported policy layer supports:
   - asset-aware momentum thresholds (`STOCK_MOMENTUM_ENTRY_THRESHOLD`, `CRYPTO_MOMENTUM_ENTRY_THRESHOLD`)

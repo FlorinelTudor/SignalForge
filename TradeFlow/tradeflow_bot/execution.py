@@ -117,6 +117,8 @@ class TradingEngine:
             volatility_window=self.settings.volatility_window,
             momentum_threshold=self.settings.momentum_threshold,
             zscore_threshold=self.settings.zscore_threshold,
+            momentum_signal_weight=self.settings.momentum_signal_weight,
+            mean_reversion_signal_weight=self.settings.mean_reversion_signal_weight,
         )
 
     def prepare_model(self) -> pd.DataFrame:

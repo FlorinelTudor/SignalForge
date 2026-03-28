@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /dashboard
-Disallow: /login
-Disallow: /register
-Disallow: /auth/
-
-Sitemap: https://agentxplorer.com/sitemap.xml
-Sitemap: https://api.agentxplorer.com/api/sitemaps/agents.xml

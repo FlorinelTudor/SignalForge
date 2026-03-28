@@ -19,6 +19,8 @@ class Settings:
     volatility_window: int = 20
     momentum_threshold: float = 0.02
     zscore_threshold: float = 1.2
+    momentum_signal_weight: float = 0.6
+    mean_reversion_signal_weight: float = 0.4
     ml_long_threshold: float = 0.55
     ml_short_threshold: float = 0.45
     transaction_cost_bps: float = 5.0
@@ -161,6 +163,8 @@ def load_settings(env_file: str = ".env") -> Settings:
         volatility_window=int(os.getenv("VOLATILITY_WINDOW", "20")),
         momentum_threshold=float(os.getenv("MOMENTUM_THRESHOLD", "0.02")),
         zscore_threshold=float(os.getenv("ZSCORE_THRESHOLD", "1.2")),
+        momentum_signal_weight=float(os.getenv("MOMENTUM_SIGNAL_WEIGHT", "0.6")),
+        mean_reversion_signal_weight=float(os.getenv("MEAN_REVERSION_SIGNAL_WEIGHT", "0.4")),
         ml_long_threshold=float(os.getenv("ML_LONG_THRESHOLD", "0.55")),
         ml_short_threshold=float(os.getenv("ML_SHORT_THRESHOLD", "0.45")),
         transaction_cost_bps=float(os.getenv("TRANSACTION_COST_BPS", "5.0")),

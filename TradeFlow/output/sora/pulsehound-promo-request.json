@@ -1,0 +1,10 @@
+{
+  "dry_run": true,
+  "request": {
+    "endpoint": "/v1/videos",
+    "model": "sora-2",
+    "prompt": "Use case: social ad for a fintech SaaS launch\nPrimary request: cinematic promotional video for PulseHound, a stock and crypto portfolio tracker with AI summaries, earnings tracking, important news, and bullish and bearish signals\nScene/background: sleek product-demo environment with floating laptop and phone screens, dark studio space with subtle grid reflections and premium fintech atmosphere\nSubject: PulseHound app interface and logo\nAction: quick sequence showing portfolio dashboard, watchlist, AI analysis card, earnings calendar, important news feed, bullish and bearish signal badges, alerts, and day and dark theme toggle\nCamera: smooth dolly and push-in moves, crisp UI close-ups, one hero end frame\nLighting/mood: polished, confident, high-trust, modern SaaS product launch\nColor palette: deep navy, charcoal, electric teal, mint, white\nStyle/format: premium product teaser, crisp motion graphics, clean UI mockups, no real people\nTiming/beats: beat 1 logo reveal, beat 2 portfolio overview, beat 3 watchlist and AI analysis, beat 4 earnings and news, beat 5 bullish and bearish signals plus alerting, beat 6 theme toggle and final brand frame\nAudio: subtle futuristic pulse sound design, soft rising synth bed, no vocals\nText (verbatim): \"PulseHound\" \"AI Portfolio Intelligence\" \"Watchlist\" \"AI Analysis\" \"Earnings\" \"Market News\" \"Bullish Signal\" \"Bearish Signal\" \"Price Alerts\" \"Dark Mode\" \"Light Mode\"\nConstraints: suitable for audiences under 18, no real people, no copyrighted brands, product UI should clearly show add to watchlist, AI summaries, earnings tracking, important news, bullish and bearish signals, price alerts, portfolio allocation, performance chart, asset drill-down, day and dark theme\nAvoid: messy dashboards, unreadable text, meme crypto aesthetics, unrealistic phone gestures, flicker, watermark",
+    "seconds": "8",
+    "size": "1280x720"
+  }
+}

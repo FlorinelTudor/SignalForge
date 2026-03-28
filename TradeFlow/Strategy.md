@@ -210,3 +210,21 @@ Automatic tuning updates are appended below by the bot.
 - backtest_sharpe: 12.742983
 - backtest_max_drawdown: -0.013441
 
+
+## 2026-03-25T15:04:24.866449+00:00
+- momentum_threshold: 0.0112
+- zscore_threshold: 0.9375
+- ml_long_threshold: 0.5775
+- ml_short_threshold: 0.4
+- objective: 4.501831
+- backtest_total_return: 0.020652
+- backtest_sharpe: 4.503359
+- backtest_max_drawdown: -0.018863
+
+## 2026-03-28T00:00:00+00:00
+- change_type: autoresearch sandbox added
+- editable_surface: `autoresearch_trading/candidate_strategy.py`
+- fixed_components:
+  - `autoresearch_trading/evaluator.py`
+  - promotion gate using holdout objective, trade-count minimum, and drawdown gap
+- live_scope: only approved thresholds and signal weights are promoted into `.env`

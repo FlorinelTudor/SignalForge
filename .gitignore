@@ -167,3 +167,5 @@ __marimo__/
 data/
 node_modules/
 .codex/
+
+.worktrees/
