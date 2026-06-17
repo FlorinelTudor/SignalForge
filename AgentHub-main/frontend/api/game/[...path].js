@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const { BlobError, get, list, put } = require("@vercel/blob");
 
 const MAX_PLAYERS = 9;
 const PHASE_IDS = [
@@ -58,8 +59,8 @@ const STARTING_FAMILIES = [
   { name: "Novak", profile: "Immigrant household", food: 52, health: 59, savings: 22, debt: 38, hope: 56, education: 58, stability: 45, bankTrust: 50, stock: 0 },
 ];
 
-const state = globalThis.__greatDepressionRooms || { rooms: new Map() };
-globalThis.__greatDepressionRooms = state;
+const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+const BLOB_OPTIONS = blobToken ? { access: "private", token: blobToken } : { access: "private" };
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -83,7 +84,7 @@ function publicRoom(room) {
   return {
     roomCode: room.room_code,
     phaseIndex: room.phase_index,
-    players: room.players,
+    players: room.players || [],
     updatedAt: room.updated_at,
   };
 }
@@ -138,7 +139,105 @@ function getBody(req) {
   return req.body;
 }
 
-module.exports = function handler(req, res) {
+function roomPath(code) {
+  return `game-rooms/${code}/room.json`;
+}
+
+function playerPath(code, slot) {
+  return `game-rooms/${code}/players/slot-${slot}.json`;
+}
+
+async function readJson(path) {
+  try {
+    const blob = await get(path, BLOB_OPTIONS);
+    return await blob.json();
+  } catch (error) {
+    if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
+    throw error;
+  }
+}
+
+async function writeJson(path, payload, allowOverwrite = true) {
+  await put(path, JSON.stringify(payload), {
+    ...BLOB_OPTIONS,
+    addRandomSuffix: false,
+    allowOverwrite,
+    contentType: "application/json; charset=utf-8",
+  });
+}
+
+async function listPlayers(code) {
+  const prefix = `game-rooms/${code}/players/`;
+  const result = await list({ ...BLOB_OPTIONS, prefix, limit: MAX_PLAYERS + 5 });
+  const players = await Promise.all(
+    result.blobs
+      .filter((blob) => /slot-\d+\.json$/.test(blob.pathname))
+      .sort((a, b) => a.pathname.localeCompare(b.pathname, undefined, { numeric: true }))
+      .slice(0, MAX_PLAYERS)
+      .map((blob) => readJson(blob.pathname))
+  );
+  return players.filter(Boolean);
+}
+
+async function readRoom(code) {
+  const room = await readJson(roomPath(code));
+  if (!room) return null;
+  room.players = await listPlayers(code);
+  return room;
+}
+
+async function saveRoom(room) {
+  const roomPayload = { ...room };
+  delete roomPayload.players;
+  await writeJson(roomPath(room.room_code), roomPayload);
+}
+
+async function createRoom() {
+  for (let i = 0; i < 12; i += 1) {
+    const code = roomCode();
+    const now = new Date().toISOString();
+    const room = {
+      room_code: code,
+      host_token: crypto.randomBytes(32).toString("base64url"),
+      phase_index: 0,
+      created_at: now,
+      updated_at: now,
+    };
+    try {
+      await writeJson(roomPath(code), room, false);
+      room.players = [];
+      return room;
+    } catch (error) {
+      if (!/already exists|overwrite/i.test(String(error.message || ""))) throw error;
+    }
+  }
+  return null;
+}
+
+async function addPlayer(code, playerName, clientId) {
+  const players = await listPlayers(code);
+  const existing = players.find((player) => player.clientId === clientId);
+  if (existing) return existing;
+  if (players.length >= MAX_PLAYERS) return null;
+
+  for (let slot = 0; slot < MAX_PLAYERS; slot += 1) {
+    if (players.some((player) => player.slot === slot)) continue;
+    const player = { ...pickFamily(playerName, slot, clientId), slot };
+    try {
+      await writeJson(playerPath(code, slot), player, false);
+      return player;
+    } catch (error) {
+      if (!/already exists|overwrite/i.test(String(error.message || ""))) throw error;
+    }
+  }
+  return null;
+}
+
+async function savePlayer(code, player) {
+  await writeJson(playerPath(code, player.slot), player);
+}
+
+module.exports = async function handler(req, res) {
   const rawParts = Array.isArray(req.query.path) ? req.query.path : [req.query.path].filter(Boolean);
   const urlParts = (req.url || "")
     .split("?")[0]
@@ -150,24 +249,13 @@ module.exports = function handler(req, res) {
   if (parts[0] !== "rooms") return json(res, 404, { detail: "Not found" });
 
   if (req.method === "POST" && parts.length === 1) {
-    let code = roomCode();
-    for (let i = 0; i < 12 && state.rooms.has(code); i += 1) code = roomCode();
-    if (state.rooms.has(code)) return json(res, 500, { detail: "Could not create a unique room code" });
-    const now = new Date().toISOString();
-    const room = {
-      room_code: code,
-      host_token: crypto.randomBytes(32).toString("base64url"),
-      phase_index: 0,
-      players: [],
-      created_at: now,
-      updated_at: now,
-    };
-    state.rooms.set(code, room);
+    const room = await createRoom();
+    if (!room) return json(res, 500, { detail: "Could not create a unique room code" });
     return json(res, 200, { room: publicRoom(room), hostToken: room.host_token });
   }
 
   const code = String(parts[1] || "").trim().toUpperCase();
-  const room = state.rooms.get(code);
+  const room = await readRoom(code);
   if (!room) return json(res, 404, { detail: "Room not found" });
 
   if (req.method === "GET" && parts.length === 2) return json(res, 200, { room: publicRoom(room) });
@@ -175,12 +263,11 @@ module.exports = function handler(req, res) {
   const body = getBody(req);
   if (req.method === "POST" && parts[2] === "join") {
     const clientId = body.client_id || crypto.randomUUID();
-    const existing = room.players.find((player) => player.clientId === clientId);
-    if (existing) return json(res, 200, { room: publicRoom(room), playerId: existing.id });
-    if (room.players.length >= MAX_PLAYERS) return json(res, 409, { detail: `Room is full (${MAX_PLAYERS} players max).` });
-    const player = pickFamily(String(body.player_name || "Player").trim() || "Player", room.players.length, clientId);
-    room.players.push(player);
+    const player = await addPlayer(code, String(body.player_name || "Player").trim() || "Player", clientId);
+    if (!player) return json(res, 409, { detail: `Room is full (${MAX_PLAYERS} players max).` });
     room.updated_at = new Date().toISOString();
+    await saveRoom(room);
+    room.players = await listPlayers(code);
     return json(res, 200, { room: publicRoom(room), playerId: player.id });
   }
 
@@ -191,11 +278,13 @@ module.exports = function handler(req, res) {
     if ((room.players[playerIndex].choices?.[phaseId] || []).length === 2) return json(res, 200, { room: publicRoom(room) });
     const updatedPlayer = applyChoices(room.players[playerIndex], (body.choices || []).slice(0, 2), phaseId);
     updatedPlayer.choices = { ...(room.players[playerIndex].choices || {}), [phaseId]: (body.choices || []).slice(0, 2) };
-    room.players[playerIndex] = updatedPlayer;
+    await savePlayer(code, updatedPlayer);
+    room.players = await listPlayers(code);
     if (room.players.length && room.players.every((player) => (player.choices?.[phaseId] || []).length === 2)) {
       room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
     }
     room.updated_at = new Date().toISOString();
+    await saveRoom(room);
     return json(res, 200, { room: publicRoom(room) });
   }
 
@@ -203,6 +292,7 @@ module.exports = function handler(req, res) {
     if (!body.host_token || body.host_token !== room.host_token) return json(res, 403, { detail: "Only the host can advance this room." });
     room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
     room.updated_at = new Date().toISOString();
+    await saveRoom(room);
     return json(res, 200, { room: publicRoom(room) });
   }
 
