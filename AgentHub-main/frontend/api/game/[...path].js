@@ -192,7 +192,34 @@ async function listPlayers(code) {
       .slice(0, MAX_PLAYERS)
       .map((blob) => readJson(blob.pathname))
   );
-  return players.filter(Boolean);
+  const visiblePlayers = players.filter(Boolean);
+  const choices = await listChoiceMarkers(code);
+  choices.forEach(({ slot, phaseId, choices: selectedChoices }) => {
+    const playerIndex = visiblePlayers.findIndex((player) => player.slot === slot);
+    if (playerIndex < 0) return;
+    const player = visiblePlayers[playerIndex];
+    if ((player.choices?.[phaseId] || []).length === 2) return;
+    const updated = applyChoices(player, selectedChoices, phaseId);
+    updated.choices = { ...(player.choices || {}), [phaseId]: selectedChoices };
+    visiblePlayers[playerIndex] = updated;
+  });
+  return visiblePlayers;
+}
+
+async function listChoiceMarkers(code) {
+  const prefix = `game-rooms/${code}/choices/`;
+  const result = await list({ ...BLOB_OPTIONS, prefix, limit: MAX_PLAYERS * PHASE_IDS.length + 10 });
+  const markers = await Promise.all(
+    result.blobs
+      .filter((blob) => /slot-\d+-[^/]+\.json$/.test(blob.pathname))
+      .map(async (blob) => {
+        const match = blob.pathname.match(/slot-(\d+)-([^.]+)\.json$/);
+        const payload = await readJson(blob.pathname);
+        if (!match || !payload) return null;
+        return { slot: Number(match[1]), phaseId: match[2], choices: payload.choices || [] };
+      })
+  );
+  return markers.filter(Boolean);
 }
 
 async function readRoom(code) {
