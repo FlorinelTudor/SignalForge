@@ -81,6 +81,7 @@ logger = logging.getLogger(__name__)
 RATE_LIMITS = {
     "auth": {"limit": 5, "window": 60},
     "search": {"limit": 60, "window": 60},
+    "game": {"limit": 240, "window": 60},
     "write": {"limit": 30, "window": 60},
 }
 _rate_state = {}
@@ -137,6 +138,8 @@ def _rate_bucket(request: Request) -> Optional[str]:
     method = request.method.upper()
     if path.startswith("/api/auth/login") or path.startswith("/api/auth/register"):
         return "auth"
+    if path.startswith("/api/game/rooms"):
+        return "game"
     if path.startswith("/api/agents") and method == "GET":
         return "search"
     if method in {"POST", "PUT", "DELETE"} and path.startswith("/api/"):
@@ -831,6 +834,127 @@ class SummarizeRequest(BaseModel):
 class CheckoutRequest(BaseModel):
     plan: str = Field(min_length=2, max_length=20)  # "verified" or "pro"
 
+class GameJoinRoom(BaseModel):
+    room_code: str = Field(min_length=4, max_length=12)
+    player_name: str = Field(default="Player", min_length=1, max_length=80)
+    client_id: Optional[str] = Field(default=None, max_length=120)
+
+class GameSubmitChoices(BaseModel):
+    player_id: str = Field(min_length=4, max_length=120)
+    choices: List[str] = Field(min_length=2, max_length=2)
+
+class GameAdvanceRoom(BaseModel):
+    host_token: str = Field(min_length=16, max_length=160)
+
+MAX_GAME_PLAYERS = 9
+
+GAME_PHASE_IDS = [
+    "postwar",
+    "recession_1921",
+    "early_boom",
+    "speculation",
+    "crash",
+    "deepening",
+    "bank_holiday",
+    "work_relief",
+    "second",
+    "defense_shift",
+    "recovery",
+]
+
+GAME_IMPACTS = {
+    "keep_factory_job": {"food": 6, "savings": 9, "hope": -5, "stability": 16},
+    "use_savings_food": {"food": 18, "health": 9, "savings": -17},
+    "move_to_city": {"savings": -10, "hope": 7, "stability": -9},
+    "take_store_credit": {"food": 8, "debt": 17, "hope": 5},
+    "pull_child_school": {"savings": 13, "education": -24, "hope": -14},
+    "join_mutual_aid": {"hope": 12, "stability": 11, "savings": -5},
+    "build_emergency_fund": {"savings": 16, "hope": -4, "stability": 11},
+    "invest_stocks": {"savings": 22, "stock": 26, "hope": 10, "stability": -4},
+    "borrow_to_invest": {"savings": 28, "stock": 38, "debt": 24, "hope": 12, "stability": -12},
+    "buy_radio_credit": {"hope": 15, "debt": 16, "savings": -5},
+    "pay_down_debt": {"debt": -24, "savings": -9, "stability": 10},
+    "night_school": {"education": 17, "savings": -9, "hope": 4},
+    "keep_cash": {"savings": 13, "stability": 8, "hope": -3},
+    "move_better_rental": {"health": 13, "hope": 10, "debt": 9},
+    "sell_stocks_now": {"savings": -14, "stock": -28, "stability": 10},
+    "withdraw_bank_cash": {"savings": 9, "bankTrust": -22, "stability": 7},
+    "cut_food_rent": {"food": -20, "health": -14, "savings": 16, "stability": -12},
+    "search_any_work": {"savings": 12, "health": -8, "hope": 5},
+    "move_with_relatives": {"debt": -10, "stability": 9, "hope": -16},
+    "keep_children_school": {"education": 18, "savings": -13, "hope": 6},
+    "sell_possessions": {"savings": 18, "hope": -15, "stability": -7},
+    "apply_public_works": {"food": 15, "savings": 13, "health": -5, "hope": 16},
+    "trust_reopened_bank": {"bankTrust": 22, "stability": 12},
+    "accept_relief": {"food": 19, "health": 10, "hope": -7},
+    "move_for_work_camp": {"savings": 14, "education": 7, "hope": -10},
+    "organize_neighbors": {"hope": 14, "stability": 13, "savings": -5},
+    "delay_medical_care": {"savings": 13, "health": -22},
+    "stay_public_works": {"savings": 11, "stability": 12},
+    "seek_defense_work": {"savings": 20, "hope": 16, "stability": -5},
+    "rebuild_savings": {"savings": 20, "hope": 5, "stability": 5},
+    "repair_health": {"health": 21, "savings": -12},
+    "support_union": {"hope": 11, "stability": -10, "savings": 11},
+    "older_child_fulltime": {"savings": 16, "education": -21, "hope": -11},
+}
+
+GAME_STARTING_FAMILIES = [
+    {"name": "Carter", "profile": "Cleveland factory family", "food": 55, "health": 62, "savings": 28, "debt": 42, "hope": 58, "education": 64, "stability": 54, "bankTrust": 55, "stock": 0},
+    {"name": "Rosen", "profile": "Small shop owners", "food": 60, "health": 58, "savings": 44, "debt": 48, "hope": 62, "education": 68, "stability": 48, "bankTrust": 62, "stock": 0},
+    {"name": "Williams", "profile": "Tenant farm family", "food": 48, "health": 55, "savings": 18, "debt": 55, "hope": 52, "education": 50, "stability": 42, "bankTrust": 45, "stock": 0},
+    {"name": "Novak", "profile": "Immigrant household", "food": 52, "health": 59, "savings": 22, "debt": 38, "hope": 56, "education": 58, "stability": 45, "bankTrust": 50, "stock": 0},
+]
+
+def _game_clamp(value: float) -> int:
+    return max(0, min(100, round(value)))
+
+def _game_room_code() -> str:
+    alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    return "".join(secrets.choice(alphabet) for _ in range(4))
+
+def _public_game_room(room: dict) -> dict:
+    return {
+        "roomCode": room["room_code"],
+        "phaseIndex": room.get("phase_index", 0),
+        "players": room.get("players", []),
+        "updatedAt": room.get("updated_at"),
+    }
+
+def _game_pick_family(player_name: str, index: int, client_id: Optional[str]) -> dict:
+    base = dict(GAME_STARTING_FAMILIES[index % len(GAME_STARTING_FAMILIES)])
+    base.update({
+        "id": str(uuid.uuid4()),
+        "playerName": player_name,
+        "clientId": client_id or str(uuid.uuid4()),
+        "choices": {},
+        "score": 0,
+    })
+    for key in ["food", "health", "savings", "hope", "education", "stability", "bankTrust"]:
+        base[key] = _game_clamp(base[key] + secrets.randbelow(17) - 8)
+    base["debt"] = max(0, round(base["debt"] + secrets.randbelow(21) - 10))
+    return base
+
+def _game_apply_choices(family: dict, choices: List[str], phase_id: str) -> dict:
+    next_family = dict(family)
+    for choice in choices:
+        for key, value in GAME_IMPACTS.get(choice, {}).items():
+            current = next_family.get(key, 0)
+            if key in {"debt", "stock"}:
+                next_family[key] = max(0, current + value)
+            else:
+                next_family[key] = _game_clamp(current + value)
+    if phase_id == "crash" and next_family.get("stock", 0) > 0:
+        next_family["savings"] = _game_clamp(next_family.get("savings", 0) - math.ceil(next_family["stock"] * 0.55))
+        next_family["hope"] = _game_clamp(next_family.get("hope", 0) - 8)
+        next_family["stock"] = max(0, math.floor(next_family["stock"] * 0.25))
+    next_family["debt"] = max(0, round(next_family.get("debt", 0)))
+    next_family["minFood"] = min(next_family.get("minFood", next_family["food"]), next_family["food"])
+    next_family["minHealth"] = min(next_family.get("minHealth", next_family["health"]), next_family["health"])
+    next_family["minHope"] = min(next_family.get("minHope", next_family["hope"]), next_family["hope"])
+    next_family["minEducation"] = min(next_family.get("minEducation", next_family["education"]), next_family["education"])
+    next_family["minStability"] = min(next_family.get("minStability", next_family["stability"]), next_family["stability"])
+    return next_family
+
 # ─── Auth Helpers ───
 
 def _hash_refresh_token(token: str) -> str:
@@ -937,6 +1061,105 @@ async def get_current_user(request: Request) -> dict:
         pass
 
     raise HTTPException(status_code=401, detail="Invalid session")
+
+# ─── Great Depression Game Rooms ───
+
+@api_router.post("/game/rooms")
+async def create_game_room():
+    for _ in range(12):
+        code = _game_room_code()
+        if not await db.game_rooms.find_one({"room_code": code}):
+            now = datetime.now(timezone.utc).isoformat()
+            host_token = secrets.token_urlsafe(32)
+            room = {
+                "room_code": code,
+                "host_token": host_token,
+                "phase_index": 0,
+                "players": [],
+                "created_at": now,
+                "updated_at": now,
+            }
+            await db.game_rooms.insert_one(room)
+            return {"room": _public_game_room(room), "hostToken": host_token}
+    raise HTTPException(status_code=500, detail="Could not create a unique room code")
+
+@api_router.get("/game/rooms/{room_code}")
+async def get_game_room(room_code: str):
+    room = await db.game_rooms.find_one({"room_code": room_code.strip().upper()}, {"_id": 0})
+    if not room:
+        raise HTTPException(status_code=404, detail="Room not found")
+    return {"room": _public_game_room(room)}
+
+@api_router.post("/game/rooms/{room_code}/join")
+async def join_game_room(room_code: str, payload: GameJoinRoom):
+    code = room_code.strip().upper()
+    room = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    if not room:
+        raise HTTPException(status_code=404, detail="Room not found")
+    client_id = payload.client_id or str(uuid.uuid4())
+    for player in room.get("players", []):
+        if player.get("clientId") == client_id:
+            return {"room": _public_game_room(room), "playerId": player["id"]}
+    if len(room.get("players", [])) >= MAX_GAME_PLAYERS:
+        raise HTTPException(status_code=409, detail=f"Room is full ({MAX_GAME_PLAYERS} players max).")
+    player = _game_pick_family(payload.player_name.strip() or "Player", len(room.get("players", [])), client_id)
+    now = datetime.now(timezone.utc).isoformat()
+    result = await db.game_rooms.update_one(
+        {"room_code": code, f"players.{MAX_GAME_PLAYERS - 1}": {"$exists": False}},
+        {"$push": {"players": player}, "$set": {"updated_at": now}},
+    )
+    if getattr(result, "modified_count", 0) == 0:
+        raise HTTPException(status_code=409, detail=f"Room is full ({MAX_GAME_PLAYERS} players max).")
+    updated = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    return {"room": _public_game_room(updated), "playerId": player["id"]}
+
+@api_router.post("/game/rooms/{room_code}/choices")
+async def submit_game_choices(room_code: str, payload: GameSubmitChoices):
+    code = room_code.strip().upper()
+    room = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    if not room:
+        raise HTTPException(status_code=404, detail="Room not found")
+    phase_index = int(room.get("phase_index", 0))
+    phase_id = GAME_PHASE_IDS[min(phase_index, len(GAME_PHASE_IDS) - 1)]
+    player = next((p for p in room.get("players", []) if p.get("id") == payload.player_id), None)
+    if not player:
+        raise HTTPException(status_code=404, detail="Player not found in this room")
+    if len(player.get("choices", {}).get(phase_id, [])) == 2:
+        return {"room": _public_game_room(room)}
+
+    updated_player = _game_apply_choices(player, payload.choices, phase_id)
+    updated_player["choices"] = {**player.get("choices", {}), phase_id: payload.choices}
+    now = datetime.now(timezone.utc).isoformat()
+    await db.game_rooms.update_one(
+        {"room_code": code, "players.id": payload.player_id},
+        {"$set": {"players.$": updated_player, "updated_at": now}},
+    )
+    updated = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    players = updated.get("players", [])
+    if players and all(len(player.get("choices", {}).get(phase_id, [])) == 2 for player in players):
+        await db.game_rooms.update_one(
+            {"room_code": code, "phase_index": phase_index},
+            {"$set": {"phase_index": min(phase_index + 1, len(GAME_PHASE_IDS) - 1), "updated_at": now}},
+        )
+        updated = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    return {"room": _public_game_room(updated)}
+
+@api_router.post("/game/rooms/{room_code}/advance")
+async def advance_game_room(room_code: str, payload: GameAdvanceRoom):
+    code = room_code.strip().upper()
+    room = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    if not room:
+        raise HTTPException(status_code=404, detail="Room not found")
+    if not secrets.compare_digest(payload.host_token, room.get("host_token", "")):
+        raise HTTPException(status_code=403, detail="Only the host can advance this room.")
+    next_phase_index = min(int(room.get("phase_index", 0)) + 1, len(GAME_PHASE_IDS) - 1)
+    now = datetime.now(timezone.utc).isoformat()
+    await db.game_rooms.update_one(
+        {"room_code": code},
+        {"$set": {"phase_index": next_phase_index, "updated_at": now}},
+    )
+    updated = await db.game_rooms.find_one({"room_code": code}, {"_id": 0})
+    return {"room": _public_game_room(updated)}
 
 # ─── Auth Routes ───
 
