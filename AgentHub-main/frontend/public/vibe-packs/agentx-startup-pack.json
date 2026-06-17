@@ -1,0 +1,27 @@
+{
+  "name": "Startup Launch Pack",
+  "description": "A quick-start bundle for MVP launches with analytics, content, and support agents.",
+  "agents": [
+    {
+      "name": "GrowthOps",
+      "purpose": "Growth experiments + weekly insights",
+      "setup": "Set ANALYTICS_API_KEY in .env"
+    },
+    {
+      "name": "ContentForge",
+      "purpose": "Generate launch posts + landing copy",
+      "setup": "Set OPENAI_API_KEY in .env"
+    },
+    {
+      "name": "SupportPulse",
+      "purpose": "Customer support triage",
+      "setup": "Set HELP_DESK_WEBHOOK in .env"
+    }
+  ],
+  "quick_start": [
+    "Download the pack",
+    "Copy .env.example to .env",
+    "Fill required keys",
+    "Run: npm run start"
+  ]
+}

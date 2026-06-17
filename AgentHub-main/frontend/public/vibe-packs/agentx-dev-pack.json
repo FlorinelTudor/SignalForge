@@ -1,0 +1,21 @@
+{
+  "name": "Dev Acceleration Pack",
+  "description": "Coding and review agents to ship faster with guardrails.",
+  "agents": [
+    {
+      "name": "CodeReview",
+      "purpose": "PR reviews and security linting",
+      "setup": "Set GITHUB_TOKEN in .env"
+    },
+    {
+      "name": "Docsmith",
+      "purpose": "Docs generation and README polish",
+      "setup": "Set OPENAI_API_KEY in .env"
+    }
+  ],
+  "quick_start": [
+    "Download the pack",
+    "Set env keys",
+    "Run: npm run start"
+  ]
+}

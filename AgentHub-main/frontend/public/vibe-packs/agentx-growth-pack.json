@@ -1,0 +1,21 @@
+{
+  "name": "Growth & Ops Pack",
+  "description": "Automation and analytics agents for growth, ops, and reliability.",
+  "agents": [
+    {
+      "name": "FunnelTracer",
+      "purpose": "Track activation and conversions",
+      "setup": "Set POSTHOG_API_KEY in .env"
+    },
+    {
+      "name": "ReleaseRadar",
+      "purpose": "Monitor deploys and incidents",
+      "setup": "Set SLACK_WEBHOOK in .env"
+    }
+  ],
+  "quick_start": [
+    "Download the pack",
+    "Set env keys",
+    "Run: npm run start"
+  ]
+}
