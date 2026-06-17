@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const asset = (name) => `${process.env.PUBLIC_URL || ""}/depression-game/${name}`;
 const MAX_PLAYERS = 9;
+const GAME_STATE_VERSION = "multiplayer-host-token-v1";
 
 const phases = [
   {
@@ -220,7 +221,10 @@ function scoreFamily(family) {
 function loadSavedGame() {
   if (typeof window === "undefined") return {};
   try {
-    return JSON.parse(window.localStorage.getItem("gd-game-state") || "{}");
+    const saved = JSON.parse(window.localStorage.getItem("gd-game-state") || "{}");
+    if (saved.version !== GAME_STATE_VERSION) return {};
+    if (saved.view === "host" && !saved.hostToken) return {};
+    return saved;
   } catch {
     return {};
   }
@@ -273,7 +277,7 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(
       "gd-game-state",
-      JSON.stringify({ view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt, joinClientId: joinClientIdRef.current })
+      JSON.stringify({ version: GAME_STATE_VERSION, view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt, joinClientId: joinClientIdRef.current })
     );
   }, [view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt]);
 
