@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const asset = (name) => `${process.env.PUBLIC_URL || ""}/depression-game/${name}`;
 const MAX_PLAYERS = 9;
-const GAME_STATE_VERSION = "multiplayer-host-token-v1";
+const GAME_STATE_VERSION = "blob-multiplayer-v2";
 
 const phases = [
   {
