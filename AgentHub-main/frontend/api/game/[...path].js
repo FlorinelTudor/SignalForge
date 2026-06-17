@@ -140,7 +140,13 @@ function getBody(req) {
 
 module.exports = function handler(req, res) {
   const rawParts = Array.isArray(req.query.path) ? req.query.path : [req.query.path].filter(Boolean);
-  const parts = rawParts[0] === "game" ? rawParts.slice(1) : rawParts;
+  const urlParts = (req.url || "")
+    .split("?")[0]
+    .split("/")
+    .filter(Boolean)
+    .filter((part) => part !== "api");
+  const routeParts = rawParts.length ? rawParts : urlParts;
+  const parts = routeParts[0] === "game" ? routeParts.slice(1) : routeParts;
   if (parts[0] !== "rooms") return json(res, 404, { detail: "Not found" });
 
   if (req.method === "POST" && parts.length === 1) {
