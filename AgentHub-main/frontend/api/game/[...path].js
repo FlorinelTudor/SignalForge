@@ -150,7 +150,15 @@ function playerPath(code, slot) {
 async function readJson(path) {
   try {
     const blob = await get(path, BLOB_OPTIONS);
-    return await blob.json();
+    if (!blob || blob.statusCode !== 200 || !blob.stream) return null;
+    const reader = blob.stream.getReader();
+    const chunks = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(Buffer.from(value));
+    }
+    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
   } catch (error) {
     if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
     throw error;
