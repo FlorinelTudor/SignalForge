@@ -147,6 +147,14 @@ function playerPath(code, slot) {
   return `game-rooms/${code}/players/slot-${slot}.json`;
 }
 
+function choicePath(code, slot, phaseId) {
+  return `game-rooms/${code}/choices/slot-${slot}-${phaseId}.json`;
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function readJson(path) {
   try {
     const blob = await get(path, BLOB_OPTIONS);
@@ -284,10 +292,21 @@ module.exports = async function handler(req, res) {
     const playerIndex = room.players.findIndex((player) => player.id === body.player_id);
     if (playerIndex < 0) return json(res, 404, { detail: "Player not found in this room" });
     if ((room.players[playerIndex].choices?.[phaseId] || []).length === 2) return json(res, 200, { room: publicRoom(room) });
+    try {
+      await writeJson(choicePath(code, room.players[playerIndex].slot, phaseId), { choices: (body.choices || []).slice(0, 2) }, false);
+    } catch (error) {
+      if (!/already exists|overwrite/i.test(String(error.message || ""))) throw error;
+      room.players = await listPlayers(code);
+      return json(res, 200, { room: publicRoom(room) });
+    }
     const updatedPlayer = applyChoices(room.players[playerIndex], (body.choices || []).slice(0, 2), phaseId);
     updatedPlayer.choices = { ...(room.players[playerIndex].choices || {}), [phaseId]: (body.choices || []).slice(0, 2) };
     await savePlayer(code, updatedPlayer);
-    room.players = await listPlayers(code);
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      room.players = await listPlayers(code);
+      if (room.players.find((player) => player.id === body.player_id)?.choices?.[phaseId]?.length === 2) break;
+      await delay(120);
+    }
     if (room.players.length && room.players.every((player) => (player.choices?.[phaseId] || []).length === 2)) {
       room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
     }
