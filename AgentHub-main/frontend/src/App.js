@@ -235,7 +235,7 @@ const apiBase = () => {
   if (typeof window !== "undefined" && ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) {
     return "http://localhost:8000/api";
   }
-  return "https://api.agentxplorer.com/api";
+  return "/api";
 };
 
 async function gameApi(path, options = {}) {
