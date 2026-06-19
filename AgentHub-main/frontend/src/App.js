@@ -193,7 +193,7 @@ const phases = [
     image: "recovery-mobilization-market.png",
     newsImage: "news-recovery.png",
     news: "Factories hire as orders surge",
-    summary: "The Depression-era crisis gives way to mobilization, though not every family recovers equally.",
+    summary: "The long crisis gives way to mobilization, though not every family recovers equally.",
     conditions: [["Unemployment", "Falling", "good"], ["Bank confidence", "Recovering", "good"], ["Savings", "Rebuilding", "good"], ["Public support", "Shifting", "neutral"]],
     choices: [],
   },
@@ -404,8 +404,8 @@ function App() {
     <main className="gd-app">
       <section className="gd-topbar">
         <div>
-          <p className="gd-kicker">The Long Downturn</p>
-          <h1>Great Depression Survival Game</h1>
+          <p className="gd-kicker">Main Street, 1919</p>
+          <h1>American Promise Survival Game</h1>
         </div>
         <div className="gd-room">Room {roomCode || "not started"}</div>
       </section>
