@@ -61,6 +61,9 @@ const STARTING_FAMILIES = [
 
 const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
 const BLOB_OPTIONS = blobToken ? { access: "private", token: blobToken } : { access: "private" };
+const memoryStore = globalThis.__gdGameMemoryStore || new Map();
+globalThis.__gdGameMemoryStore = memoryStore;
+globalThis.__gdGameBlobUnavailable = globalThis.__gdGameBlobUnavailable || false;
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -155,7 +158,36 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function shouldUseMemoryStore(error) {
+  const message = String(error?.message || error || "");
+  return /blob: this store has been suspended|no token|unauthorized|forbidden/i.test(message);
+}
+
+function readMemoryJson(path) {
+  const value = memoryStore.get(path);
+  return value ? JSON.parse(value) : null;
+}
+
+function writeMemoryJson(path, payload, allowOverwrite = true) {
+  if (!allowOverwrite && memoryStore.has(path)) throw new Error("already exists");
+  memoryStore.set(path, JSON.stringify(payload));
+}
+
+async function listStoredPaths(prefix, limit) {
+  if (!globalThis.__gdGameBlobUnavailable) {
+    try {
+      const result = await list({ ...BLOB_OPTIONS, prefix, limit });
+      return result.blobs.map((blob) => blob.pathname);
+    } catch (error) {
+      if (!shouldUseMemoryStore(error)) throw error;
+      globalThis.__gdGameBlobUnavailable = true;
+    }
+  }
+  return [...memoryStore.keys()].filter((path) => path.startsWith(prefix)).slice(0, limit);
+}
+
 async function readJson(path) {
+  if (globalThis.__gdGameBlobUnavailable) return readMemoryJson(path);
   try {
     const blob = await get(path, BLOB_OPTIONS);
     if (!blob || blob.statusCode !== 200 || !blob.stream) return null;
@@ -169,28 +201,42 @@ async function readJson(path) {
     return JSON.parse(Buffer.concat(chunks).toString("utf8"));
   } catch (error) {
     if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
+    if (shouldUseMemoryStore(error)) {
+      globalThis.__gdGameBlobUnavailable = true;
+      return readMemoryJson(path);
+    }
     throw error;
   }
 }
 
 async function writeJson(path, payload, allowOverwrite = true) {
-  await put(path, JSON.stringify(payload), {
-    ...BLOB_OPTIONS,
-    addRandomSuffix: false,
-    allowOverwrite,
-    contentType: "application/json; charset=utf-8",
-  });
+  if (globalThis.__gdGameBlobUnavailable) {
+    writeMemoryJson(path, payload, allowOverwrite);
+    return;
+  }
+  try {
+    await put(path, JSON.stringify(payload), {
+      ...BLOB_OPTIONS,
+      addRandomSuffix: false,
+      allowOverwrite,
+      contentType: "application/json; charset=utf-8",
+    });
+  } catch (error) {
+    if (!shouldUseMemoryStore(error)) throw error;
+    globalThis.__gdGameBlobUnavailable = true;
+    writeMemoryJson(path, payload, allowOverwrite);
+  }
 }
 
 async function listPlayers(code) {
   const prefix = `game-rooms/${code}/players/`;
-  const result = await list({ ...BLOB_OPTIONS, prefix, limit: MAX_PLAYERS + 5 });
+  const paths = await listStoredPaths(prefix, MAX_PLAYERS + 5);
   const players = await Promise.all(
-    result.blobs
-      .filter((blob) => /slot-\d+\.json$/.test(blob.pathname))
-      .sort((a, b) => a.pathname.localeCompare(b.pathname, undefined, { numeric: true }))
+    paths
+      .filter((path) => /slot-\d+\.json$/.test(path))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
       .slice(0, MAX_PLAYERS)
-      .map((blob) => readJson(blob.pathname))
+      .map((path) => readJson(path))
   );
   const visiblePlayers = players.filter(Boolean);
   const choices = await listChoiceMarkers(code);
@@ -208,13 +254,13 @@ async function listPlayers(code) {
 
 async function listChoiceMarkers(code) {
   const prefix = `game-rooms/${code}/choices/`;
-  const result = await list({ ...BLOB_OPTIONS, prefix, limit: MAX_PLAYERS * PHASE_IDS.length + 10 });
+  const paths = await listStoredPaths(prefix, MAX_PLAYERS * PHASE_IDS.length + 10);
   const markers = await Promise.all(
-    result.blobs
-      .filter((blob) => /slot-\d+-[^/]+\.json$/.test(blob.pathname))
-      .map(async (blob) => {
-        const match = blob.pathname.match(/slot-(\d+)-([^.]+)\.json$/);
-        const payload = await readJson(blob.pathname);
+    paths
+      .filter((path) => /slot-\d+-[^/]+\.json$/.test(path))
+      .map(async (path) => {
+        const match = path.match(/slot-(\d+)-([^.]+)\.json$/);
+        const payload = await readJson(path);
         if (!match || !payload) return null;
         return { slot: Number(match[1]), phaseId: match[2], choices: payload.choices || [] };
       })
