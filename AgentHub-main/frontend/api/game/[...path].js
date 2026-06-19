@@ -64,8 +64,8 @@ const BLOB_OPTIONS = blobToken ? { access: "private", token: blobToken } : { acc
 const memoryStore = globalThis.__gdGameMemoryStore || new Map();
 globalThis.__gdGameMemoryStore = memoryStore;
 globalThis.__gdGameBlobUnavailable = globalThis.__gdGameBlobUnavailable || false;
-const JSONBLOB_STORE_ID = process.env.JSONBLOB_STORE_ID || "019ee11f-8caa-7a8e-8546-8e68b1c29c74";
-const JSONBLOB_URL = JSONBLOB_STORE_ID ? `https://jsonblob.com/api/jsonBlob/${JSONBLOB_STORE_ID}` : "";
+const DEFAULT_JSONBLOB_STORE_ID = "019ee11f-8caa-7a8e-8546-8e68b1c29c74";
+const JSONBLOB_STORE_IDS = [...new Set([process.env.JSONBLOB_STORE_ID, DEFAULT_JSONBLOB_STORE_ID].filter(Boolean))];
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -176,13 +176,17 @@ function writeMemoryJson(path, payload, allowOverwrite = true) {
 }
 
 async function readJsonBlobStore() {
-  const response = await fetch(JSONBLOB_URL, { cache: "no-store" });
-  if (!response.ok) throw new Error(`JSONBlob read failed (${response.status})`);
-  return response.json();
+  let lastStatus = "";
+  for (const id of JSONBLOB_STORE_IDS) {
+    const response = await fetch(`https://jsonblob.com/api/jsonBlob/${id}`, { cache: "no-store" });
+    if (response.ok) return { id, store: await response.json() };
+    lastStatus = `${id}:${response.status}`;
+  }
+  throw new Error(`JSONBlob read failed (${lastStatus || "not configured"})`);
 }
 
-async function writeJsonBlobStore(store) {
-  const response = await fetch(JSONBLOB_URL, {
+async function writeJsonBlobStore(id, store) {
+  const response = await fetch(`https://jsonblob.com/api/jsonBlob/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(store),
@@ -191,26 +195,26 @@ async function writeJsonBlobStore(store) {
 }
 
 async function readFallbackJson(path) {
-  if (!JSONBLOB_URL) return readMemoryJson(path);
-  const store = await readJsonBlobStore();
+  if (!JSONBLOB_STORE_IDS.length) return readMemoryJson(path);
+  const { store } = await readJsonBlobStore();
   const value = store[path];
   return value ? JSON.parse(value) : null;
 }
 
 async function writeFallbackJson(path, payload, allowOverwrite = true) {
-  if (!JSONBLOB_URL) {
+  if (!JSONBLOB_STORE_IDS.length) {
     writeMemoryJson(path, payload, allowOverwrite);
     return;
   }
-  const store = await readJsonBlobStore();
+  const { id, store } = await readJsonBlobStore();
   if (!allowOverwrite && store[path]) throw new Error("already exists");
   store[path] = JSON.stringify(payload);
-  await writeJsonBlobStore(store);
+  await writeJsonBlobStore(id, store);
 }
 
 async function listFallbackPaths(prefix, limit) {
-  if (!JSONBLOB_URL) return [...memoryStore.keys()].filter((path) => path.startsWith(prefix)).slice(0, limit);
-  const store = await readJsonBlobStore();
+  if (!JSONBLOB_STORE_IDS.length) return [...memoryStore.keys()].filter((path) => path.startsWith(prefix)).slice(0, limit);
+  const { store } = await readJsonBlobStore();
   return Object.keys(store).filter((path) => path.startsWith(prefix)).slice(0, limit);
 }
 
