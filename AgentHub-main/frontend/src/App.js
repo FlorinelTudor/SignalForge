@@ -221,6 +221,12 @@ function scoreFamily(family) {
 function loadSavedGame() {
   if (typeof window === "undefined") return {};
   try {
+    const params = new URLSearchParams(window.location.search);
+    const joinCode = (params.get("room") || "").trim().toUpperCase();
+    if (params.has("newHost") || joinCode) {
+      window.localStorage.removeItem("gd-game-state");
+      return joinCode ? { view: "join", roomCode: joinCode } : {};
+    }
     const saved = JSON.parse(window.localStorage.getItem("gd-game-state") || "{}");
     if (saved.version !== GAME_STATE_VERSION) return {};
     if (saved.view === "host" && !saved.hostToken) return {};
