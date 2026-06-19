@@ -289,12 +289,28 @@ function App() {
     setLastSyncedAt(Date.now());
   }
 
+  function resetExpiredRoom() {
+    setView("start");
+    setRoomCode("");
+    setHostToken("");
+    setPlayers([]);
+    setPhaseIndex(0);
+    setActivePlayerId("");
+    setSelected([]);
+    setLastSyncedAt(0);
+    setApiError("That room expired. Create a fresh room to continue.");
+  }
+
   async function runGameRequest(request) {
     setIsBusy(true);
     setApiError("");
     try {
       return await request();
     } catch (error) {
+      if (/room not found/i.test(error.message)) {
+        resetExpiredRoom();
+        return null;
+      }
       setApiError(error.message);
       return null;
     } finally {
@@ -313,9 +329,13 @@ function App() {
           setApiError("");
         }
       } catch (error) {
-        if (!cancelled) setApiError(error.message);
+        if (!cancelled) {
+          if (/room not found/i.test(error.message)) resetExpiredRoom();
+          else setApiError(error.message);
+        }
       }
     };
+    pullRoom();
     const timer = window.setInterval(pullRoom, 2000);
     return () => {
       cancelled = true;
