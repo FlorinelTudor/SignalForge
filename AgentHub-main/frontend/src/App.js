@@ -450,7 +450,7 @@ function App() {
               </p>
               <div className="gd-actions">
                 <button onClick={createHostRoom} disabled={isBusy}>{isBusy ? "Creating..." : "Create host room"}</button>
-                <button className="secondary" onClick={() => setView("join")}>Join playtest</button>
+                <button className="secondary" onClick={() => setView("join")}>Join as player</button>
               </div>
             </div>
           </div>
