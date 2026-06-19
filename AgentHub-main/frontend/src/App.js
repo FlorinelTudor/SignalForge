@@ -199,6 +199,59 @@ const phases = [
   },
 ];
 
+const extremeChoiceRules = [
+  {
+    id: "seek_charity_clinic",
+    title: "Seek charity clinic",
+    detail: "Health crisis: recover health, but lose savings and hope.",
+    when: (family) => family.health < 25,
+  },
+  {
+    id: "send_family_to_country",
+    title: "Send family to relatives",
+    detail: "Health crisis: protect food and health, but reduce stability.",
+    when: (family) => family.health < 25,
+  },
+  {
+    id: "pawn_heirloom",
+    title: "Pawn family heirloom",
+    detail: "Savings crisis: raise cash fast, but hurt hope.",
+    when: (family) => family.savings < 20,
+  },
+  {
+    id: "take_desperate_work",
+    title: "Take dangerous work",
+    detail: "Food crisis: bring income and food, risk health.",
+    when: (family) => family.food < 20,
+  },
+  {
+    id: "sponsor_neighbor",
+    title: "Sponsor a neighbor",
+    detail: "High stability: build support, spend savings.",
+    when: (family) => family.stability > 80,
+  },
+  {
+    id: "fund_training",
+    title: "Fund training",
+    detail: "High savings: improve education and future resilience.",
+    when: (family) => family.savings > 80,
+  },
+];
+
+function getExtremeChoices(family) {
+  if (!family) return [];
+  return extremeChoiceRules
+    .filter((rule) => rule.when(family))
+    .slice(0, 2)
+    .map(({ id, title, detail }) => [id, title, detail]);
+}
+
+function familyImageFor(family, danger) {
+  if (!family) return "family-profile.png";
+  if (family.health < 25) return "family-health-crisis.png";
+  return danger ? "family-danger-state.png" : "family-profile.png";
+}
+
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
@@ -274,6 +327,12 @@ function App() {
   const activePlayer = players.find((p) => p.id === activePlayerId) || players[0];
   const submittedChoices = activePlayer?.choices?.[phase.id] || [];
   const submittedCount = players.filter((p) => p.choices?.[phase.id]?.length === 2).length;
+  const activeChoices = useMemo(() => {
+    if (!phase.choices.length) return phase.choices;
+    const existingChoiceIds = new Set(phase.choices.map(([id]) => id));
+    const extremeChoices = getExtremeChoices(activePlayer).filter(([id]) => !existingChoiceIds.has(id));
+    return [...phase.choices, ...extremeChoices];
+  }, [activePlayer, phase]);
   const scoredPlayers = useMemo(
     () => players.map((p) => ({ ...p, score: scoreFamily(p) })).sort((a, b) => b.score - a.score),
     [players]
@@ -481,7 +540,7 @@ function App() {
               <h2>{phase.news}</h2>
             </div>
 
-            {phase.choices.length > 0 && submittedChoices.length > 0 ? (
+            {activeChoices.length > 0 && submittedChoices.length > 0 ? (
               <div className="gd-panel gd-submitted">
                 <p className="gd-kicker">Choices Submitted</p>
                 <h2>Ready for the next phase</h2>
@@ -492,13 +551,13 @@ function App() {
                 <p className="gd-sync">Submitted {submittedCount}/{players.length || 1}</p>
                 {view === "host" && <button onClick={advancePhase} disabled={isBusy || isFinalPhase}>Advance now</button>}
               </div>
-            ) : phase.choices.length > 0 ? (
+            ) : activeChoices.length > 0 ? (
               <div className="gd-choices">
                 <img src={asset("new-deal-choice-background.png")} alt="" />
                 <div className="gd-choice-content">
                   <p className="gd-kicker">Choose 2 Actions</p>
                   <div className="gd-choice-grid">
-                    {phase.choices.map(([id, title, detail], index) => (
+                    {activeChoices.map(([id, title, detail], index) => (
                       <button key={id} className={selected.includes(id) ? "selected" : ""} onClick={() => toggleChoice(id)}>
                         <span>{String.fromCharCode(65 + index)}</span>
                         <strong>{title}</strong>
@@ -545,7 +604,7 @@ function FamilyCard({ family, danger }) {
   return (
     <div className="gd-panel">
       <div className="family-image">
-        <img src={asset(danger ? "family-danger-state.png" : "family-profile.png")} alt={`${family.name} family`} />
+        <img src={asset(familyImageFor(family, danger))} alt={`${family.name} family`} />
       </div>
       <p className="gd-kicker">Family Profile</p>
       <h2>The {family.name} Family</h2>

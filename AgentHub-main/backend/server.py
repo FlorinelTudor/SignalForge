@@ -896,6 +896,12 @@ GAME_IMPACTS = {
     "repair_health": {"health": 21, "savings": -12},
     "support_union": {"hope": 11, "stability": -10, "savings": 11},
     "older_child_fulltime": {"savings": 16, "education": -21, "hope": -11},
+    "seek_charity_clinic": {"health": 24, "savings": -12, "hope": -8},
+    "send_family_to_country": {"health": 16, "food": 12, "stability": -16, "hope": -5},
+    "pawn_heirloom": {"savings": 24, "hope": -18, "stability": -6},
+    "take_desperate_work": {"food": 16, "savings": 14, "health": -15, "stability": -6},
+    "sponsor_neighbor": {"hope": 12, "stability": 8, "savings": -14},
+    "fund_training": {"education": 20, "savings": -18, "hope": 6},
 }
 
 GAME_STARTING_FAMILIES = [

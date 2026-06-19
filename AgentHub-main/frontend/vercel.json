@@ -1,8 +1,8 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "https://recovery-jokes-semi-residence.trycloudflare.com/$1"
+      "src": "/(.*)",
+      "dest": "https://recovery-jokes-semi-residence.trycloudflare.com/$1"
     }
   ],
   "buildCommand": "PUBLIC_URL= npm run build",
