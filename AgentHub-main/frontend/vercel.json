@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "https://recovery-jokes-semi-residence.trycloudflare.com/$1"
+    }
+  ],
   "buildCommand": "PUBLIC_URL= npm run build",
   "devCommand": "npm run start",
   "outputDirectory": "build"
