@@ -64,6 +64,8 @@ const BLOB_OPTIONS = blobToken ? { access: "private", token: blobToken } : { acc
 const memoryStore = globalThis.__gdGameMemoryStore || new Map();
 globalThis.__gdGameMemoryStore = memoryStore;
 globalThis.__gdGameBlobUnavailable = globalThis.__gdGameBlobUnavailable || false;
+const JSONBLOB_STORE_ID = process.env.JSONBLOB_STORE_ID || "019ee11f-8caa-7a8e-8546-8e68b1c29c74";
+const JSONBLOB_URL = JSONBLOB_STORE_ID ? `https://jsonblob.com/api/jsonBlob/${JSONBLOB_STORE_ID}` : "";
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -173,6 +175,45 @@ function writeMemoryJson(path, payload, allowOverwrite = true) {
   memoryStore.set(path, JSON.stringify(payload));
 }
 
+async function readJsonBlobStore() {
+  const response = await fetch(JSONBLOB_URL, { cache: "no-store" });
+  if (!response.ok) throw new Error(`JSONBlob read failed (${response.status})`);
+  return response.json();
+}
+
+async function writeJsonBlobStore(store) {
+  const response = await fetch(JSONBLOB_URL, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(store),
+  });
+  if (!response.ok) throw new Error(`JSONBlob write failed (${response.status})`);
+}
+
+async function readFallbackJson(path) {
+  if (!JSONBLOB_URL) return readMemoryJson(path);
+  const store = await readJsonBlobStore();
+  const value = store[path];
+  return value ? JSON.parse(value) : null;
+}
+
+async function writeFallbackJson(path, payload, allowOverwrite = true) {
+  if (!JSONBLOB_URL) {
+    writeMemoryJson(path, payload, allowOverwrite);
+    return;
+  }
+  const store = await readJsonBlobStore();
+  if (!allowOverwrite && store[path]) throw new Error("already exists");
+  store[path] = JSON.stringify(payload);
+  await writeJsonBlobStore(store);
+}
+
+async function listFallbackPaths(prefix, limit) {
+  if (!JSONBLOB_URL) return [...memoryStore.keys()].filter((path) => path.startsWith(prefix)).slice(0, limit);
+  const store = await readJsonBlobStore();
+  return Object.keys(store).filter((path) => path.startsWith(prefix)).slice(0, limit);
+}
+
 async function listStoredPaths(prefix, limit) {
   if (!globalThis.__gdGameBlobUnavailable) {
     try {
@@ -183,11 +224,11 @@ async function listStoredPaths(prefix, limit) {
       globalThis.__gdGameBlobUnavailable = true;
     }
   }
-  return [...memoryStore.keys()].filter((path) => path.startsWith(prefix)).slice(0, limit);
+  return listFallbackPaths(prefix, limit);
 }
 
 async function readJson(path) {
-  if (globalThis.__gdGameBlobUnavailable) return readMemoryJson(path);
+  if (globalThis.__gdGameBlobUnavailable) return readFallbackJson(path);
   try {
     const blob = await get(path, BLOB_OPTIONS);
     if (!blob || blob.statusCode !== 200 || !blob.stream) return null;
@@ -203,7 +244,7 @@ async function readJson(path) {
     if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
     if (shouldUseMemoryStore(error)) {
       globalThis.__gdGameBlobUnavailable = true;
-      return readMemoryJson(path);
+      return readFallbackJson(path);
     }
     throw error;
   }
@@ -211,7 +252,7 @@ async function readJson(path) {
 
 async function writeJson(path, payload, allowOverwrite = true) {
   if (globalThis.__gdGameBlobUnavailable) {
-    writeMemoryJson(path, payload, allowOverwrite);
+    await writeFallbackJson(path, payload, allowOverwrite);
     return;
   }
   try {
@@ -224,7 +265,7 @@ async function writeJson(path, payload, allowOverwrite = true) {
   } catch (error) {
     if (!shouldUseMemoryStore(error)) throw error;
     globalThis.__gdGameBlobUnavailable = true;
-    writeMemoryJson(path, payload, allowOverwrite);
+    await writeFallbackJson(path, payload, allowOverwrite);
   }
 }
 
