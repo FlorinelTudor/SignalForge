@@ -241,11 +241,11 @@ async function readJson(path) {
     }
     return JSON.parse(Buffer.concat(chunks).toString("utf8"));
   } catch (error) {
-    if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
     if (shouldUseMemoryStore(error)) {
       globalThis.__gdGameBlobUnavailable = true;
       return readFallbackJson(path);
     }
+    if (error instanceof BlobError || /not found/i.test(String(error.message || ""))) return null;
     throw error;
   }
 }
