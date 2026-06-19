@@ -280,7 +280,7 @@ async function savePlayer(code, player) {
   await writeJson(playerPath(code, player.slot), player);
 }
 
-module.exports = async function handler(req, res) {
+async function handleGameRequest(req, res) {
   const rawParts = Array.isArray(req.query.path) ? req.query.path : [req.query.path].filter(Boolean);
   const urlParts = (req.url || "")
     .split("?")[0]
@@ -351,4 +351,13 @@ module.exports = async function handler(req, res) {
   }
 
   return json(res, 404, { detail: "Not found" });
+}
+
+module.exports = async function handler(req, res) {
+  try {
+    return await handleGameRequest(req, res);
+  } catch (error) {
+    console.error(error);
+    return json(res, 500, { detail: error.message || "The game room server did not respond." });
+  }
 };
