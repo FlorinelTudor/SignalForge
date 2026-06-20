@@ -6,6 +6,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### Quota-safe game playtesting
+
+Use local smoke tests for repeated multiplayer checks so hosted services are not hit during development:
+
+1. Build the frontend once with `npm run build`.
+2. Start the local game server with `npm run playtest:server`.
+3. In another terminal, run `npm run playtest:local`.
+
+`npm run playtest:local` creates a local room, joins 9 simulated players, verifies each player receives a different family, and advances all decision rounds to the final phase. It targets `http://127.0.0.1:4173/api/game` by default and refuses to run against public URLs unless `ALLOW_PUBLIC_SMOKE=1` is set intentionally.
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -68,5 +78,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
 

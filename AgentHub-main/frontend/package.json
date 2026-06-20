@@ -60,7 +60,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "playtest:server": "node scripts/playtest-server.js",
+    "playtest:local": "node scripts/local-smoke.js"
   },
   "browserslist": {
     "production": [
