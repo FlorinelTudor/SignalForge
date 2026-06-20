@@ -16,6 +16,17 @@ Use local smoke tests for repeated multiplayer checks so hosted services are not
 
 `npm run playtest:local` creates a local room, joins 9 simulated players, verifies each player receives a different family, and advances all decision rounds to the final phase. It targets `http://127.0.0.1:4173/api/game` by default and refuses to run against public URLs unless `ALLOW_PUBLIC_SMOKE=1` is set intentionally.
 
+### Final live-device smoke
+
+Use the public site only for a tiny readiness check before a real session:
+
+1. Host creates one room on `agentxplorer.com`.
+2. Two phones join with the room code.
+3. Each phone selects exactly two actions and submits once.
+4. Host confirms the counter reaches `submitted 2/2` and the phase advances.
+
+Stop there. Run full 9-player or all-phase tests locally with `npm run playtest:local`.
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -78,4 +89,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
