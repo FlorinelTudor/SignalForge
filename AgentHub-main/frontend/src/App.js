@@ -276,13 +276,17 @@ function loadSavedGame() {
   try {
     const params = new URLSearchParams(window.location.search);
     const joinCode = (params.get("room") || "").trim().toUpperCase();
-    if (params.has("newHost") || joinCode) {
-      window.localStorage.removeItem("gd-game-state");
-      return joinCode ? { view: "join", roomCode: joinCode } : {};
-    }
     const saved = JSON.parse(window.localStorage.getItem("gd-game-state") || "{}");
+    if (params.has("newHost")) {
+      window.localStorage.removeItem("gd-game-state");
+      return {};
+    }
     if (saved.version !== GAME_STATE_VERSION) return {};
     if (saved.view === "host" && !saved.hostToken) return {};
+    if (joinCode) {
+      if (saved.roomCode === joinCode && (saved.activePlayerId || saved.hostToken)) return saved;
+      return { view: "join", roomCode: joinCode };
+    }
     return saved;
   } catch {
     return {};
