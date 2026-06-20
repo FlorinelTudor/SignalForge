@@ -552,7 +552,7 @@ function App() {
                   Your choices were applied to the family meters. The phase will move forward automatically once every
                   player in the room has submitted, or the host can advance it manually.
                 </p>
-                <p className="gd-sync">Submitted {submittedCount}/{players.length || 1}</p>
+                <p className="gd-sync">Submitted {submittedCount}/{players.length}</p>
                 {view === "host" && <button onClick={advancePhase} disabled={isBusy || isFinalPhase}>Advance now</button>}
               </div>
             ) : activeChoices.length > 0 ? (
@@ -586,7 +586,7 @@ function App() {
             {view === "host" && (
               <div className="gd-panel">
                 <p className="gd-kicker">Host Controls</p>
-                <p className="gd-sync">Players {players.length}/{MAX_PLAYERS} - submitted {submittedCount}/{players.length || 1}</p>
+                <p className="gd-sync">Players {players.length}/{MAX_PLAYERS} - submitted {submittedCount}/{players.length}</p>
                 <p className="gd-sync">Phase {Math.min(phaseIndex + 1, phases.length)}/{phases.length} - target 10-15 min</p>
                 <p className="gd-sync">Sync {lastSyncedAt ? new Date(lastSyncedAt).toLocaleTimeString() : "waiting"}</p>
                 <button onClick={addDemoPlayer} disabled={isBusy || players.length >= MAX_PLAYERS}>Add demo player</button>
