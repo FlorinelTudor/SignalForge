@@ -63,6 +63,11 @@ const STARTING_FAMILIES = [
   { name: "Rosen", profile: "Small shop owners", food: 60, health: 58, savings: 44, debt: 48, hope: 62, education: 68, stability: 48, bankTrust: 62, stock: 0 },
   { name: "Williams", profile: "Tenant farm family", food: 48, health: 55, savings: 18, debt: 55, hope: 52, education: 50, stability: 42, bankTrust: 45, stock: 0 },
   { name: "Novak", profile: "Immigrant household", food: 52, health: 59, savings: 22, debt: 38, hope: 56, education: 58, stability: 45, bankTrust: 50, stock: 0 },
+  { name: "O'Connor", profile: "Railroad worker household", food: 57, health: 60, savings: 24, debt: 36, hope: 57, education: 61, stability: 52, bankTrust: 54, stock: 0 },
+  { name: "Bianchi", profile: "Garment district family", food: 54, health: 57, savings: 30, debt: 44, hope: 60, education: 63, stability: 47, bankTrust: 52, stock: 0 },
+  { name: "Johnson", profile: "Black urban service family", food: 50, health: 56, savings: 16, debt: 46, hope: 55, education: 59, stability: 40, bankTrust: 42, stock: 0 },
+  { name: "Kowalski", profile: "Coal town mining family", food: 53, health: 51, savings: 20, debt: 50, hope: 50, education: 52, stability: 43, bankTrust: 47, stock: 0 },
+  { name: "Martinez", profile: "Seasonal farm labor family", food: 46, health: 54, savings: 14, debt: 40, hope: 54, education: 48, stability: 38, bankTrust: 43, stock: 0 },
 ];
 
 const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
