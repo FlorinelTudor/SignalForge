@@ -292,7 +292,7 @@ function loadSavedGame() {
 const apiBase = () => {
   if (process.env.REACT_APP_GAME_API_URL) return process.env.REACT_APP_GAME_API_URL.replace(/\/$/, "");
   if (typeof window !== "undefined" && ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)) {
-    return "http://localhost:8000/api";
+    return window.location.port === "3000" ? "http://localhost:8000/api" : "/api";
   }
   return "/api";
 };
