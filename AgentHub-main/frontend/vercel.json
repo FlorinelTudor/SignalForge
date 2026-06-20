@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "https://separation-merchandise-waiver-earrings.trycloudflare.com/$1"
+      "dest": "https://ser-gonna-insertion-choir.trycloudflare.com/$1"
     }
   ],
   "buildCommand": "PUBLIC_URL= npm run build",
