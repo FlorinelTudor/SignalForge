@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "https://recovery-jokes-semi-residence.trycloudflare.com/$1"
+      "dest": "https://separation-merchandise-waiver-earrings.trycloudflare.com/$1"
     }
   ],
   "buildCommand": "PUBLIC_URL= npm run build",
