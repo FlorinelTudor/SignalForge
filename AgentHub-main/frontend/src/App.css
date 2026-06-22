@@ -469,23 +469,141 @@
   font-size: 20px;
 }
 
-@keyframes newspaperThrow {
+.phase-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #11100e;
+  color: #fffefa;
+  pointer-events: none;
+  animation: phaseReveal 3.4s ease-in-out forwards;
+}
+
+.phase-reveal img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.045);
+  animation: phaseRevealImage 3.4s ease-in-out forwards;
+}
+
+.phase-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 16, 14, .08), rgba(17, 16, 14, .52));
+}
+
+.phase-reveal-copy {
+  position: relative;
+  z-index: 1;
+  width: min(860px, calc(100% - 40px));
+  margin-top: auto;
+  margin-bottom: clamp(38px, 9vh, 94px);
+  text-align: center;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .48);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: phaseRevealCopy 3.4s ease-in-out forwards;
+}
+
+.phase-reveal-copy .gd-kicker {
+  color: rgba(255, 254, 250, .78);
+}
+
+.phase-reveal-copy h2 {
+  margin: 0;
+  color: #fffefa;
+  font-size: clamp(38px, 7vw, 84px);
+  font-weight: 650;
+  line-height: .95;
+  letter-spacing: 0;
+}
+
+.phase-ui-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+.phase-ui-visible {
+  animation: phaseUiIn .48s ease-out both;
+}
+
+@keyframes phaseReveal {
   0% {
     opacity: 0;
-    transform: translate(-42px, -60px) rotate(-10deg) scale(.94);
   }
-  62% {
+  14%,
+  78% {
     opacity: 1;
-    transform: translate(5px, 3px) rotate(1.5deg) scale(1.01);
   }
   100% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 0;
   }
 }
 
-.newspaper-throw {
-  animation: newspaperThrow .72s cubic-bezier(.2, .8, .2, 1);
+@keyframes phaseRevealImage {
+  0% {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+  18%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes phaseRevealCopy {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  30%,
+  76% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes phaseUiIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase-reveal,
+  .phase-reveal img,
+  .phase-reveal-copy,
+  .phase-ui-visible {
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
+  }
+
+  .phase-ui-hidden {
+    transform: none;
+  }
 }
 
 @media (max-width: 940px) {

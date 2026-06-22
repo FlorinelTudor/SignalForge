@@ -337,6 +337,7 @@ function App() {
   const [apiError, setApiError] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   const [lastSyncedAt, setLastSyncedAt] = useState(savedGame.lastSyncedAt || 0);
+  const [phaseRevealVisible, setPhaseRevealVisible] = useState(false);
   const joinClientIdRef = useRef(savedGame.joinClientId || `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
 
   const phase = phases[phaseIndex] || phases[0];
@@ -362,6 +363,14 @@ function App() {
       JSON.stringify({ version: GAME_STATE_VERSION, view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt, joinClientId: joinClientIdRef.current })
     );
   }, [view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt]);
+
+  useEffect(() => {
+    if (view !== "host" && view !== "player") return undefined;
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    setPhaseRevealVisible(true);
+    const timer = window.setTimeout(() => setPhaseRevealVisible(false), reduceMotion ? 350 : 3400);
+    return () => window.clearTimeout(timer);
+  }, [phaseIndex, view]);
 
   function syncRoom(room) {
     if (!room) return;
@@ -543,9 +552,19 @@ function App() {
       )}
 
       {(view === "host" || view === "player") && (
-        <section className="gd-grid">
+        <>
+        {phaseRevealVisible && (
+          <div className="phase-reveal" key={phase.id} aria-hidden="true">
+            <img src={asset(phase.image)} alt="" />
+            <div className="phase-reveal-copy">
+              <p className="gd-kicker">Market Conditions - {phase.years}</p>
+              <h2>{phase.title}</h2>
+            </div>
+          </div>
+        )}
+        <section className={`gd-grid ${phaseRevealVisible ? "phase-ui-hidden" : "phase-ui-visible"}`}>
           <div className="gd-main">
-            <div className={`gd-market ${phase.id === "second" ? "newspaper-throw" : ""}`}>
+            <div className="gd-market">
               <p className="gd-kicker">Market Conditions - {phase.years}</p>
               <img src={asset(phase.image)} alt={phase.title} />
               <p>{phase.summary}</p>
@@ -610,6 +629,7 @@ function App() {
             )}
           </aside>
         </section>
+        </>
       )}
     </main>
   );
