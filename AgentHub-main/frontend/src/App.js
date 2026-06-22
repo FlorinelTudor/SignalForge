@@ -267,11 +267,13 @@ function familyImageFor(family) {
     family.hope,
     family.education,
     family.stability,
+    family.savings,
     family.minFood,
     family.minHealth,
     family.minHope,
     family.minEducation,
     family.minStability,
+    family.minSavings,
   ].filter((value) => typeof value === "number");
   if (minHealth < 25) return "family-health-crisis.png";
   return dangerValues.some((value) => value < 25) ? "family-danger-state.png" : "family-profile.png";
@@ -286,7 +288,7 @@ function scoreFamily(family) {
   const debtPenalty = family.debt * 0.28;
   const reputationBonus = ((family.reputation ?? 50) - 50) * 0.22;
   const exploitPenalty = (family.exploitMarkers || 0) * 5;
-  const dangerMeters = ["minFood", "minHealth", "minHope", "minEducation", "minStability"];
+  const dangerMeters = ["minFood", "minHealth", "minHope", "minEducation", "minStability", "minSavings"];
   const dangerPenalty = dangerMeters.reduce((sum, key) => {
     const value = family[key] ?? 100;
     if (value < 10) return sum + 18;
@@ -331,7 +333,8 @@ function lowestRecordedMeter(family) {
     family.minHealth ?? family.health ?? 100,
     family.minHope ?? family.hope ?? 100,
     family.minEducation ?? family.education ?? 100,
-    family.minStability ?? family.stability ?? 100
+    family.minStability ?? family.stability ?? 100,
+    family.minSavings ?? family.savings ?? 100
   );
 }
 
@@ -390,7 +393,7 @@ function historicalDebrief(players, shared) {
       ? "Cooperation was a meaningful strategy: shared support improved trust and helped families absorb shocks."
       : "Soft betrayal paid in the short term, but exploit markers and lower trust made selfish survival more costly at the end.",
     dangerCount
-      ? `${dangerCount} families hit a danger zone on at least one meter, showing how quickly food, health, hope, schooling, or stability could become fragile.`
+      ? `${dangerCount} families hit a danger zone on at least one meter, showing how quickly food, health, savings, hope, schooling, or stability could become fragile.`
       : "No family crossed a severe danger threshold, which means the room collectively managed risk unusually well.",
     (shared?.trust ?? 55) >= 60
       ? "The room ended with a relatively strong trust climate, making relief and work access easier to justify."
@@ -484,7 +487,7 @@ function App() {
     if (view !== "host" && view !== "player") return undefined;
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
     setPhaseRevealVisible(true);
-    const timer = window.setTimeout(() => setPhaseRevealVisible(false), reduceMotion ? 350 : 3400);
+    const timer = window.setTimeout(() => setPhaseRevealVisible(false), reduceMotion ? 350 : 4400);
     return () => window.clearTimeout(timer);
   }, [phaseIndex, view]);
 

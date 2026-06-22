@@ -204,6 +204,7 @@ function applyChoices(family, choices, phaseId, options = {}) {
   next.minHope = Math.min(next.minHope ?? next.hope, next.hope);
   next.minEducation = Math.min(next.minEducation ?? next.education, next.education);
   next.minStability = Math.min(next.minStability ?? next.stability, next.stability);
+  next.minSavings = Math.min(next.minSavings ?? next.savings, next.savings);
   next.rushedChoiceCount = (next.rushedChoiceCount || 0) + (options.rushed ? 1 : 0);
   next.lastChoiceRushed = Boolean(options.rushed);
   next.lastChoiceMultiplier = multiplier;
@@ -236,6 +237,7 @@ function applySharedImpact(family, impact) {
   next.minHope = Math.min(next.minHope ?? next.hope, next.hope);
   next.minEducation = Math.min(next.minEducation ?? next.education, next.education);
   next.minStability = Math.min(next.minStability ?? next.stability, next.stability);
+  next.minSavings = Math.min(next.minSavings ?? next.savings, next.savings);
   return next;
 }
 
