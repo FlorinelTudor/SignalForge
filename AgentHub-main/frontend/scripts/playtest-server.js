@@ -59,6 +59,44 @@ const IMPACTS = {
   take_desperate_work: { food: 16, savings: 14, health: -15, stability: -6 },
   sponsor_neighbor: { hope: 12, stability: 8, savings: -14 },
   fund_training: { education: 20, savings: -18, hope: 6 },
+  contribute_community_pot: { food: -8, savings: -5, hope: 6, stability: 7, reputation: 10 },
+  hoard_relief: { food: 18, savings: 8, hope: -5, reputation: -14 },
+  undercut_wages: { savings: 19, stability: -12, hope: -8, reputation: -12 },
+  inform_on_black_market: { savings: 16, stability: 8, hope: -10, reputation: -16 },
+};
+
+const ACTION_DYNAMICS = {
+  keep_factory_job: ["work"],
+  search_any_work: ["work"],
+  apply_public_works: ["work", "relief"],
+  stay_public_works: ["work"],
+  seek_defense_work: ["work"],
+  take_desperate_work: ["work"],
+  older_child_fulltime: ["work"],
+  accept_relief: ["relief"],
+  seek_charity_clinic: ["relief"],
+  join_mutual_aid: ["cooperate"],
+  organize_neighbors: ["cooperate"],
+  support_union: ["cooperate"],
+  sponsor_neighbor: ["cooperate"],
+  contribute_community_pot: ["cooperate"],
+  hoard_relief: ["relief", "betray"],
+  undercut_wages: ["work", "betray"],
+  inform_on_black_market: ["betray"],
+};
+
+const PHASE_PRESSURE = {
+  postwar: { work: 0.7, relief: 0.2, need: 0.55 },
+  recession_1921: { work: 0.45, relief: 0.25, need: 0.7 },
+  early_boom: { work: 0.85, relief: 0.2, need: 0.45 },
+  speculation: { work: 0.85, relief: 0.2, need: 0.45 },
+  crash: { work: 0.35, relief: 0.25, need: 0.85 },
+  deepening: { work: 0.3, relief: 0.35, need: 1 },
+  bank_holiday: { work: 0.45, relief: 0.55, need: 0.85 },
+  work_relief: { work: 0.65, relief: 0.6, need: 0.65 },
+  second: { work: 0.5, relief: 0.45, need: 0.75 },
+  defense_shift: { work: 0.75, relief: 0.35, need: 0.5 },
+  recovery: { work: 0.9, relief: 0.3, need: 0.35 },
 };
 
 const STARTING_FAMILIES = [
@@ -77,6 +115,10 @@ const rooms = new Map();
 
 function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+function clampReputation(value) {
+  return Math.max(-30, Math.min(100, Math.round(value)));
 }
 
 function positiveImpactMultiplier(family, rushed) {
@@ -99,10 +141,12 @@ function roomCode() {
 }
 
 function publicRoom(room) {
+  const phaseId = PHASE_IDS[Math.min(room.phase_index, PHASE_IDS.length - 1)];
   return {
     roomCode: room.room_code,
     phaseIndex: room.phase_index,
     players: room.players || [],
+    shared: sharedSnapshot(room, phaseId),
     updatedAt: room.updated_at,
   };
 }
@@ -116,6 +160,8 @@ function pickFamily(playerName, index, clientId) {
     choices: {},
     score: 0,
     slot: index,
+    reputation: 50,
+    exploitMarkers: 0,
   });
   ["food", "health", "savings", "hope", "education", "stability", "bankTrust"].forEach((key) => {
     family[key] = clamp(family[key] + crypto.randomInt(17) - 8);
@@ -131,7 +177,9 @@ function applyChoices(family, choices, phaseId, options = {}) {
     Object.entries(IMPACTS[choice] || {}).forEach(([key, value]) => {
       const impact = scaledImpact(key, value, multiplier);
       const current = next[key] || 0;
-      next[key] = key === "debt" || key === "stock" ? Math.max(0, current + impact) : clamp(current + impact);
+      if (key === "debt" || key === "stock") next[key] = Math.max(0, current + impact);
+      else if (key === "reputation") next[key] = clampReputation((next[key] ?? 50) + impact);
+      else next[key] = clamp(current + impact);
     });
   });
   if (phaseId === "crash" && next.stock > 0) {
@@ -148,6 +196,102 @@ function applyChoices(family, choices, phaseId, options = {}) {
   next.lastChoiceRushed = Boolean(options.rushed);
   next.lastChoiceMultiplier = multiplier;
   return next;
+}
+
+function phaseCapacity(phaseId, playerCount) {
+  const pressure = PHASE_PRESSURE[phaseId] || PHASE_PRESSURE.postwar;
+  return {
+    workSlots: Math.max(1, Math.round(playerCount * pressure.work)),
+    reliefSlots: Math.max(1, Math.round(playerCount * pressure.relief)),
+    communityNeed: Math.max(2, Math.ceil(playerCount * pressure.need)),
+  };
+}
+
+function choiceHasTag(choices, tag) {
+  return choices.some((choice) => (ACTION_DYNAMICS[choice] || []).includes(tag));
+}
+
+function applySharedImpact(family, impact) {
+  const next = { ...family };
+  Object.entries(impact).forEach(([key, value]) => {
+    const current = key === "reputation" ? next[key] ?? 50 : next[key] || 0;
+    if (key === "debt" || key === "stock" || key === "exploitMarkers") next[key] = Math.max(0, current + value);
+    else if (key === "reputation") next[key] = clampReputation(current + value);
+    else next[key] = clamp(current + value);
+  });
+  next.minFood = Math.min(next.minFood ?? next.food, next.food);
+  next.minHealth = Math.min(next.minHealth ?? next.health, next.health);
+  next.minHope = Math.min(next.minHope ?? next.hope, next.hope);
+  next.minEducation = Math.min(next.minEducation ?? next.education, next.education);
+  next.minStability = Math.min(next.minStability ?? next.stability, next.stability);
+  return next;
+}
+
+function resolveScarcity(contenders, slots) {
+  return [...contenders]
+    .sort((a, b) => (b.player.reputation ?? 50) - (a.player.reputation ?? 50) || a.player.slot - b.player.slot)
+    .slice(0, slots)
+    .reduce((winners, item) => winners.add(item.player.id), new Set());
+}
+
+function sharedSnapshot(room, phaseId) {
+  const playerCount = Math.max(1, (room.players || []).length);
+  return {
+    trust: room.shared?.trust ?? 55,
+    communityPot: room.shared?.communityPot ?? 3,
+    lastRound: room.shared?.lastRound || "No shared decision has resolved yet.",
+    ...phaseCapacity(phaseId, playerCount),
+  };
+}
+
+function resolveSharedRound(room, phaseId) {
+  room.resolved_phases = room.resolved_phases || {};
+  if (room.resolved_phases[phaseId]) return;
+
+  const capacity = phaseCapacity(phaseId, room.players.length);
+  const round = room.players.map((player) => ({
+    player,
+    choices: player.choices?.[phaseId] || [],
+  }));
+  const work = round.filter((entry) => choiceHasTag(entry.choices, "work"));
+  const relief = round.filter((entry) => choiceHasTag(entry.choices, "relief"));
+  const cooperate = round.filter((entry) => choiceHasTag(entry.choices, "cooperate"));
+  const betray = round.filter((entry) => choiceHasTag(entry.choices, "betray"));
+  const workWinners = resolveScarcity(work, capacity.workSlots);
+  const reliefWinners = resolveScarcity(relief, capacity.reliefSlots);
+  const communityPot = Math.max(0, (room.shared?.communityPot ?? 3) + cooperate.length * 2 - betray.length);
+  const potMetNeed = communityPot >= capacity.communityNeed;
+
+  room.players = room.players.map((player) => {
+    const choices = player.choices?.[phaseId] || [];
+    let next = player;
+    if (choiceHasTag(choices, "work") && !workWinners.has(player.id)) next = applySharedImpact(next, { savings: -8, hope: -5 });
+    if (choiceHasTag(choices, "relief") && !reliefWinners.has(player.id)) next = applySharedImpact(next, { food: -7, hope: -4 });
+    if (choiceHasTag(choices, "cooperate")) next = applySharedImpact(next, { reputation: 5 });
+    if (choiceHasTag(choices, "betray")) next = applySharedImpact(next, { reputation: -8, exploitMarkers: 1 });
+    next = applySharedImpact(next, potMetNeed ? { food: 4, hope: 5, stability: 3 } : { hope: -5, stability: -4 });
+    return next;
+  });
+
+  const trustDelta = cooperate.length * 4 - betray.length * 9 + (potMetNeed ? 4 : -5) - Math.max(0, work.length - capacity.workSlots) * 2;
+  room.shared = {
+    trust: clamp((room.shared?.trust ?? 55) + trustDelta),
+    communityPot: Math.max(0, communityPot - capacity.communityNeed),
+    lastRound: `${cooperate.length} helped the community, ${betray.length} took a selfish edge. ${
+      potMetNeed ? "The community pot held." : "The pot fell short."
+    }`,
+    last: {
+      phaseId,
+      cooperate: cooperate.length,
+      betray: betray.length,
+      workDemand: work.length,
+      reliefDemand: relief.length,
+      workSlots: capacity.workSlots,
+      reliefSlots: capacity.reliefSlots,
+      potMetNeed,
+    },
+  };
+  room.resolved_phases[phaseId] = true;
 }
 
 function getRoom(req, res) {
@@ -174,6 +318,8 @@ app.post("/api/game/rooms", (_req, res) => {
       players: [],
       created_at: now,
       phase_started_at: now,
+      shared: { trust: 55, communityPot: 3, lastRound: "No shared decision has resolved yet." },
+      resolved_phases: {},
       updated_at: now,
     };
     rooms.set(code, room);
@@ -224,6 +370,7 @@ app.post("/api/game/rooms/:roomCode/choices", (req, res) => {
     updated.choices = { ...(room.players[index].choices || {}), [phaseId]: choices };
     room.players[index] = updated;
     if (room.players.length && room.players.every((player) => (player.choices?.[phaseId] || []).length === 2)) {
+      resolveSharedRound(room, phaseId);
       room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
       room.phase_started_at = new Date().toISOString();
     }

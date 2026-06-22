@@ -22,6 +22,7 @@ const phases = [
       ["take_store_credit", "Buy on store credit", "Preserve cash now, add debt later."],
       ["pull_child_school", "Older child works", "Raise income, harm education and morale."],
       ["join_mutual_aid", "Join mutual aid", "Build support, spend time and small dues."],
+      ["contribute_community_pot", "Share supplies", "Help the community pot at a short-term cost."],
     ],
   },
   {
@@ -39,6 +40,7 @@ const phases = [
       ["move_to_city", "Move closer to work", "Higher wage chance, higher rent."],
       ["pull_child_school", "Older child works", "Raise income, harm education and morale."],
       ["join_mutual_aid", "Join mutual aid", "Build support, spend time and small dues."],
+      ["hoard_relief", "Take extra relief", "Gain food now, but damage trust if exposed."],
       ["keep_factory_job", "Stay with current employer", "Accept shorter hours and protect stability."],
     ],
   },
@@ -76,6 +78,7 @@ const phases = [
       ["pay_down_debt", "Pay down debt", "Less exciting, more resilient."],
       ["keep_cash", "Keep cash cushion", "A cautious choice in an optimistic time."],
       ["night_school", "Invest in skills", "Improve future job options, lose income now."],
+      ["undercut_wages", "Undercut wages", "Win scarce work by accepting less pay and lower trust."],
     ],
   },
   {
@@ -112,6 +115,7 @@ const phases = [
       ["keep_children_school", "Keep children in school", "Protect future, sacrifice short-term income."],
       ["sell_possessions", "Sell possessions", "Raise cash, lower hope and comfort."],
       ["join_mutual_aid", "Lean on mutual aid", "Build support, spend time and small dues."],
+      ["hoard_relief", "Take extra relief", "Gain food now, but damage trust if exposed."],
     ],
   },
   {
@@ -130,6 +134,7 @@ const phases = [
       ["move_for_work_camp", "Send eldest to work camp", "Income and skills, family separation."],
       ["organize_neighbors", "Organize neighbors", "Mutual aid and voice, takes time."],
       ["delay_medical_care", "Delay medical care", "Preserve cash, risk health later."],
+      ["contribute_community_pot", "Share relief supplies", "Strengthen the community pot and your reputation."],
     ],
   },
   {
@@ -148,6 +153,7 @@ const phases = [
       ["move_for_work_camp", "Send eldest to work camp", "Income and skills, family separation."],
       ["rebuild_savings", "Rebuild savings", "Slow progress, stronger resilience."],
       ["trust_reopened_bank", "Trust the reopened bank", "Rebuild safety, depends on trust."],
+      ["hoard_relief", "Take extra relief", "Gain food now, but damage trust if exposed."],
     ],
   },
   {
@@ -166,6 +172,7 @@ const phases = [
       ["repair_health", "Spend on health", "Improve long-term survival, reduce cash."],
       ["support_union", "Support union drive", "Potential wage gains, job conflict risk."],
       ["older_child_fulltime", "Older child works full-time", "Income now, education cost deepens."],
+      ["undercut_wages", "Undercut wages", "Win scarce work by accepting less pay and lower trust."],
     ],
   },
   {
@@ -184,6 +191,7 @@ const phases = [
       ["support_union", "Support union drive", "Potential wage gains, job conflict risk."],
       ["keep_children_school", "Keep children in school", "Protect future, sacrifice short-term income."],
       ["move_better_rental", "Move to safer housing", "Improve health and morale, raise rent."],
+      ["inform_on_black_market", "Inform on informal trade", "Gain a short edge, but take an exploit penalty."],
     ],
   },
   {
@@ -272,6 +280,8 @@ function clamp(value) {
 function scoreFamily(family) {
   const core = (family.food + family.health + family.savings + family.hope + family.education + family.stability) / 6;
   const debtPenalty = family.debt * 0.28;
+  const reputationBonus = ((family.reputation ?? 50) - 50) * 0.22;
+  const exploitPenalty = (family.exploitMarkers || 0) * 5;
   const dangerMeters = ["minFood", "minHealth", "minHope", "minEducation", "minStability"];
   const dangerPenalty = dangerMeters.reduce((sum, key) => {
     const value = family[key] ?? 100;
@@ -281,7 +291,7 @@ function scoreFamily(family) {
     return sum;
   }, 0);
   const resilienceBonus = dangerPenalty === 0 ? 6 : 0;
-  return clamp(core - debtPenalty - dangerPenalty + resilienceBonus);
+  return clamp(core - debtPenalty - dangerPenalty - exploitPenalty + reputationBonus + resilienceBonus);
 }
 
 function loadSavedGame() {
@@ -330,6 +340,7 @@ function App() {
   const [roomCode, setRoomCode] = useState(savedGame.roomCode || "");
   const [hostToken, setHostToken] = useState(savedGame.hostToken || "");
   const [players, setPlayers] = useState(savedGame.players || []);
+  const [shared, setShared] = useState(savedGame.shared || null);
   const [phaseIndex, setPhaseIndex] = useState(savedGame.phaseIndex || 0);
   const [playerName, setPlayerName] = useState(savedGame.playerName || "");
   const [activePlayerId, setActivePlayerId] = useState(savedGame.activePlayerId || "");
@@ -360,9 +371,9 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(
       "gd-game-state",
-      JSON.stringify({ version: GAME_STATE_VERSION, view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt, joinClientId: joinClientIdRef.current })
+      JSON.stringify({ version: GAME_STATE_VERSION, view, roomCode, hostToken, players, shared, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt, joinClientId: joinClientIdRef.current })
     );
-  }, [view, roomCode, hostToken, players, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt]);
+  }, [view, roomCode, hostToken, players, shared, phaseIndex, playerName, activePlayerId, selected, lastSyncedAt]);
 
   useEffect(() => {
     if (view !== "host" && view !== "player") return undefined;
@@ -376,6 +387,7 @@ function App() {
     if (!room) return;
     setRoomCode(room.roomCode);
     setPlayers(room.players || []);
+    setShared(room.shared || null);
     setPhaseIndex(room.phaseIndex || 0);
     setLastSyncedAt(Date.now());
   }
@@ -385,6 +397,7 @@ function App() {
     setRoomCode("");
     setHostToken("");
     setPlayers([]);
+    setShared(null);
     setPhaseIndex(0);
     setActivePlayerId("");
     setSelected([]);
@@ -615,12 +628,13 @@ function App() {
           <aside className="gd-sidebar">
             <FamilyCard family={activePlayer} />
             {activePlayer && <Meters family={activePlayer} />}
+            <CommunityPanel shared={shared} />
             <Conditions conditions={phase.conditions} />
             {view === "host" && (
               <div className="gd-panel">
                 <p className="gd-kicker">Host Controls</p>
                 <p className="gd-sync">Players {players.length}/{MAX_PLAYERS} - submitted {submittedCount}/{players.length}</p>
-                <p className="gd-sync">Phase {Math.min(phaseIndex + 1, phases.length)}/{phases.length} - target 10-15 min</p>
+              <p className="gd-sync">Phase {Math.min(phaseIndex + 1, phases.length)}/{phases.length} - target 20-25 min</p>
                 <p className="gd-sync">Sync {lastSyncedAt ? new Date(lastSyncedAt).toLocaleTimeString() : "waiting"}</p>
                 <button onClick={addDemoPlayer} disabled={isBusy || players.length >= MAX_PLAYERS}>Add demo player</button>
                 <button onClick={advancePhase} disabled={isBusy || isFinalPhase}>Advance phase</button>
@@ -653,6 +667,7 @@ function FamilyCard({ family }) {
 
 function Meters({ family }) {
   const meters = ["food", "health", "savings", "hope", "education", "stability"];
+  const reputation = family.reputation ?? 50;
   return (
     <div className="gd-panel">
       <p className="gd-kicker">Family Meters</p>
@@ -664,6 +679,51 @@ function Meters({ family }) {
         </div>
       ))}
       <div className="meter debt"><span>debt</span><div><i style={{ width: `${family.debt}%` }} /></div><b>{family.debt}</b></div>
+      <div className="meter reputation">
+        <span>trust</span>
+        <div><i style={{ width: `${Math.max(0, Math.min(100, ((reputation + 30) / 130) * 100))}%` }} /></div>
+        <b>{reputation}</b>
+      </div>
+      {!!family.exploitMarkers && <p className="gd-sync">Exploit markers: {family.exploitMarkers}</p>}
+    </div>
+  );
+}
+
+function CommunityPanel({ shared }) {
+  const current = shared || {
+    trust: 55,
+    communityPot: 3,
+    workSlots: 1,
+    reliefSlots: 1,
+    communityNeed: 2,
+    lastRound: "No shared decision has resolved yet.",
+  };
+  const trustStatus = current.trust >= 68 ? "good" : current.trust <= 35 ? "bad" : "warn";
+  const potStatus = current.communityPot >= current.communityNeed ? "good" : current.communityPot <= 1 ? "bad" : "warn";
+  return (
+    <div className="gd-panel community-panel">
+      <p className="gd-kicker">Town Hall</p>
+      <h2>Discuss aloud, choose secretly</h2>
+      <p className="gd-sync">Take a short meeting discussion before choices. The app only records final choices.</p>
+      <div className="community-stats">
+        <div>
+          <span>Work slots</span>
+          <strong>{current.workSlots}</strong>
+        </div>
+        <div>
+          <span>Relief slots</span>
+          <strong>{current.reliefSlots}</strong>
+        </div>
+        <div className={potStatus}>
+          <span>Community pot</span>
+          <strong>{current.communityPot}/{current.communityNeed}</strong>
+        </div>
+        <div className={trustStatus}>
+          <span>Trust climate</span>
+          <strong>{current.trust}</strong>
+        </div>
+      </div>
+      <p className="community-last">{current.lastRound}</p>
     </div>
   );
 }
@@ -692,11 +752,14 @@ function Leaderboard({ players }) {
       {players.map((player, index) => (
         <div className="leader-row" key={player.id}>
           <b>{index + 1}</b>
-          <span>{player.playerName || "Player"} ({player.name} Family)</span>
+          <span>
+            {player.playerName || "Player"} ({player.name} Family)
+            <small>Trust {player.reputation ?? 50} · Exploit markers {player.exploitMarkers || 0}</small>
+          </span>
           <strong>{player.score}</strong>
         </div>
       ))}
-      <p className="gd-note">Danger penalties apply when food, health, hope, education, or stability ever drop below 25.</p>
+      <p className="gd-note">Scores include danger penalties, debt, trust reputation, and exploit markers.</p>
     </div>
   );
 }

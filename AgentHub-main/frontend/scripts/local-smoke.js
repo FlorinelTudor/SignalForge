@@ -2,16 +2,16 @@ const DEFAULT_BASE_URL = "http://127.0.0.1:4173/api/game";
 const MAX_PLAYERS = 9;
 
 const phaseChoices = [
-  ["keep_factory_job", "use_savings_food"],
-  ["use_savings_food", "take_store_credit"],
+  ["keep_factory_job", "contribute_community_pot"],
+  ["use_savings_food", "hoard_relief"],
   ["buy_radio_credit", "pay_down_debt"],
-  ["invest_stocks", "borrow_to_invest"],
+  ["invest_stocks", "undercut_wages"],
   ["sell_stocks_now", "withdraw_bank_cash"],
-  ["cut_food_rent", "search_any_work"],
-  ["apply_public_works", "trust_reopened_bank"],
-  ["stay_public_works", "repair_health"],
-  ["stay_public_works", "seek_defense_work"],
-  ["seek_defense_work", "rebuild_savings"],
+  ["cut_food_rent", "hoard_relief"],
+  ["apply_public_works", "contribute_community_pot"],
+  ["stay_public_works", "hoard_relief"],
+  ["stay_public_works", "undercut_wages"],
+  ["seek_defense_work", "inform_on_black_market"],
 ];
 
 function getBaseUrl() {
@@ -88,6 +88,9 @@ async function main() {
     const expectedPhase = round + 1;
     if (state.room.phaseIndex !== expectedPhase) {
       throw new Error(`Expected phase ${expectedPhase}, got ${state.room.phaseIndex}`);
+    }
+    if (!state.room.shared || typeof state.room.shared.trust !== "number") {
+      throw new Error("Expected shared community state after choices resolved");
     }
   }
 
