@@ -672,7 +672,7 @@ function Leaderboard({ players }) {
       {players.map((player, index) => (
         <div className="leader-row" key={player.id}>
           <b>{index + 1}</b>
-          <span>The {player.name} Family</span>
+          <span>{player.playerName || "Player"} ({player.name} Family)</span>
           <strong>{player.score}</strong>
         </div>
       ))}
