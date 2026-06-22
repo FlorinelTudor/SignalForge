@@ -154,7 +154,7 @@ const phases = [
     id: "second",
     years: "1937-1938",
     title: "A Recovery Stumbles",
-    image: "public-news-1937-newspaper.png",
+    image: "recovery-stumbles-market.png",
     newsImage: "public-news-1937-newspaper.png",
     news: "Recovery slows as jobless rise again",
     summary: "Policy changes, business caution, and weak demand contribute to another downturn.",
@@ -246,10 +246,23 @@ function getExtremeChoices(family) {
     .map(({ id, title, detail }) => [id, title, detail]);
 }
 
-function familyImageFor(family, danger) {
+function familyImageFor(family) {
   if (!family) return "family-profile.png";
-  if (family.health < 25) return "family-health-crisis.png";
-  return danger ? "family-danger-state.png" : "family-profile.png";
+  const minHealth = Math.min(family.health ?? 100, family.minHealth ?? 100);
+  const dangerValues = [
+    family.food,
+    family.health,
+    family.hope,
+    family.education,
+    family.stability,
+    family.minFood,
+    family.minHealth,
+    family.minHope,
+    family.minEducation,
+    family.minStability,
+  ].filter((value) => typeof value === "number");
+  if (minHealth < 25) return "family-health-crisis.png";
+  return dangerValues.some((value) => value < 25) ? "family-danger-state.png" : "family-profile.png";
 }
 
 function clamp(value) {
@@ -341,7 +354,7 @@ function App() {
     () => players.map((p) => ({ ...p, score: scoreFamily(p) })).sort((a, b) => b.score - a.score),
     [players]
   );
-  const dangerFamilyImage = activePlayer && [activePlayer.food, activePlayer.health, activePlayer.hope, activePlayer.stability].some((m) => m < 25);
+  const rushedChoiceWarning = activePlayer?.lastChoiceRushed;
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -552,6 +565,7 @@ function App() {
                   Your choices were applied to the family meters. The phase will move forward automatically once every
                   player in the room has submitted, or the host can advance it manually.
                 </p>
+                {rushedChoiceWarning && <p className="gd-sync">Quick choices gave reduced positive gains this round.</p>}
                 <p className="gd-sync">Submitted {submittedCount}/{players.length}</p>
                 {view === "host" && <button onClick={advancePhase} disabled={isBusy || isFinalPhase}>Advance now</button>}
               </div>
@@ -580,7 +594,7 @@ function App() {
           </div>
 
           <aside className="gd-sidebar">
-            <FamilyCard family={activePlayer} danger={dangerFamilyImage} />
+            <FamilyCard family={activePlayer} />
             {activePlayer && <Meters family={activePlayer} />}
             <Conditions conditions={phase.conditions} />
             {view === "host" && (
@@ -601,14 +615,14 @@ function App() {
   );
 }
 
-function FamilyCard({ family, danger }) {
+function FamilyCard({ family }) {
   if (!family) {
     return <div className="gd-panel"><p className="gd-kicker">Family Profile</p><p>No players yet. Add a player to assign a family.</p></div>;
   }
   return (
     <div className="gd-panel">
       <div className="family-image">
-        <img src={asset(familyImageFor(family, danger))} alt={`${family.name} family`} />
+        <img src={asset(familyImageFor(family))} alt={`${family.name} family`} />
       </div>
       <p className="gd-kicker">Family Profile</p>
       <h2>The {family.name} Family</h2>

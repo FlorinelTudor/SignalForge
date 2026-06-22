@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 
 const MAX_PLAYERS = 9;
+const MIN_THINKING_TIME_MS = 7000;
 const PORT = Number(process.env.PORT || 4173);
 const PHASE_IDS = [
   "postwar",
@@ -78,6 +79,18 @@ function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
 
+function positiveImpactMultiplier(family, rushed) {
+  if (!rushed) return 1;
+  return Math.max(0.55, 0.85 - (family.rushedChoiceCount || 0) * 0.1);
+}
+
+function scaledImpact(key, value, multiplier) {
+  if (multiplier >= 1) return value;
+  if (key === "debt" && value < 0) return Math.round(value * multiplier);
+  if (key !== "debt" && value > 0) return Math.round(value * multiplier);
+  return value;
+}
+
 function roomCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "";
@@ -111,12 +124,14 @@ function pickFamily(playerName, index, clientId) {
   return family;
 }
 
-function applyChoices(family, choices, phaseId) {
+function applyChoices(family, choices, phaseId, options = {}) {
   const next = { ...family, choices: { ...(family.choices || {}) } };
+  const multiplier = positiveImpactMultiplier(family, options.rushed);
   choices.forEach((choice) => {
     Object.entries(IMPACTS[choice] || {}).forEach(([key, value]) => {
+      const impact = scaledImpact(key, value, multiplier);
       const current = next[key] || 0;
-      next[key] = key === "debt" || key === "stock" ? Math.max(0, current + value) : clamp(current + value);
+      next[key] = key === "debt" || key === "stock" ? Math.max(0, current + impact) : clamp(current + impact);
     });
   });
   if (phaseId === "crash" && next.stock > 0) {
@@ -129,6 +144,9 @@ function applyChoices(family, choices, phaseId) {
   next.minHope = Math.min(next.minHope ?? next.hope, next.hope);
   next.minEducation = Math.min(next.minEducation ?? next.education, next.education);
   next.minStability = Math.min(next.minStability ?? next.stability, next.stability);
+  next.rushedChoiceCount = (next.rushedChoiceCount || 0) + (options.rushed ? 1 : 0);
+  next.lastChoiceRushed = Boolean(options.rushed);
+  next.lastChoiceMultiplier = multiplier;
   return next;
 }
 
@@ -155,6 +173,7 @@ app.post("/api/game/rooms", (_req, res) => {
       phase_index: 0,
       players: [],
       created_at: now,
+      phase_started_at: now,
       updated_at: now,
     };
     rooms.set(code, room);
@@ -199,11 +218,14 @@ app.post("/api/game/rooms/:roomCode/choices", (req, res) => {
   }
   if ((room.players[index].choices?.[phaseId] || []).length !== 2) {
     const choices = (req.body.choices || []).slice(0, 2);
-    const updated = applyChoices(room.players[index], choices, phaseId);
+    const phaseStartedAt = Date.parse(room.phase_started_at || room.updated_at || room.created_at || new Date().toISOString());
+    const rushed = Date.now() - phaseStartedAt < MIN_THINKING_TIME_MS;
+    const updated = applyChoices(room.players[index], choices, phaseId, { rushed });
     updated.choices = { ...(room.players[index].choices || {}), [phaseId]: choices };
     room.players[index] = updated;
     if (room.players.length && room.players.every((player) => (player.choices?.[phaseId] || []).length === 2)) {
       room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
+      room.phase_started_at = new Date().toISOString();
     }
     room.updated_at = new Date().toISOString();
   }
@@ -218,6 +240,7 @@ app.post("/api/game/rooms/:roomCode/advance", (req, res) => {
     return;
   }
   room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
+  room.phase_started_at = new Date().toISOString();
   room.updated_at = new Date().toISOString();
   res.json({ room: publicRoom(room) });
 });

@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const { BlobError, get, list, put } = require("@vercel/blob");
 
 const MAX_PLAYERS = 9;
+const MIN_THINKING_TIME_MS = 7000;
 const PHASE_IDS = [
   "postwar",
   "recession_1921",
@@ -82,6 +83,18 @@ function clamp(value) {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
 
+function positiveImpactMultiplier(family, rushed) {
+  if (!rushed) return 1;
+  return Math.max(0.55, 0.85 - (family.rushedChoiceCount || 0) * 0.1);
+}
+
+function scaledImpact(key, value, multiplier) {
+  if (multiplier >= 1) return value;
+  if (key === "debt" && value < 0) return Math.round(value * multiplier);
+  if (key !== "debt" && value > 0) return Math.round(value * multiplier);
+  return value;
+}
+
 function json(res, status, payload) {
   res.statusCode = status;
   res.setHeader("content-type", "application/json; charset=utf-8");
@@ -121,12 +134,14 @@ function pickFamily(playerName, index, clientId) {
   return family;
 }
 
-function applyChoices(family, choices, phaseId) {
+function applyChoices(family, choices, phaseId, options = {}) {
   const next = { ...family, choices: { ...(family.choices || {}) } };
+  const multiplier = positiveImpactMultiplier(family, options.rushed);
   choices.forEach((choice) => {
     Object.entries(IMPACTS[choice] || {}).forEach(([key, value]) => {
+      const impact = scaledImpact(key, value, multiplier);
       const current = next[key] || 0;
-      next[key] = key === "debt" || key === "stock" ? Math.max(0, current + value) : clamp(current + value);
+      next[key] = key === "debt" || key === "stock" ? Math.max(0, current + impact) : clamp(current + impact);
     });
   });
   if (phaseId === "crash" && next.stock > 0) {
@@ -140,6 +155,9 @@ function applyChoices(family, choices, phaseId) {
   next.minHope = Math.min(next.minHope ?? next.hope, next.hope);
   next.minEducation = Math.min(next.minEducation ?? next.education, next.education);
   next.minStability = Math.min(next.minStability ?? next.stability, next.stability);
+  next.rushedChoiceCount = (next.rushedChoiceCount || 0) + (options.rushed ? 1 : 0);
+  next.lastChoiceRushed = Boolean(options.rushed);
+  next.lastChoiceMultiplier = multiplier;
   return next;
 }
 
@@ -296,12 +314,12 @@ async function listPlayers(code) {
   );
   const visiblePlayers = players.filter(Boolean);
   const choices = await listChoiceMarkers(code);
-  choices.forEach(({ slot, phaseId, choices: selectedChoices }) => {
+  choices.forEach(({ slot, phaseId, choices: selectedChoices, rushed }) => {
     const playerIndex = visiblePlayers.findIndex((player) => player.slot === slot);
     if (playerIndex < 0) return;
     const player = visiblePlayers[playerIndex];
     if ((player.choices?.[phaseId] || []).length === 2) return;
-    const updated = applyChoices(player, selectedChoices, phaseId);
+    const updated = applyChoices(player, selectedChoices, phaseId, { rushed });
     updated.choices = { ...(player.choices || {}), [phaseId]: selectedChoices };
     visiblePlayers[playerIndex] = updated;
   });
@@ -318,7 +336,7 @@ async function listChoiceMarkers(code) {
         const match = path.match(/slot-(\d+)-([^.]+)\.json$/);
         const payload = await readJson(path);
         if (!match || !payload) return null;
-        return { slot: Number(match[1]), phaseId: match[2], choices: payload.choices || [] };
+        return { slot: Number(match[1]), phaseId: match[2], choices: payload.choices || [], rushed: Boolean(payload.rushed) };
       })
   );
   return markers.filter(Boolean);
@@ -346,6 +364,7 @@ async function createRoom() {
       host_token: crypto.randomBytes(32).toString("base64url"),
       phase_index: 0,
       created_at: now,
+      phase_started_at: now,
       updated_at: now,
     };
     try {
@@ -421,14 +440,16 @@ async function handleGameRequest(req, res) {
     const playerIndex = room.players.findIndex((player) => player.id === body.player_id);
     if (playerIndex < 0) return json(res, 404, { detail: "Player not found in this room" });
     if ((room.players[playerIndex].choices?.[phaseId] || []).length === 2) return json(res, 200, { room: publicRoom(room) });
+    const phaseStartedAt = Date.parse(room.phase_started_at || room.updated_at || room.created_at || new Date().toISOString());
+    const rushed = Date.now() - phaseStartedAt < MIN_THINKING_TIME_MS;
     try {
-      await writeJson(choicePath(code, room.players[playerIndex].slot, phaseId), { choices: (body.choices || []).slice(0, 2) }, false);
+      await writeJson(choicePath(code, room.players[playerIndex].slot, phaseId), { choices: (body.choices || []).slice(0, 2), rushed }, false);
     } catch (error) {
       if (!/already exists|overwrite/i.test(String(error.message || ""))) throw error;
       room.players = await listPlayers(code);
       return json(res, 200, { room: publicRoom(room) });
     }
-    const updatedPlayer = applyChoices(room.players[playerIndex], (body.choices || []).slice(0, 2), phaseId);
+    const updatedPlayer = applyChoices(room.players[playerIndex], (body.choices || []).slice(0, 2), phaseId, { rushed });
     updatedPlayer.choices = { ...(room.players[playerIndex].choices || {}), [phaseId]: (body.choices || []).slice(0, 2) };
     await savePlayer(code, updatedPlayer);
     for (let attempt = 0; attempt < 4; attempt += 1) {
@@ -438,6 +459,7 @@ async function handleGameRequest(req, res) {
     }
     if (room.players.length && room.players.every((player) => (player.choices?.[phaseId] || []).length === 2)) {
       room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
+      room.phase_started_at = new Date().toISOString();
     }
     room.updated_at = new Date().toISOString();
     await saveRoom(room);
@@ -447,6 +469,7 @@ async function handleGameRequest(req, res) {
   if (req.method === "POST" && parts[2] === "advance") {
     if (!body.host_token || body.host_token !== room.host_token) return json(res, 403, { detail: "Only the host can advance this room." });
     room.phase_index = Math.min(room.phase_index + 1, PHASE_IDS.length - 1);
+    room.phase_started_at = new Date().toISOString();
     room.updated_at = new Date().toISOString();
     await saveRoom(room);
     return json(res, 200, { room: publicRoom(room) });
