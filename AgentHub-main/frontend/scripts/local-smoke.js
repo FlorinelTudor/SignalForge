@@ -73,6 +73,9 @@ async function main() {
   if (new Set(families).size !== MAX_PLAYERS) {
     throw new Error(`Expected unique family names, got: ${families.join(", ")}`);
   }
+  if (state.room.players.some((player) => !player.role || !player.objectiveId || !player.objectiveTitle)) {
+    throw new Error("Expected every player to receive a period role and family objective");
+  }
 
   for (let round = 0; round < phaseChoices.length; round += 1) {
     const choices = phaseChoices[round];

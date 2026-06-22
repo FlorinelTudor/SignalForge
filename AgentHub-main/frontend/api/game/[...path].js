@@ -98,15 +98,15 @@ const PHASE_PRESSURE = {
 };
 
 const STARTING_FAMILIES = [
-  { name: "Carter", profile: "Cleveland factory family", food: 55, health: 62, savings: 28, debt: 42, hope: 58, education: 64, stability: 54, bankTrust: 55, stock: 0 },
-  { name: "Rosen", profile: "Small shop owners", food: 60, health: 58, savings: 44, debt: 48, hope: 62, education: 68, stability: 48, bankTrust: 62, stock: 0 },
-  { name: "Williams", profile: "Tenant farm family", food: 48, health: 55, savings: 18, debt: 55, hope: 52, education: 50, stability: 42, bankTrust: 45, stock: 0 },
-  { name: "Novak", profile: "Immigrant household", food: 52, health: 59, savings: 22, debt: 38, hope: 56, education: 58, stability: 45, bankTrust: 50, stock: 0 },
-  { name: "O'Connor", profile: "Railroad worker household", food: 57, health: 60, savings: 24, debt: 36, hope: 57, education: 61, stability: 52, bankTrust: 54, stock: 0 },
-  { name: "Bianchi", profile: "Garment district family", food: 54, health: 57, savings: 30, debt: 44, hope: 60, education: 63, stability: 47, bankTrust: 52, stock: 0 },
-  { name: "Johnson", profile: "Black urban service family", food: 50, health: 56, savings: 16, debt: 46, hope: 55, education: 59, stability: 40, bankTrust: 42, stock: 0 },
-  { name: "Kowalski", profile: "Coal town mining family", food: 53, health: 51, savings: 20, debt: 50, hope: 50, education: 52, stability: 43, bankTrust: 47, stock: 0 },
-  { name: "Martinez", profile: "Seasonal farm labor family", food: 46, health: 54, savings: 14, debt: 40, hope: 54, education: 48, stability: 38, bankTrust: 43, stock: 0 },
+  { name: "Carter", profile: "Cleveland factory household", role: "Industrial wage earners", objectiveId: "industrial_stability", objectiveTitle: "Hold the household together", objectiveDetail: "Finish with Stability 60+ while keeping trust at 45+.", food: 55, health: 62, savings: 28, debt: 42, hope: 58, education: 64, stability: 54, bankTrust: 55, stock: 0 },
+  { name: "Rosen", profile: "Small shop owners", role: "Main Street merchants", objectiveId: "shopkeeper_debt", objectiveTitle: "Keep the shop solvent", objectiveDetail: "Finish with Debt 45 or lower and Hope 45+.", food: 60, health: 58, savings: 44, debt: 48, hope: 62, education: 68, stability: 48, bankTrust: 62, stock: 0 },
+  { name: "Williams", profile: "Tenant farm family", role: "Rural tenant farmers", objectiveId: "tenant_food", objectiveTitle: "Keep food on the table", objectiveDetail: "Finish with Food 50+ or successfully use a migration/work-camp path.", food: 48, health: 55, savings: 18, debt: 55, hope: 52, education: 50, stability: 42, bankTrust: 45, stock: 0 },
+  { name: "Novak", profile: "Recent immigrant industrial household", role: "New arrival workers", objectiveId: "immigrant_trust", objectiveTitle: "Build standing", objectiveDetail: "Finish with Trust 65+ or Education 60+.", food: 52, health: 59, savings: 22, debt: 38, hope: 56, education: 58, stability: 45, bankTrust: 50, stock: 0 },
+  { name: "O'Connor", profile: "Railroad worker household", role: "Rail and transport workers", objectiveId: "railroad_mobility", objectiveTitle: "Keep moving, stay healthy", objectiveDetail: "Use at least 2 work or mobility actions and finish with Health 45+.", food: 57, health: 60, savings: 24, debt: 36, hope: 57, education: 61, stability: 52, bankTrust: 54, stock: 0 },
+  { name: "Bianchi", profile: "Garment district family", role: "Urban garment workers", objectiveId: "garment_solidarity", objectiveTitle: "Stand with the neighborhood", objectiveDetail: "Use at least 2 community/labor actions and finish with Hope 55+.", food: 54, health: 57, savings: 30, debt: 44, hope: 60, education: 63, stability: 47, bankTrust: 52, stock: 0 },
+  { name: "Johnson", profile: "Black urban service family", role: "Urban service workers", objectiveId: "service_respect", objectiveTitle: "Earn respect under pressure", objectiveDetail: "Finish with Stability 50+ and Trust 60+.", food: 50, health: 56, savings: 16, debt: 46, hope: 55, education: 59, stability: 40, bankTrust: 42, stock: 0 },
+  { name: "Kowalski", profile: "Coal town mining family", role: "Mining household", objectiveId: "miner_health", objectiveTitle: "Survive dangerous work", objectiveDetail: "Finish with Health 45+ and Debt 55 or lower.", food: 53, health: 51, savings: 20, debt: 50, hope: 50, education: 52, stability: 43, bankTrust: 47, stock: 0 },
+  { name: "Martinez", profile: "Seasonal farm labor family", role: "Migrant farm workers", objectiveId: "seasonal_work", objectiveTitle: "Find enough work", objectiveDetail: "Finish with Food 45+ and use at least 2 work or relief actions.", food: 46, health: 54, savings: 14, debt: 40, hope: 54, education: 48, stability: 38, bankTrust: 43, stock: 0 },
 ];
 
 const blobToken = process.env.BLOB_READ_WRITE_TOKEN;

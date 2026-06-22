@@ -343,6 +343,24 @@
   object-position: center top;
 }
 
+.family-objective {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--gd-line);
+  border-radius: 8px;
+  background: var(--gd-surface);
+}
+
+.family-objective strong {
+  color: var(--gd-ink);
+}
+
+.family-objective p {
+  margin: 5px 0 0;
+  color: var(--gd-muted);
+  font-size: 14px;
+}
+
 .meter {
   display: grid;
   grid-template-columns: 82px minmax(0, 1fr) 38px;
@@ -631,6 +649,28 @@
 
 .award-card small {
   font-size: 12px;
+}
+
+.debrief-panel {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px solid var(--gd-line);
+  border-radius: 8px;
+  background: #f8f3e9;
+}
+
+.debrief-panel h3 {
+  margin: 0;
+  color: var(--gd-ink);
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.debrief-panel p:not(.gd-kicker) {
+  margin: 0;
+  color: var(--gd-muted);
 }
 
 .phase-reveal {

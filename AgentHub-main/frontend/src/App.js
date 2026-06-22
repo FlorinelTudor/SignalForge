@@ -6,6 +6,8 @@ const MAX_PLAYERS = 9;
 const GAME_STATE_VERSION = "blob-multiplayer-v2";
 const COOPERATIVE_CHOICES = new Set(["join_mutual_aid", "organize_neighbors", "support_union", "sponsor_neighbor", "contribute_community_pot"]);
 const RISK_CHOICES = new Set(["invest_stocks", "borrow_to_invest", "move_to_city", "withdraw_bank_cash", "search_any_work", "move_for_work_camp", "seek_defense_work", "support_union", "take_desperate_work", "undercut_wages", "inform_on_black_market"]);
+const WORK_OR_RELIEF_CHOICES = new Set(["keep_factory_job", "search_any_work", "apply_public_works", "stay_public_works", "seek_defense_work", "take_desperate_work", "older_child_fulltime", "accept_relief", "seek_charity_clinic", "hoard_relief"]);
+const MOBILITY_CHOICES = new Set(["move_to_city", "move_with_relatives", "move_for_work_camp", "seek_defense_work"]);
 
 const phases = [
   {
@@ -293,11 +295,34 @@ function scoreFamily(family) {
     return sum;
   }, 0);
   const resilienceBonus = dangerPenalty === 0 ? 6 : 0;
-  return clamp(core - debtPenalty - dangerPenalty - exploitPenalty + reputationBonus + resilienceBonus);
+  return clamp(core - debtPenalty - dangerPenalty - exploitPenalty + reputationBonus + resilienceBonus + objectiveResult(family).bonus);
 }
 
 function flattenChoices(family) {
   return Object.values(family.choices || {}).flat();
+}
+
+function countChoices(family, choiceSet) {
+  return flattenChoices(family).filter((choice) => choiceSet.has(choice)).length;
+}
+
+function objectiveResult(family) {
+  const choices = flattenChoices(family);
+  const usedMigrationPath = choices.some((choice) => MOBILITY_CHOICES.has(choice));
+  const workReliefCount = countChoices(family, WORK_OR_RELIEF_CHOICES);
+  const communityCount = countChoices(family, COOPERATIVE_CHOICES);
+  const trust = family.reputation ?? 50;
+  const completed =
+    (family.objectiveId === "industrial_stability" && family.stability >= 60 && trust >= 45) ||
+    (family.objectiveId === "shopkeeper_debt" && family.debt <= 45 && family.hope >= 45) ||
+    (family.objectiveId === "tenant_food" && (family.food >= 50 || usedMigrationPath)) ||
+    (family.objectiveId === "immigrant_trust" && (trust >= 65 || family.education >= 60)) ||
+    (family.objectiveId === "railroad_mobility" && workReliefCount >= 2 && family.health >= 45) ||
+    (family.objectiveId === "garment_solidarity" && communityCount >= 2 && family.hope >= 55) ||
+    (family.objectiveId === "service_respect" && family.stability >= 50 && trust >= 60) ||
+    (family.objectiveId === "miner_health" && family.health >= 45 && family.debt <= 55) ||
+    (family.objectiveId === "seasonal_work" && family.food >= 45 && workReliefCount >= 2);
+  return { completed, bonus: completed ? 10 : 0 };
 }
 
 function lowestRecordedMeter(family) {
@@ -348,6 +373,30 @@ function computeAwards(players) {
     { id: "gamble", title: "Boldest Gamble", player: boldestGamble, detail: "Took the biggest strategic risks while staying in the race." },
     { id: "steady", title: "Steady Hand", player: steadyHand, detail: "Kept the family out of danger with the fewest severe lows." },
   ].filter((award) => award.player);
+}
+
+function historicalDebrief(players, shared) {
+  if (!players.length) return [];
+  const choices = players.flatMap(flattenChoices);
+  const exploitCount = players.reduce((sum, player) => sum + (player.exploitMarkers || 0), 0);
+  const objectiveCount = players.filter((player) => objectiveResult(player).completed).length;
+  const dangerCount = players.filter((player) => lowestRecordedMeter(player) < 25).length;
+  const cooperationCount = choices.filter((choice) => COOPERATIVE_CHOICES.has(choice)).length;
+  const workReliefCount = choices.filter((choice) => WORK_OR_RELIEF_CHOICES.has(choice)).length;
+  const takeaways = [
+    `${objectiveCount}/${players.length} families completed their background objective, showing how the same economy created different survival priorities.`,
+    `${workReliefCount} work or relief choices were made. Scarce opportunities helped, but they could not remove pressure for everyone.`,
+    cooperationCount >= exploitCount
+      ? "Cooperation was a meaningful strategy: shared support improved trust and helped families absorb shocks."
+      : "Soft betrayal paid in the short term, but exploit markers and lower trust made selfish survival more costly at the end.",
+    dangerCount
+      ? `${dangerCount} families hit a danger zone on at least one meter, showing how quickly food, health, hope, schooling, or stability could become fragile.`
+      : "No family crossed a severe danger threshold, which means the room collectively managed risk unusually well.",
+    (shared?.trust ?? 55) >= 60
+      ? "The room ended with a relatively strong trust climate, making relief and work access easier to justify."
+      : "The room ended with a strained trust climate, showing how scarcity can weaken community confidence.",
+  ];
+  return takeaways;
 }
 
 function loadSavedGame() {
@@ -677,7 +726,7 @@ function App() {
                 </div>
               </div>
             ) : (
-              <Leaderboard players={scoredPlayers} />
+              <Leaderboard players={scoredPlayers} shared={shared} />
             )}
           </div>
 
@@ -717,6 +766,12 @@ function FamilyCard({ family }) {
       <p className="gd-kicker">Family Profile</p>
       <h2>The {family.name} Family</h2>
       <p>{family.playerName} - {family.profile}</p>
+      {family.objectiveTitle && (
+        <div className="family-objective">
+          <strong>{family.role}</strong>
+          <p>{family.objectiveTitle}: {family.objectiveDetail}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -800,8 +855,9 @@ function Conditions({ conditions }) {
   );
 }
 
-function Leaderboard({ players }) {
+function Leaderboard({ players, shared }) {
   const awards = computeAwards(players);
+  const debrief = historicalDebrief(players, shared);
   return (
     <div className="gd-panel leaderboard">
       <p className="gd-kicker">Final Leaderboard</p>
@@ -817,16 +873,9 @@ function Leaderboard({ players }) {
         </div>
       )}
       {players.map((player, index) => (
-        <div className="leader-row" key={player.id}>
-          <b>{index + 1}</b>
-          <span>
-            {player.playerName || "Player"} ({player.name} Family)
-            <small>Trust {player.reputation ?? 50} · Exploit markers {player.exploitMarkers || 0}</small>
-          </span>
-          <strong>{player.score}</strong>
-        </div>
+        <LeaderboardRow player={player} index={index} key={player.id} />
       ))}
-      <p className="gd-note">Scores include danger penalties, debt, trust reputation, and exploit markers.</p>
+      <p className="gd-note">Scores include danger penalties, debt, trust reputation, exploit markers, and a +10 family objective bonus.</p>
       <div className="award-grid">
         {awards.map((award) => (
           <div className={award.primary ? "award-card primary" : "award-card"} key={award.id}>
@@ -839,6 +888,30 @@ function Leaderboard({ players }) {
           </div>
         ))}
       </div>
+      <div className="debrief-panel">
+        <p className="gd-kicker">Historical Debrief</p>
+        <h3>What this room experienced</h3>
+        {debrief.map((takeaway) => (
+          <p key={takeaway}>{takeaway}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LeaderboardRow({ player, index }) {
+  const objective = objectiveResult(player);
+  return (
+    <div className="leader-row" key={player.id}>
+      <b>{index + 1}</b>
+      <span>
+        {player.playerName || "Player"} ({player.name} Family)
+        <small>Trust {player.reputation ?? 50} · Exploit markers {player.exploitMarkers || 0}</small>
+        {player.objectiveTitle && (
+          <small>{objective.completed ? "+10" : "0"} objective: {player.objectiveTitle}</small>
+        )}
+      </span>
+      <strong>{player.score}</strong>
     </div>
   );
 }
