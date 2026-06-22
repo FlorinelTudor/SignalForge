@@ -167,6 +167,7 @@ function pickFamily(playerName, index, clientId) {
     family[key] = clamp(family[key] + crypto.randomInt(17) - 8);
   });
   family.debt = Math.max(0, Math.round(family.debt + crypto.randomInt(21) - 10));
+  family.initialHardship = Math.round(100 - (family.food + family.health + family.savings + family.hope + family.education + family.stability) / 6 + family.debt * 0.25);
   return family;
 }
 

@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const asset = (name) => `${process.env.PUBLIC_URL || ""}/depression-game/${name}`;
 const MAX_PLAYERS = 9;
 const GAME_STATE_VERSION = "blob-multiplayer-v2";
+const COOPERATIVE_CHOICES = new Set(["join_mutual_aid", "organize_neighbors", "support_union", "sponsor_neighbor", "contribute_community_pot"]);
+const RISK_CHOICES = new Set(["invest_stocks", "borrow_to_invest", "move_to_city", "withdraw_bank_cash", "search_any_work", "move_for_work_camp", "seek_defense_work", "support_union", "take_desperate_work", "undercut_wages", "inform_on_black_market"]);
 
 const phases = [
   {
@@ -292,6 +294,60 @@ function scoreFamily(family) {
   }, 0);
   const resilienceBonus = dangerPenalty === 0 ? 6 : 0;
   return clamp(core - debtPenalty - dangerPenalty - exploitPenalty + reputationBonus + resilienceBonus);
+}
+
+function flattenChoices(family) {
+  return Object.values(family.choices || {}).flat();
+}
+
+function lowestRecordedMeter(family) {
+  return Math.min(
+    family.minFood ?? family.food ?? 100,
+    family.minHealth ?? family.health ?? 100,
+    family.minHope ?? family.hope ?? 100,
+    family.minEducation ?? family.education ?? 100,
+    family.minStability ?? family.stability ?? 100
+  );
+}
+
+function startingHardship(family) {
+  if (typeof family.initialHardship === "number") return family.initialHardship;
+  const baseline = ["food", "health", "savings", "hope", "education", "stability"].reduce((sum, key) => sum + (family[key] || 0), 0) / 6;
+  return 100 - baseline + (family.debt || 0) * 0.25;
+}
+
+function awardWinner(players, scoreMap, selector, usedIds = new Set()) {
+  const eligible = players.filter((player) => !usedIds.has(player.id));
+  const pool = eligible.length ? eligible : players;
+  return [...pool].sort((a, b) => selector(b, scoreMap.get(b.id)) - selector(a, scoreMap.get(a.id)) || (scoreMap.get(b.id) || 0) - (scoreMap.get(a.id) || 0))[0];
+}
+
+function computeAwards(players) {
+  if (!players.length) return [];
+  const scored = players.map((player) => ({ ...player, score: scoreFamily(player) })).sort((a, b) => b.score - a.score);
+  const scoreMap = new Map(scored.map((player) => [player.id, player.score]));
+  const mostResilient = scored[0];
+  const usedIds = new Set(mostResilient ? [mostResilient.id] : []);
+  const communityAnchor = awardWinner(players, scoreMap, (player) => {
+    const choices = flattenChoices(player);
+    return (player.reputation ?? 50) + choices.filter((choice) => COOPERATIVE_CHOICES.has(choice)).length * 8 - (player.exploitMarkers || 0) * 12;
+  }, usedIds);
+  if (communityAnchor) usedIds.add(communityAnchor.id);
+  const hardestRoad = awardWinner(players, scoreMap, (player) => startingHardship(player) + Math.max(0, scoreMap.get(player.id) || 0) * 0.35, usedIds);
+  if (hardestRoad) usedIds.add(hardestRoad.id);
+  const boldestGamble = awardWinner(players, scoreMap, (player) => {
+    const choices = flattenChoices(player);
+    return choices.filter((choice) => RISK_CHOICES.has(choice)).length * 12 + (player.stock || 0) * 0.25 + (player.exploitMarkers || 0) * 6;
+  }, usedIds);
+  if (boldestGamble) usedIds.add(boldestGamble.id);
+  const steadyHand = awardWinner(players, scoreMap, (player) => lowestRecordedMeter(player) - (player.exploitMarkers || 0) * 10 - (player.rushedChoiceCount || 0) * 3, usedIds);
+  return [
+    { id: "resilient", title: "Most Resilient Family", player: mostResilient, detail: "Highest final resilience score across meters, debt, trust, and danger penalties.", primary: true },
+    { id: "anchor", title: "Community Anchor", player: communityAnchor, detail: "Best record of cooperation, trust, and low exploitation." },
+    { id: "hardest", title: "Hardest Road", player: hardestRoad, detail: "Strongest finish from the toughest family position." },
+    { id: "gamble", title: "Boldest Gamble", player: boldestGamble, detail: "Took the biggest strategic risks while staying in the race." },
+    { id: "steady", title: "Steady Hand", player: steadyHand, detail: "Kept the family out of danger with the fewest severe lows." },
+  ].filter((award) => award.player);
 }
 
 function loadSavedGame() {
@@ -745,10 +801,21 @@ function Conditions({ conditions }) {
 }
 
 function Leaderboard({ players }) {
+  const awards = computeAwards(players);
   return (
     <div className="gd-panel leaderboard">
       <p className="gd-kicker">Final Leaderboard</p>
       <h2>Scores include danger penalties</h2>
+      {awards[0] && (
+        <div className="winner-badge">
+          <img src={asset("award-most-resilient-family.png")} alt="Most Resilient Family badge" />
+          <div>
+            <p className="gd-kicker">Winner</p>
+            <h3>{awards[0].player.playerName || "Player"} ({awards[0].player.name} Family)</h3>
+            <p>{awards[0].detail}</p>
+          </div>
+        </div>
+      )}
       {players.map((player, index) => (
         <div className="leader-row" key={player.id}>
           <b>{index + 1}</b>
@@ -760,6 +827,18 @@ function Leaderboard({ players }) {
         </div>
       ))}
       <p className="gd-note">Scores include danger penalties, debt, trust reputation, and exploit markers.</p>
+      <div className="award-grid">
+        {awards.map((award) => (
+          <div className={award.primary ? "award-card primary" : "award-card"} key={award.id}>
+            <span>{award.primary ? "★" : "•"}</span>
+            <div>
+              <strong>{award.title}</strong>
+              <p>{award.player.playerName || "Player"} ({award.player.name} Family)</p>
+              <small>{award.detail}</small>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
