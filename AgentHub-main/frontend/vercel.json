@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "https://dublin-duke-superb-oldest.trycloudflare.com/$1"
+      "dest": "https://rod-reflections-interested-puzzles.trycloudflare.com/$1"
     }
   ],
   "buildCommand": "PUBLIC_URL= npm run build",
